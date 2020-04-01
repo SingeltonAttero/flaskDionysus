@@ -68,56 +68,44 @@ dependencies {
     implementation(Libs.androidx_cardview)
     implementation(Libs.androidx_fragment)
 
-    //Koin
-    implementation(Libs.koin_scope)
-    implementation(Libs.koin_viewmodel)
+    // DI
+    implementation(Libs.toothpick_ktp)
+    implementation(Libs.toothpick_smoothie_lifecycle)
+    implementation(Libs.toothpick_smoothie_viewmodel)
+    kapt(Libs.toothpick_kapt)
 
-    // cicerone
+    // Cicerone
     implementation(Libs.cicerone)
 
-    //lifecycle
+    // Lifecycle
     implementation(Libs.lifecycle_extensions)
     implementation(Libs.lifecycle_livedata)
     implementation(Libs.lifecycle_viewmodel)
 
-    //Glide
-    implementation(Libs.glide_runtime)
-    kapt(Libs.glide_compiler)
+    // Coil
+    implementation(Libs.coil)
 
-    //adapterDelegat
+    // Adapter Delegates
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
 
-    //room
-    implementation(Libs.room_runtime)
-    implementation(Libs.room_ktx)
-    implementation(Libs.room_testing)
-    kapt(Libs.room_compiler)
     //Networking
-    implementation(Libs.tikxml_annotation)
-    implementation(Libs.tikxml_core)
-    kapt(Libs.tikxml_kapt)
     implementation(Libs.okhttp_logging_interceptor)
     implementation(Libs.retrofit)
-    implementation(Libs.tikxml_converter)
 
-    // coroutines
+    // Coroutines
     implementation(Libs.coroutines_android)
     implementation(Libs.coroutines)
-    // logger
-    implementation(Libs.stetho)
 
     //Timber
     implementation(Libs.timber)
 
-    // test
+    // Unit test
     testImplementation(Libs.kotlinx_coroutines_test)
     testImplementation(Libs.junit4)
-    testImplementation(Libs.assertj)
     testImplementation(Libs.junit_ext)
     testImplementation(Libs.mockito_core)
     testImplementation(Libs.mockito_kotlin)
-    testImplementation(Libs.koin_test)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class).all {

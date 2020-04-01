@@ -5,5 +5,5 @@
  */
 
 object Config {
-    const val SERVER_ENDPOINT = "\"https://s3.eu-central-1.amazonaws.com/totdesigner/\""
+    const val SERVER_ENDPOINT = "\"localhost:8888\""
 }

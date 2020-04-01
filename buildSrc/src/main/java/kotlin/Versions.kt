@@ -1,8 +1,10 @@
 object Versions {
+
     //Plugins
     const val android_gradle_plugin = "3.6.0"
     const val kotlin_gradle_plugin = "1.3.7"
     const val plugins_android_junit5 = "1.5.2.0"
+
     //AndroidX
     const val androidx_appcompat = "1.1.0"
     const val androidx_constraint_layout = "2.0.0-beta4"
@@ -21,6 +23,9 @@ object Versions {
 
     //Koin
     const val koin = "2.0.1"
+
+    // Toothpick
+    const val toothpick = "3.1.0"
 
     //Lifecycle
     const val lifecycle = "2.2.0-alpha01"
@@ -41,14 +46,17 @@ object Versions {
     //Glide
     const val glide = "4.11.0"
 
+    //Coil
+    const val coil: String = "0.9.5"
+
     //Cicerone
-    const val cicerone = "5.0.0"
+    const val cicerone = "5.1.0"
 
     //AdapterDelegates
     const val adapter_delegates = "4.2.0"
 
     //PermissionsDispatcher
-    const val permissionsdispatcher =  "4.5.0"
+    const val permissionsdispatcher = "4.5.0"
 
     //Timber
     const val timber = "4.7.1"
@@ -60,7 +68,8 @@ object Versions {
     const val test_rules = "1.1.0"
     const val mockito_kotlin = "2.2.0"
     const val assertj_core = "3.10.0"
-    const val arch_core_test ="2.0.0"
+    const val arch_core_test = "2.0.0"
+
     // android test
     const val test_espresso = "3.1.1"
     const val test_ext_junit = "1.1.0"

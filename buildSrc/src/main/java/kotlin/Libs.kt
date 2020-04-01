@@ -1,5 +1,5 @@
 object Libs {
-    //Plugins
+    // Plugins
     const val android_gradle_plugin =
         "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
     const val kotlin_gradle_plugin =
@@ -7,7 +7,8 @@ object Libs {
 
     const val plugins_android_junit5 =
         "de.mannodermaus.gradle.plugins:android-junit5:${Versions.plugins_android_junit5}"
-    //AndroidX
+
+    // AndroidX
     const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
     const val androidx_recyclerview =
         "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview}"
@@ -25,35 +26,43 @@ object Libs {
     const val transition_transition =
         "androidx.transition:transition:${Versions.transition_transition}"
 
-    //Kotlin
+    // Kotlin
     const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlin_coroutines}"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlin_coroutines}"
     const val jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin_gradle_plugin}"
 
-    //Koin
+    // Koin
     const val koin_scope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     const val koin_test = "org.koin:koin-test:${Versions.koin}"
 
-    //Lifecycle
+    // Toothpick
+    const val toothpick_ktp = "com.github.stephanenicolas.toothpick:ktp:${Versions.toothpick}"
+    const val toothpick_kapt = "com.github.stephanenicolas.toothpick:toothpick-compiler:${Versions.toothpick}"
+    const val toothpick_smoothie_viewmodel =
+        "com.github.stephanenicolas.toothpick:smoothie-lifecycle-viewmodel-ktp:${Versions.toothpick}"
+    const val toothpick_smoothie_lifecycle =
+        "com.github.stephanenicolas.toothpick:smoothie-lifecycle-ktp:${Versions.toothpick}"
+
+    // Lifecycle
     const val lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val lifecycle_viewmodel =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
-    //Conductor
+    // Conductor
     const val conductor_controller = "com.bluelinelabs:conductor:${Versions.conductor_controller}"
     const val conductor_archlifecircle =
         "com.bluelinelabs:conductor-archlifecycle:${Versions.conductor_controller}"
 
 
-    //Room
+    // Room
     const val room_runtime = "androidx.room:room-runtime:${Versions.room}"
     const val room_compiler = "androidx.room:room-compiler:${Versions.room}"
     const val room_testing = "androidx.room:room-testing:${Versions.room}"
     const val room_ktx = "androidx.room:room-ktx:${Versions.room}"
 
-    //Networking
+    // Networking
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val tikxml_annotation = "com.tickaroo.tikxml:annotation:${Versions.tikxml}"
@@ -66,29 +75,32 @@ object Libs {
         "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_logging_interceptor}"
     const val stetho = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
 
-    //Glide
+    // Glide
     const val glide_runtime = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
-    //Cicerone
+    //Coil
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
+
+    // Cicerone
     const val cicerone = "ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
 
-    //AdapterDelegates
+    // AdapterDelegates
     const val adapter_delegates =
         "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates}"
     const val adapter_delegates_dsl =
         "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates}"
 
-    //PermissionsDispatcher
+    // PermissionsDispatcher
     const val permissionsdispatcher =
         "org.permissionsdispatcher:permissionsdispatcher:${Versions.permissionsdispatcher}"
     const val permissionsdispatcherprocessor =
         "org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.permissionsdispatcher}"
 
-    //Timber
+    // Timber
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
-    //Test
+    // Unit test
     const val junit4 = "junit:junit:${Versions.junit4}"
     const val junit_ext = "androidx.test.ext:junit:${Versions.test_ext_junit}"
     const val runner = "androidx.test:runner:${Versions.test_runner}"
@@ -99,7 +111,8 @@ object Libs {
     const val arch_core_testing = "androidx.arch.core:core-testing:${Versions.arch_core_test}"
     const val kotlin_reflect =
         "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_gradle_plugin}"
-    // android test
+
+    // Android test
     const val espresso_contrib = "androidx.test.espresso:espresso-contrib:${Versions.test_espresso}"
     const val espresso_core = "androidx.test.espresso:espresso-core:${Versions.test_espresso}"
     const val espresso_intents = "androidx.test.espresso:espresso-intents:${Versions.test_espresso}"
