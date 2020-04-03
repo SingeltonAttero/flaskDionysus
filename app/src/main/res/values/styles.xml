@@ -14,4 +14,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <style name="DescriptionText">
+        <item name="android:textColor">@color/colorGrayDescriptionText</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

@@ -3,7 +3,7 @@ package ru.yweber.flaskdionysus.ui
 import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.yweber.flaskdionysus.ui.home.HomeListDrinkFragment
-import ru.yweber.flaskdionysus.ui.start.MainFlowFragment
+import ru.yweber.flaskdionysus.ui.main.MainFlowFragment
 
 object Screens {
 

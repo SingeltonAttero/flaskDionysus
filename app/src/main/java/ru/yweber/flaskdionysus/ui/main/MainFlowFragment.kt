@@ -1,4 +1,4 @@
-package ru.yweber.flaskdionysus.ui.start
+package ru.yweber.flaskdionysus.ui.main
 
 import android.os.Bundle
 import android.view.View
