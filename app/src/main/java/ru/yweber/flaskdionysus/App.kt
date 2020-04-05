@@ -1,6 +1,7 @@
 package ru.yweber.flaskdionysus
 
 import android.app.Application
+import leakcanary.LeakCanary
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.module.appModule
 import ru.yweber.flaskdionysus.di.module.navigationModule
@@ -18,6 +19,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        LeakCanary.showLeakDisplayActivityLauncherIcon(true)
         initTimber()
         rootScope = KTP.openScope(AppScope::class.java)
             .installModules(appModule(this), navigationModule())

@@ -74,4 +74,7 @@ object Versions {
     const val test_espresso = "3.1.1"
     const val test_ext_junit = "1.1.0"
     const val kotlinx_coroutines_test = "1.3.0"
+
+    // Leakcanary
+    const val leakcanary = "2.2"
 }

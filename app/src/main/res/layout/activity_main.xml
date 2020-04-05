@@ -4,4 +4,4 @@
     android:id="@+id/containerRootActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.app.AppActivity"/>
+    tools:context=".ui.app.AppActivity" />

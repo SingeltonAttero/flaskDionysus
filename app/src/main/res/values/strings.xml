@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Фляга Диониса</string>
     <string name="todo">todo</string>
+    <string name="iba_logo">IBA</string>
+    <string name="search">Поиск</string>
+    <string name="about_project">О проекте</string>
 </resources>

@@ -9,6 +9,7 @@ import ru.yweber.flaskdionysus.core.adapter.DrinksAdapter
 import ru.yweber.flaskdionysus.core.decorator.PaddingItemDecorator
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.home.state.ListDrinkState
+import toothpick.Scope
 import toothpick.ktp.delegate.inject
 
 /**
@@ -20,9 +21,8 @@ class HomeListDrinkFragment : BaseFragment(R.layout.fragment_home_list_drink) {
     private val viewModel by inject<HomeListDrinkViewModel>()
     private val adapter by lazy { DrinksAdapter().createAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installViewModel<HomeListDrinkViewModel>(parentScope)
-        super.onCreate(savedInstanceState)
+    override fun installModule(scope: Scope) {
+        scope.installViewModel<HomeListDrinkViewModel>()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

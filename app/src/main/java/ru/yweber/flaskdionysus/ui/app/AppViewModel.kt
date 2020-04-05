@@ -24,6 +24,7 @@ class AppViewModel @Inject constructor(
 
     fun navigateStart() {
         router.newRootScreen(Screens.StartFlowScreen)
+        action.value = currentState.copy(isStartMainScreen = true)
     }
 
 

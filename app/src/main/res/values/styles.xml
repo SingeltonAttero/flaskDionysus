@@ -6,13 +6,43 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="SplashTheme"
+        parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/layer_splesh_screen</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorControl</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 
     <style name="Toolbar"
         parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="actionOverflowButtonStyle">@style/ActionItem</item>
     </style>
+
+    <style name="ActionItem"
+        parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_action_item</item>
+    </style>
+
+    <style name="StyleFab"
+        parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorWhite</item>
+        <item name="backgroundTint">#C2185B</item>
+        <item name="android:src">@drawable/ic_filter_list</item>
+    </style>
+
+    <style name="MenuStyle"
+        parent="Widget.AppCompat.Light.PopupMenu" />
 
     <style name="DescriptionText">
         <item name="android:textColor">@color/colorGrayDescriptionText</item>

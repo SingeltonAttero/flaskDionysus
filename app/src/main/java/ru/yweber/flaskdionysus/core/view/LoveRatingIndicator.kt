@@ -2,10 +2,11 @@ package ru.yweber.flaskdionysus.core.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import ru.yweber.flaskdionysus.R
+import ru.yweber.flaskdionysus.system.setVector
 
 /**
  * Created on 02.04.2020
@@ -19,10 +20,17 @@ class LoveRatingIndicator @JvmOverloads constructor(
     LinearLayout(context, attrs, defStyleAttr) {
 
     private val listView = mutableListOf<ImageView>()
-    private val count: Int
+    private var count: Int = 0
     private val fillingDrawable: Int
     private val emptyDrawable: Int
     private val progress: Int
+    private val globalListener = ViewTreeObserver.OnGlobalLayoutListener {
+        val deltaSize = width / count
+        val wrapParams = LayoutParams(deltaSize, deltaSize)
+        listView.forEach {
+            it.layoutParams = wrapParams
+        }
+    }
 
     init {
         val obtainAttr = context.obtainStyledAttributes(attrs, R.styleable.LoveRatingIndicator, 0, 0)
@@ -39,7 +47,7 @@ class LoveRatingIndicator @JvmOverloads constructor(
         obtainAttr.recycle()
         val paramsIndicator = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         createIndicator(context, paramsIndicator)
-        correctSizeIndicator()
+        viewTreeObserver.addOnGlobalLayoutListener(globalListener)
     }
 
     private fun createIndicator(
@@ -49,23 +57,13 @@ class LoveRatingIndicator @JvmOverloads constructor(
         val indicator = ImageView(context)
         indicator.layoutParams = paramsIndicator
         if (it <= progress) {
-            indicator.setImageDrawable(ContextCompat.getDrawable(context, fillingDrawable))
+            indicator.setVector(fillingDrawable)
         } else {
-            indicator.setImageDrawable(ContextCompat.getDrawable(context, emptyDrawable))
+            indicator.setVector(emptyDrawable)
         }
         listView.add(indicator)
     }
 
-
-    private fun correctSizeIndicator() {
-        viewTreeObserver.addOnGlobalLayoutListener {
-            val deltaSize = width / count
-            val wrapParams = LayoutParams(deltaSize, deltaSize)
-            listView.forEach {
-                it.layoutParams = wrapParams
-            }
-        }
-    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -75,17 +73,17 @@ class LoveRatingIndicator @JvmOverloads constructor(
 
     fun progress(progress: Int) {
         listView.forEachIndexed { index, view ->
-            val drawable = if (progress > index) {
-                ContextCompat.getDrawable(context, fillingDrawable)
+            if (progress > index) {
+                view.setVector(fillingDrawable)
             } else {
-                ContextCompat.getDrawable(context, emptyDrawable)
+                view.setVector(emptyDrawable)
             }
-            view.setImageDrawable(drawable)
         }
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         removeAllViews()
+        viewTreeObserver.removeOnGlobalLayoutListener(globalListener)
     }
 }

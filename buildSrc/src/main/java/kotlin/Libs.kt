@@ -119,4 +119,7 @@ object Libs {
     const val mockito_core = "org.mockito:mockito-core:${Versions.mockito_core}"
     const val kotlinx_coroutines_test =
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinx_coroutines_test}"
+
+    // Leakcanary
+    const val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
 }

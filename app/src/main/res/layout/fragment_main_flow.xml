@@ -14,8 +14,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:menu="@menu/main_menu"
+            app:popupTheme="@style/MenuStyle"
             app:title="@string/app_name"
-            app:titleTextColor="@color/colorToolbarTitle" />
+            app:titleTextColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

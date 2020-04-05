@@ -1,15 +1,17 @@
 package ru.yweber.flaskdionysus.ui.app
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.di.ActivityScope
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.utils.ToothpickViewModelFactory
+import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.app.state.AppState
 import toothpick.Toothpick
 import toothpick.ktp.delegate.inject
 import toothpick.smoothie.lifecycle.closeOnDestroy
@@ -26,10 +28,8 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         initAppScope()
         super.onCreate(savedInstanceState)
+        subscribe(viewModel.state, ::renderState)
         viewModel.navigateStart()
-        viewModel.state.observe(this, Observer {
-            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-        })
     }
 
     private fun initAppScope() {
@@ -41,6 +41,12 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
                 ).closeOnViewModelCleared(this)
             }.closeOnDestroy(this)
             .inject(this)
+    }
+
+    private fun renderState(appState: AppState) {
+        if (appState.isStartMainScreen) {
+            containerRootActivity.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite))
+        }
     }
 
     override fun onResumeFragments() {

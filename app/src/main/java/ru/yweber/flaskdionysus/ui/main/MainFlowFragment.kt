@@ -1,7 +1,11 @@
 package ru.yweber.flaskdionysus.ui.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_main_flow.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -12,6 +16,7 @@ import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.di.module.MainFlowHolder
 import ru.yweber.flaskdionysus.di.module.MainFlowRouter
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
+import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
@@ -27,15 +32,21 @@ class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
     override val navigator: Navigator
         get() = SupportAppNavigator(requireActivity(), childFragmentManager, R.id.containerMainFlow)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installViewModel<MainFlowViewModel>(parentScope, module {
+    override fun installModule(scope: Scope) {
+        scope.installModules(module {
             val handler = Toothpick.openRootScope().getInstance(HandleCiceroneNavigate::class.java)
             val mainFlowCicerone = handler.createCicerone(HandleCiceroneNavigate.MAIN_NAVIGATION)
             bind(Router::class.java).withName(MainFlowRouter::class.java).toInstance(mainFlowCicerone.router)
             bind(NavigatorHolder::class.java).withName(MainFlowHolder::class.java)
                 .toInstance(mainFlowCicerone.navigatorHolder)
         })
-        super.onCreate(savedInstanceState)
+        scope.installViewModel<MainFlowViewModel>()
+    }
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

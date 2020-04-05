@@ -106,6 +106,9 @@ dependencies {
     testImplementation(Libs.junit_ext)
     testImplementation(Libs.mockito_core)
     testImplementation(Libs.mockito_kotlin)
+
+    // Leakcanary
+    debugImplementation(Libs.leakcanary)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class).all {

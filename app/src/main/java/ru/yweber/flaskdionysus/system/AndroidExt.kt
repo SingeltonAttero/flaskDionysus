@@ -1,7 +1,10 @@
 package ru.yweber.flaskdionysus.system
 
 import android.content.res.Resources
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import ru.yweber.flaskdionysus.core.BaseFragment
@@ -22,6 +25,12 @@ fun <T> AbsDelegationAdapter<T>.setData(data: T) {
     items = data
     notifyDataSetChanged()
 }
+
+fun ImageView.setVector(@DrawableRes drawableRes: Int) {
+    setImageDrawable(ContextCompat.getDrawable(context, drawableRes))
+}
+
+fun Any.objectScopeName() = "${javaClass.simpleName}_${hashCode()}"
 
 fun <T> AsyncListDifferDelegationAdapter<T>.setData(data: List<T>) {
     items = data
