@@ -60,19 +60,6 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
         closeOnViewModelCleared(this@BaseFragment)
     }
 
-    /*inline fun <reified T : ViewModel> installViewModel(parentScopeName: Any, installModule: Module = module { }) {
-        Toothpick.openScope(parentScopeName)
-            .installModules(installModule)
-            .openSubScope(currentScope) {
-                it.installViewModelBinding<T>(
-                    this,
-                    ToothpickViewModelFactory(currentScope)
-                )
-                it.closeOnViewModelCleared(this)
-            }
-            .closeOnDestroy(this)
-            .inject(this)
-    }*/
 
     open fun backPressed() = false
 

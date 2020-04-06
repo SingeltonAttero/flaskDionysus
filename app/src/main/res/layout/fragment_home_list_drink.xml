@@ -2,20 +2,24 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablDrinks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctlDrinks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="snap|scroll|exitUntilCollapsed">
 
             <FrameLayout
+                android:id="@+id/containerDrinkOnDay"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:background="@color/colorPrimary"
@@ -40,8 +44,7 @@
         android:layout_marginBottom="@dimen/margin_16"
         app:fabSize="normal"
         app:layout_anchor="@id/rvDrinks"
-        app:layout_anchorGravity="bottom|end"
-       />
+        app:layout_anchorGravity="bottom|end" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

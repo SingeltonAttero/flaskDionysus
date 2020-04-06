@@ -5,6 +5,7 @@ import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.app.state.AppState
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -21,9 +22,8 @@ class AppViewModel @Inject constructor(
     override val defaultState: AppState
         get() = AppState()
 
-
-    fun navigateStart() {
-        router.newRootScreen(Screens.StartFlowScreen)
+    fun appColdStart() {
+        router.newRootScreen(Screens.MainFlowScreen)
         action.value = currentState.copy(isStartMainScreen = true)
     }
 

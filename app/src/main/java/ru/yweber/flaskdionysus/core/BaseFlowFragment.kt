@@ -1,5 +1,9 @@
 package ru.yweber.flaskdionysus.core
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import ru.terrakok.cicerone.Navigator
 
@@ -11,6 +15,11 @@ abstract class BaseFlowFragment(@LayoutRes layoutRes: Int) : BaseFragment(layout
 
     protected abstract val navigator: Navigator
     protected abstract val viewModel: BaseViewModel<*>
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onResume() {
         super.onResume()

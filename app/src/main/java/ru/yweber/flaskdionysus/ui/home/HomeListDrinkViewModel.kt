@@ -6,6 +6,7 @@ import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.di.module.MainFlowRouter
 import ru.yweber.flaskdionysus.ui.home.state.ListDrinkState
+import timber.log.Timber
 import toothpick.InjectConstructor
 
 /**

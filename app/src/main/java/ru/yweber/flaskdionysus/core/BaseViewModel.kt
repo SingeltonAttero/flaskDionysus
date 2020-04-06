@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
+import timber.log.Timber
 
 /**
  * Created on 31.03.2020
@@ -23,6 +24,15 @@ abstract class BaseViewModel<T>(private val navigatorHolder: NavigatorHolder? = 
 
     val state: LiveData<T>
         get() = action
+
+    init {
+        Timber.e("viewModelLiveCircle start ${this::class.java}")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Timber.e("viewModelLiveCircle  onCleared ${this::class.java}")
+    }
 
     protected fun launch(start: suspend () -> Unit) = viewModelScope.launch { start.invoke() }
 

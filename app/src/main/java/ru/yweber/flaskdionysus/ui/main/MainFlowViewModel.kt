@@ -17,15 +17,19 @@ import javax.inject.Inject
 
 class MainFlowViewModel @Inject constructor(
     private val interactor: TestInteractor,
-    @MainFlowRouter private val router: Router,
-    @MainFlowHolder navigatorHolder: NavigatorHolder
+    @MainFlowRouter private val mainRouter: Router,
+    @MainFlowHolder navigatorHolder: NavigatorHolder,
+    private val router: Router
 ) : BaseViewModel<MainState>(navigatorHolder) {
 
     override val defaultState: MainState
         get() = MainState()
 
-    fun navigate() {
-        Timber.e(interactor.test)
-        router.newRootScreen(Screens.HomeListDrinkScreen)
+    fun navigateToAboutProject() {
+        router.navigateTo(Screens.AboutProjectScreen)
+    }
+
+    fun navigateToDrinks() {
+        mainRouter.newRootScreen(Screens.HomeListDrinkScreen)
     }
 }

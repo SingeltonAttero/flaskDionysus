@@ -3,8 +3,11 @@ package ru.yweber.flaskdionysus.ui.app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.di.ActivityScope
@@ -23,13 +26,24 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewModel: AppViewModel by inject()
     private val navigator
-        get() = SupportAppNavigator(this, R.id.containerRootActivity)
+        get() = object : SupportAppNavigator(this, supportFragmentManager, R.id.containerRootActivity) {
+            override fun setupFragmentTransaction(
+                command: Command,
+                currentFragment: Fragment?,
+                nextFragment: Fragment?,
+                fragmentTransaction: FragmentTransaction
+            ) {
+                fragmentTransaction.setReorderingAllowed(true)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initAppScope()
         super.onCreate(savedInstanceState)
         subscribe(viewModel.state, ::renderState)
-        viewModel.navigateStart()
+        if (savedInstanceState == null) {
+            viewModel.appColdStart()
+        }
     }
 
     private fun initAppScope() {
