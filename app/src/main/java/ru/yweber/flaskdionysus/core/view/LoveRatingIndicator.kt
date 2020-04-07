@@ -24,6 +24,8 @@ class LoveRatingIndicator @JvmOverloads constructor(
     private val fillingDrawable: Int
     private val emptyDrawable: Int
     private val progress: Int
+    private var isResize: Boolean = true
+    private val sizeIndicator: Int
     private val globalListener = ViewTreeObserver.OnGlobalLayoutListener {
         val deltaSize = width / count
         val wrapParams = LayoutParams(deltaSize, deltaSize)
@@ -44,10 +46,14 @@ class LoveRatingIndicator @JvmOverloads constructor(
             R.drawable.ic_favorite_invisible
         )
         progress = obtainAttr.getInteger(R.styleable.LoveRatingIndicator_lriv_count_progress, 0)
+        isResize = obtainAttr.getBoolean(R.styleable.LoveRatingIndicator_lriv_resize, true)
+        sizeIndicator = obtainAttr.getDimension(R.styleable.LoveRatingIndicator_lriv_size_item, 16F).toInt()
         obtainAttr.recycle()
         val paramsIndicator = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         createIndicator(context, paramsIndicator)
-        viewTreeObserver.addOnGlobalLayoutListener(globalListener)
+        if (isResize) {
+            viewTreeObserver.addOnGlobalLayoutListener(globalListener)
+        }
     }
 
     private fun createIndicator(
@@ -67,6 +73,12 @@ class LoveRatingIndicator @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        if (!isResize) {
+            val wrapParams = LayoutParams(sizeIndicator, sizeIndicator)
+            listView.forEach {
+                it.layoutParams = wrapParams
+            }
+        }
         listView.forEach { addView(it) }
         orientation = HORIZONTAL
     }
@@ -84,6 +96,8 @@ class LoveRatingIndicator @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         removeAllViews()
-        viewTreeObserver.removeOnGlobalLayoutListener(globalListener)
+        if (isResize) {
+            viewTreeObserver.removeOnGlobalLayoutListener(globalListener)
+        }
     }
 }

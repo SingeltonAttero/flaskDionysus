@@ -2,10 +2,15 @@ package ru.yweber.flaskdionysus.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import kotlinx.android.synthetic.main.fragment_home_list_drink.*
 import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFlowFragment
 import ru.yweber.flaskdionysus.core.adapter.DrinksAdapter
@@ -18,6 +23,8 @@ import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.home.state.ListDrinkState
 import toothpick.Scope
+import toothpick.Toothpick
+import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**
@@ -30,7 +37,16 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
 
     override val viewModel by inject<HomeListDrinkViewModel>()
     override val navigator: Navigator
-        get() = SupportAppNavigator(requireActivity(), childFragmentManager, R.id.containerDrinkOnDay)
+        get() = object : SupportAppNavigator(requireActivity(), childFragmentManager, R.id.containerDrinkOnDay) {
+            override fun setupFragmentTransaction(
+                command: Command,
+                currentFragment: Fragment?,
+                nextFragment: Fragment?,
+                fragmentTransaction: FragmentTransaction
+            ) {
+                fragmentTransaction.setReorderingAllowed(true)
+            }
+        }
 
     override fun installModule(scope: Scope) {
         scope.installNestedNavigation<DrinkDayRouter, DrinkDayHolder>(HandleCiceroneNavigate.DRINK_DAY_NAVIGATION)

@@ -4,4 +4,5 @@
     <string name="iba_logo">IBA</string>
     <string name="search">Поиск</string>
     <string name="about_project">О проекте</string>
+    <string name="drink_of_the_day">Коктейль дня</string>
 </resources>

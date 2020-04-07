@@ -32,13 +32,11 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/NameDrink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginTop="4dp"
-            android:textColor="@color/colorBlackTitleText"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/loveRatingIndicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

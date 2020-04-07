@@ -14,7 +14,7 @@
     </item>
 
     <item
-        android:drawable="@drawable/ic_img_splash_screen"
+        android:drawable="@drawable/img_splash_screen"
         android:gravity="center">
 
     </item>

@@ -10,16 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_main_flow.*
 import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFlowFragment
 import ru.yweber.flaskdionysus.core.BaseFragment
+import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.MainFlowHolder
 import ru.yweber.flaskdionysus.di.MainFlowRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import toothpick.Scope
+import toothpick.Toothpick
+import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**

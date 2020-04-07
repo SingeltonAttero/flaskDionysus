@@ -11,5 +11,12 @@
         <attr name="lriv_count_progress"
             format="integer">0
         </attr>
+        <attr name="lriv_resize"
+            format="boolean">true
+        </attr>
+        <attr name="lriv_size_item"
+            format="dimension">
+            16dp
+        </attr>
     </declare-styleable>
 </resources>

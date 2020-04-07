@@ -5,7 +5,8 @@
     android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/ablDrinks"
@@ -22,7 +23,6 @@
                 android:id="@+id/containerDrinkOnDay"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="@color/colorPrimary"
                 app:layout_collapseMode="parallax" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

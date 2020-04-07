@@ -4,7 +4,6 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import toothpick.Scope
-import toothpick.Toothpick
 import toothpick.ktp.binding.module
 
 /**
@@ -21,7 +20,7 @@ fun navigationModule() = module {
 
 inline fun <reified R : Annotation, reified H : Annotation> Scope.installNestedNavigation(constantNavigation: String) {
     installModules(module {
-        val handler = Toothpick.openRootScope().getInstance(HandleCiceroneNavigate::class.java)
+        val handler = getInstance(HandleCiceroneNavigate::class.java)
         val nestedCicerone = handler.createCicerone(constantNavigation)
         bind(Router::class.java).withName(R::class.java).toInstance(nestedCicerone.router)
         bind(NavigatorHolder::class.java).withName(H::class.java)
