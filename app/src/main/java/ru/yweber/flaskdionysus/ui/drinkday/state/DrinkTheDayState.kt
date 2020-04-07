@@ -1,4 +1,4 @@
-package ru.yweber.flaskdionysus.ui.home.drinkday.state
+package ru.yweber.flaskdionysus.ui.drinkday.state
 
 /**
  * Created on 07.04.2020

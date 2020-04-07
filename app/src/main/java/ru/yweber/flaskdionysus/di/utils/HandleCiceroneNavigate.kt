@@ -21,5 +21,7 @@ class HandleCiceroneNavigate {
     companion object {
         const val APP_NAVIGATION = "APP_GLOBAL"
         const val MAIN_NAVIGATION = "MAIN_FLOW"
+        const val DRINK_DAY_NAVIGATION = "DRINK_DAY_FLOW"
+        const val DRINK_DAY_NESTED_FLOW = "DRINK_DAY_NESTED_FLOW"
     }
 }

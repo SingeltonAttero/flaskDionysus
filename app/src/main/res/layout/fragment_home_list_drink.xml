@@ -37,11 +37,12 @@
         tools:listitem="@layout/item_drink" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/StyleFab"
+        style="@style/MaterialFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/ic_filter_list"
         app:fabSize="normal"
         app:layout_anchor="@id/rvDrinks"
         app:layout_anchorGravity="bottom|end" />
