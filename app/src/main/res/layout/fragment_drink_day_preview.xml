@@ -31,17 +31,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.60" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/TitleDrinkDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_8"
             android:text="@string/drink_of_the_day"
-            android:textAllCaps="true"
-            android:textSize="@dimen/font_10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPreviewDrinkDay" />
 
@@ -50,12 +49,12 @@
             style="@style/NameDrink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Текила Санрайз"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="Текила Санрайз" />
 
         <ru.yweber.flaskdionysus.core.view.LoveRatingIndicator
-            android:id="@+id/loveRatingIndicator"
+            android:id="@+id/lriDrinkDay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -70,12 +69,30 @@
             app:lriv_size_item="@dimen/margin_16" />
 
         <TextView
+            android:id="@+id/tvTriedDrink"
+            style="@style/DescriptionText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/lriDrinkDay"
+            tools:text="Попробовали: 132 человека" />
 
         <TextView
+            android:id="@+id/tvCookingLevel"
+            style="@style/DescriptionText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTriedDrink"
+            tools:text="Сложность: средне" />
+
+        <TextView
+            style="@style/DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvCookingLevel"
+            tools:text="Крепость: легкий" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

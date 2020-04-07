@@ -22,7 +22,19 @@ class DrinkTheDayFlowViewModel(
     override val defaultState: DrinkTheDayState
         get() = DrinkTheDayState()
 
+    private var isPreview = false
+
     fun startPreview() {
         nestedRouter.navigateTo(Screens.DrinkDayPreviewScreen)
+
+    }
+
+    fun swipePreviewToDetailed() {
+        if (isPreview) {
+            nestedRouter.backTo(Screens.DrinkDayPreviewScreen)
+        } else {
+            nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
+        }
+        isPreview = !isPreview
     }
 }

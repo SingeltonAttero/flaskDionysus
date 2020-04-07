@@ -55,8 +55,8 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     /**
      * this method invoke post installModule fragment scope
      * */
-    protected inline fun <reified T : ViewModel> Scope.installViewModel(scopeName: Any = this.name) {
-        installViewModelBinding<T>(this@BaseFragment, ToothpickViewModelFactory(scopeName))
+    protected inline fun <reified T : ViewModel> Scope.installViewModel() {
+        installViewModelBinding<T>(this@BaseFragment, ToothpickViewModelFactory(name))
         closeOnViewModelCleared(this@BaseFragment)
     }
 

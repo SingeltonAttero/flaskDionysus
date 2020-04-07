@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import coil.api.load
+import kotlinx.android.synthetic.main.fragment_drink_day_preview.*
+import kotlinx.android.synthetic.main.fragment_drink_the_day.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -47,6 +50,11 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.startPreview()
+        if (childFragmentManager.fragments.isEmpty()){
+            viewModel.startPreview()
+        }
+        fabSwipeDrinkDay.setOnClickListener {
+            viewModel.swipePreviewToDetailed()
+        }
     }
 }

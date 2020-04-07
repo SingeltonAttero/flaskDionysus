@@ -4,7 +4,11 @@ import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.yweber.flaskdionysus.ui.about.AboutProjectFragment
 import ru.yweber.flaskdionysus.ui.drinkday.DrinkTheDayFlowFragment
+import ru.yweber.flaskdionysus.ui.drinkday.about.AboutDrinkFragment
+import ru.yweber.flaskdionysus.ui.drinkday.detailed.DrinkDayDetailedFragment
+import ru.yweber.flaskdionysus.ui.drinkday.formula.FormulaDrinkFragment
 import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
+import ru.yweber.flaskdionysus.ui.drinkday.tools.ToolsDrinkFragment
 import ru.yweber.flaskdionysus.ui.home.HomeListDrinkFlowFragment
 import ru.yweber.flaskdionysus.ui.main.MainFlowFragment
 
@@ -37,6 +41,30 @@ object Screens {
     object DrinkDayPreviewScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return DrinkDayPreviewFragment()
+        }
+    }
+
+    object DrinkDayDetailedScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return DrinkDayDetailedFragment()
+        }
+    }
+
+    object AboutDrinkScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return AboutDrinkFragment()
+        }
+    }
+
+    object FormulaDrinkScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return FormulaDrinkFragment()
+        }
+    }
+
+    object ToolsDrinkScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return ToolsDrinkFragment()
         }
     }
 }
