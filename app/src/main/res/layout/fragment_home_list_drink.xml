@@ -17,7 +17,9 @@
             android:id="@+id/ctlDrinks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed">
+            app:contentScrim="@color/colorScrimDrinkDay"
+            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="400">
 
             <FrameLayout
                 android:id="@+id/containerDrinkOnDay"

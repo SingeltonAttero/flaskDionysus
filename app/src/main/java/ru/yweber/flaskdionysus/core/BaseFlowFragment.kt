@@ -16,11 +16,6 @@ abstract class BaseFlowFragment(@LayoutRes layoutRes: Int) : BaseFragment(layout
     protected abstract val navigator: Navigator
     protected abstract val viewModel: BaseViewModel<*>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onResume() {
         super.onResume()
         viewModel.addNavigator(navigator)

@@ -1,6 +1,7 @@
 package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -20,14 +21,16 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
 
     private val viewModel by inject<DrinkDayDetailedViewModel>()
     private lateinit var layoutMediator: TabLayoutMediator
-    private val fragmentAdapter by lazy { DetailedTabAdapter(this) }
+
+
+    private var fragmentAdapter: DetailedTabAdapter? = null
 
     override fun installModule(scope: Scope) {
         scope.installViewModel<DrinkDayDetailedViewModel>()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
             when (position) {
                 0 -> tab.text = getString(R.string.aboutDrink).toUpperCase(Locale.getDefault())
@@ -35,28 +38,27 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
                 2 -> tab.text = getString(R.string.tools).toUpperCase(Locale.getDefault())
             }
         }
+        fragmentAdapter = DetailedTabAdapter(this)
         viewPagerDetailedDrinkDay.adapter = fragmentAdapter
         layoutMediator.attach()
     }
 
     override fun onDestroyView() {
         viewPagerDetailedDrinkDay.adapter = null
+        tabLayoutDetailedDrinkDay.removeAllTabs()
         layoutMediator.detach()
         super.onDestroyView()
     }
 
-    private class DetailedTabAdapter(fragment: Fragment) :
+    private inner class DetailedTabAdapter(fragment: Fragment) :
         FragmentStateAdapter(fragment) {
-        private val detailedFragment = listOf(
-            Screens.AboutDrinkScreen.fragment,
-            Screens.FormulaDrinkScreen.fragment,
-            Screens.ToolsDrinkScreen.fragment
-        )
 
-        override fun getItemCount(): Int = detailedFragment.size
+        override fun getItemCount(): Int = 3
 
-        override fun createFragment(position: Int): Fragment = detailedFragment[position]
-
+        override fun createFragment(position: Int): Fragment = when (position) {
+            0 -> Screens.AboutDrinkScreen.fragment
+            1 -> Screens.FormulaDrinkScreen.fragment
+            else -> Screens.ToolsDrinkScreen.fragment
+        }
     }
-
 }
