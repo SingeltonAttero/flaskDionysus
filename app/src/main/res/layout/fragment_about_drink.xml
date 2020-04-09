@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_16"
     tools:theme="@style/AppTheme">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="About Drink Feature"
-        android:textSize="30sp" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:gravity="start|top"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/font_16"
+            android:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the
+                   \n Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
+
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>

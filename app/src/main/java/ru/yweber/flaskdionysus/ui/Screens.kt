@@ -32,7 +32,7 @@ object Screens {
         }
     }
 
-    object DrinkTheDayScreen : SupportAppScreen() {
+    object DrinkTheDayFlowScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return DrinkTheDayFlowFragment()
         }

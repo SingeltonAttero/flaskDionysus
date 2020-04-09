@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.item_drink.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkItem
+import ru.yweber.flaskdionysus.core.adapter.state.HeaderEmptyCardItem
 import kotlin.random.Random
 
 /**
@@ -18,7 +19,13 @@ import kotlin.random.Random
 class DrinksAdapter {
 
     fun createAdapter() =
-        AsyncListDifferDelegationAdapter(DiffDrink, createDrink())
+        AsyncListDifferDelegationAdapter(DiffDrink, createDrink(), createHeader())
+
+
+    private fun createHeader() =
+        adapterDelegateLayoutContainer<HeaderEmptyCardItem, DrinkItem>(R.layout.item_header_empty) {
+
+        }
 
     private fun createDrink() =
         adapterDelegateLayoutContainer<DrinkCardItem, DrinkItem>(R.layout.item_drink) {

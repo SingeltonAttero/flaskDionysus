@@ -7,4 +7,5 @@
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_5">5dp</dimen>
     <dimen name="font_10">10sp</dimen>
+    <dimen name="font_16">16sp</dimen>
 </resources>

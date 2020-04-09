@@ -5,38 +5,19 @@
     android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:theme="@style/AppTheme">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/ablDrinks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctlDrinks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:contentScrim="@color/colorScrimDrinkDay"
-            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
-            app:scrimAnimationDuration="400">
-
-            <FrameLayout
-                android:id="@+id/containerDrinkOnDay"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:layout_collapseMode="parallax" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDrinks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/item_drink" />
+
+    <FrameLayout
+        android:id="@+id/containerDrinkOnDay"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         style="@style/MaterialFab"

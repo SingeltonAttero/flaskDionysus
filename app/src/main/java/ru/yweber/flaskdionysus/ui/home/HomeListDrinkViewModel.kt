@@ -5,6 +5,7 @@ import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
+import ru.yweber.flaskdionysus.core.adapter.state.HeaderEmptyCardItem
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.ui.Screens
@@ -23,7 +24,7 @@ class HomeListDrinkViewModel(
     BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     override val defaultState: ListDrinkState
-        get() = ListDrinkState(listOf())
+        get() = ListDrinkState(listOf(HeaderEmptyCardItem))
 
     init {
         val toList = (0..100).map {
@@ -36,11 +37,13 @@ class HomeListDrinkViewModel(
                         "кокосовый сироп и еще кое-чтококосовый сироп и еще кое-чтококосовый сироп и еще кое-чтококосовый сироп и еще кое-чтококосовый сироп и еще кое-что"
             )
         }.toList()
-        action.value = currentState.copy(listDrink = toList)
+        val toMutableList = currentState.listDrink.toMutableList()
+        toMutableList.addAll(toList)
+        action.value = currentState.copy(listDrink = toMutableList)
     }
 
     fun navigateDrinkDay() {
-        drinkRouter.newRootScreen(Screens.DrinkTheDayScreen)
+        drinkRouter.newRootScreen(Screens.DrinkTheDayFlowScreen)
     }
 
 }
