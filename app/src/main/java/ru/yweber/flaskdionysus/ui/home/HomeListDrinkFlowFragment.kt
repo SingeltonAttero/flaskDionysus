@@ -8,7 +8,6 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import kotlinx.android.synthetic.main.fragment_home_list_drink.*
 import ru.terrakok.cicerone.Navigator
@@ -64,40 +63,47 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
         rvDrinks.adapter = adapter
         rvDrinks.addItemDecoration(PaddingItemDecorator())
         val setHide = AnimatorSet()
-        val setVisible = AnimatorSet()
+        val animatorSetVisible = AnimatorSet()
         rvDrinks.addOnScrollListener(HideFragmentScrollListener(hide = {
-            setVisible.cancel()
-            val animate = ObjectAnimator.ofFloat(
-                containerDrinkOnDay, View.TRANSLATION_Y,
-                0F, -containerDrinkOnDay.height.toFloat()
-            )
-            val alpha = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 1F, 0.9F)
-            val alpha2 = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 1F, 0.5F)
-            setHide.playSequentially(alpha, animate, alpha2)
-            setHide.interpolator = AccelerateInterpolator(2F)
-            setHide.start()
+            hideAnimationHeader(animatorSetVisible, setHide)
         }, visible = {
-            setHide.cancel()
-            rvDrinks.smoothScrollToPosition(0)
-            val animate = ObjectAnimator.ofFloat(
-                containerDrinkOnDay, View.TRANSLATION_Y,
-                -containerDrinkOnDay.height.toFloat(), 0F
-            )
-            val alpha = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 0.5F, 1F)
-            setVisible.playTogether(animate, alpha)
-            setVisible.interpolator = DecelerateInterpolator(2F)
-            setVisible.start()
+            visibleAnimationHeader(setHide, animatorSetVisible)
         }))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
+    private fun hideAnimationHeader(setVisible: AnimatorSet, setHide: AnimatorSet) {
+        setVisible.cancel()
+        val animate = ObjectAnimator.ofFloat(
+            containerDrinkOnDay, View.TRANSLATION_Y,
+            0F, -containerDrinkOnDay.height.toFloat()
+        )
+        val alpha = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 1F, 0.9F)
+        val alpha2 = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 1F, 0.5F)
+        setHide.playSequentially(alpha, animate, alpha2)
+        setHide.interpolator = AccelerateInterpolator(2F)
+        setHide.start()
+    }
+
+    private fun visibleAnimationHeader(
+        setHide: AnimatorSet,
+        animatorSetVisible: AnimatorSet
+    ) {
+        setHide.cancel()
+        rvDrinks.smoothScrollToPosition(0)
+        val animate = ObjectAnimator.ofFloat(
+            containerDrinkOnDay, View.TRANSLATION_Y,
+            -containerDrinkOnDay.height.toFloat(), 0F
+        )
+        val alpha = ObjectAnimator.ofFloat(containerDrinkOnDay, View.ALPHA, 0.5F, 1F)
+        animatorSetVisible.playTogether(animate, alpha)
+        animatorSetVisible.interpolator = DecelerateInterpolator(2F)
+        animatorSetVisible.start()
     }
 
     private fun renderState(state: ListDrinkState) {
         adapter.items = state.listDrink
     }
+
 
     override fun onDestroyView() {
         rvDrinks.adapter = null
