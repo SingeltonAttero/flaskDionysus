@@ -2,13 +2,13 @@ package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_drink_day_detailed.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
-import ru.yweber.flaskdionysus.ui.Screens
+import ru.yweber.flaskdionysus.core.adapter.DrinkDayDelegateAdapter
+import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
 import java.util.*
@@ -20,17 +20,19 @@ import java.util.*
 class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detailed) {
 
     private val viewModel by inject<DrinkDayDetailedViewModel>()
-    private lateinit var layoutMediator: TabLayoutMediator
 
-
-    private var fragmentAdapter: DetailedTabAdapter? = null
+    private val pageAdapter by lazy { DrinkDayDelegateAdapter().createAdapter() }
 
     override fun installModule(scope: Scope) {
         scope.installViewModel<DrinkDayDetailedViewModel>()
     }
 
+    private var layoutMediator: TabLayoutMediator? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subscribe(viewModel.state, ::renderState)
+        viewPagerDetailedDrinkDay.adapter = pageAdapter
         layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
             when (position) {
                 0 -> tab.text = getString(R.string.aboutDrink).toUpperCase(Locale.getDefault())
@@ -38,27 +40,18 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
                 2 -> tab.text = getString(R.string.tools).toUpperCase(Locale.getDefault())
             }
         }
-        fragmentAdapter = DetailedTabAdapter(this)
-        viewPagerDetailedDrinkDay.adapter = fragmentAdapter
-        layoutMediator.attach()
+        layoutMediator?.attach()
+    }
+
+    private fun renderState(state: DrinkDayDetailedState) {
+        pageAdapter.items = state.pageItem
     }
 
     override fun onDestroyView() {
+        layoutMediator?.detach()
+        layoutMediator = null
         viewPagerDetailedDrinkDay.adapter = null
-        tabLayoutDetailedDrinkDay.removeAllTabs()
-        layoutMediator.detach()
         super.onDestroyView()
     }
 
-    private inner class DetailedTabAdapter(fragment: Fragment) :
-        FragmentStateAdapter(fragment) {
-
-        override fun getItemCount(): Int = 3
-
-        override fun createFragment(position: Int): Fragment = when (position) {
-            0 -> Screens.AboutDrinkScreen.fragment
-            1 -> Screens.FormulaDrinkScreen.fragment
-            else -> Screens.ToolsDrinkScreen.fragment
-        }
-    }
 }

@@ -11,7 +11,7 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFlowFragment
-import ru.yweber.flaskdionysus.core.adapter.DrinksAdapter
+import ru.yweber.flaskdionysus.core.adapter.DrinksDelegateAdapter
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkItem
 import ru.yweber.flaskdionysus.core.decorator.PaddingItemDecorator
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
@@ -29,7 +29,7 @@ import toothpick.ktp.delegate.inject
 
 class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_drink) {
 
-    private val adapter: AsyncListDifferDelegationAdapter<DrinkItem> by lazy { DrinksAdapter().createAdapter() }
+    private val adapter: AsyncListDifferDelegationAdapter<DrinkItem> by lazy { DrinksDelegateAdapter().createAdapter() }
 
     override val viewModel by inject<HomeListDrinkViewModel>()
     override val navigator: Navigator

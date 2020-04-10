@@ -15,7 +15,7 @@ import kotlin.random.Random
  * Created on 01.04.2020
  * @author YWeber */
 
-class DrinksAdapter {
+class DrinksDelegateAdapter {
 
     fun createAdapter() =
         AsyncListDifferDelegationAdapter(DiffDrink, createDrink())

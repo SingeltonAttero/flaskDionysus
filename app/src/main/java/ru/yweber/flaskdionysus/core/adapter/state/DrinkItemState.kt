@@ -13,5 +13,3 @@ data class DrinkCardItem(
     val alcohol: String,
     val ingredients: String
 ) : DrinkItem()
-
-object HeaderEmptyCardItem : DrinkItem()
