@@ -1,7 +1,6 @@
 package ru.yweber.flaskdionysus.ui.drinkday.about
 
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import kotlinx.android.synthetic.main.fragment_about_drink.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
@@ -28,7 +27,7 @@ class AboutDrinkFragment : BaseFragment(R.layout.fragment_about_drink) {
     }
 
     private fun renderState(state: AboutDrinkState) {
-
+        tvAbout.text = state.aboutDescription
     }
 
 }

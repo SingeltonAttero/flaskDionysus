@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created on 09.04.2020
  * @author YWeber */
-private const val THRESHOLD = 400
+private const val THRESHOLD = 800
 
 class HideFragmentScrollListener(
     val hide: () -> Unit,
@@ -18,11 +18,11 @@ class HideFragmentScrollListener(
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         distanceVisible += dy
-        if (distanceHide > THRESHOLD + THRESHOLD && controlsVisible) {
+        if (distanceHide > THRESHOLD && controlsVisible) {
             hide()
             controlsVisible = false
             distanceHide = 0
-        } else if (distanceVisible < THRESHOLD && !controlsVisible) {
+        } else if (distanceVisible < THRESHOLD / 2 && !controlsVisible) {
             visible()
             controlsVisible = true
             distanceHide = 0

@@ -20,7 +20,7 @@ class DrinkTheDayFlowViewModel(
 ) : BaseViewModel<DrinkTheDayState>(nestedNavigationHolder) {
 
     override val defaultState: DrinkTheDayState
-        get() = DrinkTheDayState()
+        get() = DrinkTheDayState(true)
 
     private var isPreview = false
 
@@ -36,5 +36,6 @@ class DrinkTheDayFlowViewModel(
             nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
         }
         isPreview = !isPreview
+        action.value = currentState.copy(isPreview = !isPreview)
     }
 }

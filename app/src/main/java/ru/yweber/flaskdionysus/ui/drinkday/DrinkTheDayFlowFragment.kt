@@ -1,27 +1,26 @@
 package ru.yweber.flaskdionysus.ui.drinkday
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import coil.api.load
-import kotlinx.android.synthetic.main.fragment_drink_day_preview.*
 import kotlinx.android.synthetic.main.fragment_drink_the_day.*
 import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFlowFragment
-import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.DrinkDayNestedHolder
 import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
+import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.drinkday.state.DrinkTheDayState
 import toothpick.Scope
-import toothpick.Toothpick
-import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**
@@ -50,11 +49,42 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (childFragmentManager.fragments.isEmpty()){
+        subscribe(viewModel.state, ::render)
+        if (childFragmentManager.fragments.isEmpty()) {
             viewModel.startPreview()
         }
         fabSwipeDrinkDay.setOnClickListener {
             viewModel.swipePreviewToDetailed()
         }
     }
+
+    private fun render(state: DrinkTheDayState) {
+        val layoutParams = fabSwipeDrinkDay.layoutParams as CoordinatorLayout.LayoutParams
+        val animatorSet = AnimatorSet()
+        if (state.isPreview) {
+            val translationY = ObjectAnimator.ofFloat(
+                fabSwipeDrinkDay,
+                View.TRANSLATION_Y,
+                negativeDeltaHeight(layoutParams),
+                0F
+            )
+            val rotation = ObjectAnimator.ofFloat(fabSwipeDrinkDay, View.ROTATION, 180F, 0F)
+            animatorSet.playSequentially(translationY, rotation)
+        } else {
+            val translationY = ObjectAnimator.ofFloat(
+                fabSwipeDrinkDay,
+                View.TRANSLATION_Y,
+                0F,
+                negativeDeltaHeight(layoutParams)
+            )
+            val rotation = ObjectAnimator.ofFloat(fabSwipeDrinkDay, View.ROTATION, 0F, 180F)
+            animatorSet.playSequentially(translationY, rotation)
+        }
+        animatorSet.interpolator = AccelerateDecelerateInterpolator()
+        animatorSet.duration = 500
+        animatorSet.start()
+    }
+
+    private fun negativeDeltaHeight(layoutParams: CoordinatorLayout.LayoutParams) =
+        -(containerFlowFragment.height - (fabSwipeDrinkDay.height + layoutParams.topMargin + layoutParams.bottomMargin)).toFloat()
 }
