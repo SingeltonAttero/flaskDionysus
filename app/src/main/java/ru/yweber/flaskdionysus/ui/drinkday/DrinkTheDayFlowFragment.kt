@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
@@ -20,12 +21,14 @@ import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.drinkday.state.DrinkTheDayState
+import timber.log.Timber
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
 
 /**
  * Created on 07.04.2020
  * @author YWeber */
+private const val DURATION_ANIMATION = 350L
 
 class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day) {
 
@@ -42,6 +45,16 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
             }
         }
 
+    private var isGlobalChange = true
+    private val globalListener: ViewTreeObserver.OnGlobalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
+        if (isGlobalChange) {
+            val layoutParams = fabSwipeDrinkDay.layoutParams as CoordinatorLayout.LayoutParams
+            viewModel.fabAnimationHeight(negativeDeltaHeight(layoutParams))
+            Timber.e("Height: ${negativeDeltaHeight(layoutParams)}")
+            isGlobalChange = false
+        }
+    }
+
     override fun installModule(scope: Scope) {
         scope.installNestedNavigation<DrinkDayNestedRouter, DrinkDayNestedHolder>(HandleCiceroneNavigate.DRINK_DAY_NESTED_FLOW)
         scope.installViewModel<DrinkTheDayFlowViewModel>()
@@ -56,35 +69,47 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
         fabSwipeDrinkDay.setOnClickListener {
             viewModel.swipePreviewToDetailed()
         }
+        containerFlowFragment.viewTreeObserver.addOnGlobalLayoutListener(globalListener)
     }
 
+    private fun negativeDeltaHeight(layoutParams: CoordinatorLayout.LayoutParams) =
+        -(containerFlowFragment.height - (fabSwipeDrinkDay.height + layoutParams.topMargin + layoutParams.bottomMargin)).toFloat()
+
     private fun render(state: DrinkTheDayState) {
-        val layoutParams = fabSwipeDrinkDay.layoutParams as CoordinatorLayout.LayoutParams
+        animationFab(state)
+    }
+
+    private fun animationFab(state: DrinkTheDayState) {
         val animatorSet = AnimatorSet()
         if (state.isPreview) {
+            animatorSet.cancel()
             val translationY = ObjectAnimator.ofFloat(
                 fabSwipeDrinkDay,
                 View.TRANSLATION_Y,
-                negativeDeltaHeight(layoutParams),
+                state.height,
                 0F
             )
             val rotation = ObjectAnimator.ofFloat(fabSwipeDrinkDay, View.ROTATION, 180F, 0F)
             animatorSet.playSequentially(translationY, rotation)
         } else {
+            animatorSet.cancel()
             val translationY = ObjectAnimator.ofFloat(
                 fabSwipeDrinkDay,
                 View.TRANSLATION_Y,
                 0F,
-                negativeDeltaHeight(layoutParams)
+                state.height
             )
             val rotation = ObjectAnimator.ofFloat(fabSwipeDrinkDay, View.ROTATION, 0F, 180F)
             animatorSet.playSequentially(translationY, rotation)
         }
         animatorSet.interpolator = AccelerateDecelerateInterpolator()
-        animatorSet.duration = 500
+        animatorSet.duration = DURATION_ANIMATION
         animatorSet.start()
     }
 
-    private fun negativeDeltaHeight(layoutParams: CoordinatorLayout.LayoutParams) =
-        -(containerFlowFragment.height - (fabSwipeDrinkDay.height + layoutParams.topMargin + layoutParams.bottomMargin)).toFloat()
+    override fun onDestroyView() {
+        containerFlowFragment.viewTreeObserver.removeOnGlobalLayoutListener(globalListener)
+        super.onDestroyView()
+    }
+
 }

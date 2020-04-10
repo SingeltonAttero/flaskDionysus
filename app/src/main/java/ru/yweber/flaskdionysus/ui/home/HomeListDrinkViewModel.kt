@@ -5,7 +5,6 @@ import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
-import ru.yweber.flaskdionysus.core.adapter.state.HeaderEmptyCardItem
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.ui.Screens
@@ -24,7 +23,7 @@ class HomeListDrinkViewModel(
     BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     override val defaultState: ListDrinkState
-        get() = ListDrinkState(listOf(HeaderEmptyCardItem))
+        get() = ListDrinkState(listOf())
 
     init {
         val toList = (0..100).map {

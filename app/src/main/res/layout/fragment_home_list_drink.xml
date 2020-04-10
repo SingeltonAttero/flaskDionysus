@@ -12,12 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/item_drink" />
 
-    <FrameLayout
-        android:id="@+id/containerDrinkOnDay"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarHomeList"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="wrap_content"
+        app:layout_behavior=".core.view.scroll.FixedScrollAppBarLayoutBehavior">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctlHomeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorScrimDrinkDay"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:scrimAnimationDuration="400">
+
+            <FrameLayout
+                android:id="@+id/containerDrinkOnDay"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_collapseMode="parallax" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         style="@style/MaterialFab"

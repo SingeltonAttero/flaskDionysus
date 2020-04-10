@@ -1,6 +1,7 @@
 package ru.yweber.flaskdionysus.core.view.scroll
 
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 
 /**
  * Created on 09.04.2020
@@ -14,6 +15,10 @@ class HideFragmentScrollListener(
     private var distanceHide = 0
     private var distanceVisible = 0
     private var controlsVisible = true
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        super.onScrollStateChanged(recyclerView, newState)
+        Timber.e(recyclerView.getChildAt(0).measuredHeight.toString())
+    }
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)

@@ -5,7 +5,6 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.android.synthetic.main.fragment_home_list_drink.*
 import kotlinx.android.synthetic.main.fragment_main_flow.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -76,6 +75,10 @@ class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
         inflater.inflate(R.menu.main_menu, menu)
     }
 
+    override fun onDestroyView() {
+        (activity as? AppCompatActivity)?.setSupportActionBar(null)
+        super.onDestroyView()
+    }
 
     override fun backPressed(): Boolean {
         return childFragmentManager.fragments.lastOrNull {

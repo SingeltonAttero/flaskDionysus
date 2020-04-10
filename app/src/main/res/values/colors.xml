@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#C2185B</color>
-    <color name="colorScrimDrinkDay">#8FC2185B</color>
+    <color name="colorScrimDrinkDay">#40C2185B</color>
     <color name="colorPrimaryDark">#AD1457</color>
     <color name="colorControl">#0AAD1457</color>
     <color name="colorAccent">#BDBDBD</color>
