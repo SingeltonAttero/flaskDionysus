@@ -11,5 +11,23 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class DrinkDayPreviewViewModel : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
-        get() = DrinkDayPreviewState()
+        get() = DrinkDayPreviewState(
+            "",
+            "",
+            0,
+            "",
+            "",
+            ""
+        )
+
+    init {
+        action.value = currentState.copy(
+            imagePath = "https://kak-nazyvaetsya.ru/wp-content/uploads/2019/05/b52.jpg",
+            drinkName = "Текила Санрайз",
+            rating = 4,
+            checks = "Попробовали: 132 человека",
+            levelCooking = "Сложность: средне",
+            alcoholStrength = "Крепость: легкий"
+        )
+    }
 }

@@ -5,15 +5,7 @@
     android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDrinks"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_drink" />
+    tools:theme="@style/AppTheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarHomeList"
@@ -25,6 +17,8 @@
             android:id="@+id/ctlHomeList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             app:contentScrim="@color/colorScrimDrinkDay"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:scrimAnimationDuration="400">
@@ -37,6 +31,15 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDrinks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_drink" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         style="@style/MaterialFab"

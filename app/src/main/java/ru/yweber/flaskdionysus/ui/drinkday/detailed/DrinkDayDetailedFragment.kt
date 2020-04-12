@@ -7,7 +7,9 @@ import kotlinx.android.synthetic.main.fragment_drink_day_detailed.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.core.adapter.DrinkDayDelegateAdapter
+import ru.yweber.flaskdionysus.core.adapter.state.DetailedComponentItemState
 import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.system.toast
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
@@ -21,7 +23,13 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
 
     private val viewModel by inject<DrinkDayDetailedViewModel>()
 
-    private val pageAdapter by lazy { DrinkDayDelegateAdapter().createAdapter() }
+    private val pageAdapter by lazy {
+        DrinkDayDelegateAdapter().createAdapter(::clickComponentItem)
+    }
+
+    private fun clickComponentItem(item: DetailedComponentItemState) {
+        toast(item.toString())
+    }
 
     override fun installModule(scope: Scope) {
         scope.installViewModel<DrinkDayDetailedViewModel>()
@@ -45,6 +53,7 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
 
     private fun renderState(state: DrinkDayDetailedState) {
         pageAdapter.items = state.pageItem
+        tvNameDrink.text = state.drinkName
     }
 
     override fun onDestroyView() {

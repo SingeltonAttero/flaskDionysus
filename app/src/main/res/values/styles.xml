@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorControl</item>
         <item name="android:background">@color/colorWhite</item>
 
     </style>
@@ -77,6 +78,12 @@
         parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ComponentDrink">
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textColor">@color/colorBlackTitleText</item>
+        <item name="android:textSize">@dimen/font_16</item>
     </style>
 
 </resources>

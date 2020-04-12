@@ -87,6 +87,7 @@
             tools:text="Сложность: средне" />
 
         <TextView
+            android:id="@+id/tvAlcoholStrength"
             style="@style/DescriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

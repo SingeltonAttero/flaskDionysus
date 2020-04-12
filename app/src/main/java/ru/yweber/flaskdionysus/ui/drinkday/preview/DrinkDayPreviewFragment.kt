@@ -5,6 +5,8 @@ import coil.api.load
 import kotlinx.android.synthetic.main.fragment_drink_day_preview.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
+import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.drinkday.preview.state.DrinkDayPreviewState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
 
@@ -22,6 +24,16 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ivPreviewDrinkDay.load("https://kak-nazyvaetsya.ru/wp-content/uploads/2019/05/b52.jpg")
+        subscribe(viewModel.state, ::renderState)
+    }
+
+    private fun renderState(state: DrinkDayPreviewState) {
+        ivPreviewDrinkDay.load(state.imagePath)
+        tvNameDrink.text = state.drinkName
+        lriDrinkDay.progress(state.rating)
+        tvTriedDrink.text = state.checks
+        tvCookingLevel.text = state.levelCooking
+        tvAlcoholStrength.text = state.alcoholStrength
+
     }
 }

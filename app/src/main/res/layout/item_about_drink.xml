@@ -7,21 +7,17 @@
     android:padding="@dimen/margin_16"
     tools:theme="@style/AppTheme">
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/tvAbout"
+        style="@style/ComponentDrink"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:focusable="true"
+        android:gravity="start|top"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/font_16"
+        tools:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
 
-        <TextView
-            android:id="@+id/tvAbout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:ellipsize="end"
-            android:focusable="true"
-            android:gravity="start|top"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/font_16"
-            tools:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
-
-    </FrameLayout>
 </androidx.core.widget.NestedScrollView>
