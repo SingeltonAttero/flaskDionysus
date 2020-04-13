@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package proto;
+
+option java_package = "ru.weber.proto";
+option java_outer_classname = "DictionariesProto";
+option java_multiple_files = true;
+
+
+service Dictionaries {
+  rpc GetDictionaries(DictionariesRequest) returns (DictionariesResponse) {}
+  rpc GetByName(NameRequest) returns (NameResponse) {}
+}
+
+message DictionariesRequest {}
+
+message Dictionary {
+  int32 id = 1;
+  string name = 2;
+}
+
+message DictionariesResponse {
+  repeated Dictionary complication_levels = 1;
+  repeated Dictionary fortress_levels = 2;
+  repeated Dictionary volumes = 3;
+  repeated Dictionary ingredients = 4;
+  repeated Dictionary other = 5;
+}
+
+message NameRequest{
+  string name = 1;
+  int32 page = 2;
+}
+
+message NameItem {
+  enum Type {
+    COCKTAIL = 0;
+    INGREDIENT = 1;
+    INSTRUMENT = 2;
+  }
+  int32 id = 1;
+  string name = 2;
+  Type type = 3;
+}
+
+message NameResponse {
+  repeated NameItem items = 1;
+}

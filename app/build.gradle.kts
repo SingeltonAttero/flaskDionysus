@@ -59,6 +59,7 @@ android {
 }
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(project(":codegen"))
     //AndroidX
     implementation(Libs.androidx_app_compat)
     implementation(Libs.androidx_constraintlayout)

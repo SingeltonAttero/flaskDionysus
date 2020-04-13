@@ -1,5 +1,3 @@
-import de.mannodermaus.gradle.plugins.junit5.internal.testTaskOf
-
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
@@ -14,6 +12,7 @@ buildscript {
         classpath(Libs.android_gradle_plugin)
         classpath(Libs.kotlin_gradle_plugin)
         classpath(Libs.plugins_android_junit5)
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.12")
     }
 }
 allprojects {

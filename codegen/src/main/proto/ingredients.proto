@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package proto;
+
+option java_package = "ru.weber.proto";
+option java_outer_classname = "ingredientsProto";
+option java_multiple_files = true;
+
+service Ingredients {
+    rpc GetIngredientById(IngredientRequest) returns (IngredientResponse) {}
+}
+
+message IngredientRequest {
+    int32 id = 1;
+}
+
+message IngredientResponse {
+    int32 id = 1;
+    string name = 2;
+    string name_en = 3;
+    string info = 4;
+    string description = 5;
+    string icon = 6;
+}

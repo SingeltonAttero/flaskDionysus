@@ -2,6 +2,10 @@ package ru.yweber.flaskdionysus
 
 import android.app.Application
 import leakcanary.LeakCanary
+import ru.weber.proto.DictionariesProto
+import ru.weber.proto.DictionariesRequest
+import ru.weber.proto.DictionariesResponse
+import ru.weber.proto.DrinkRequest
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.module.appModule
 import ru.yweber.flaskdionysus.di.module.navigationModule
@@ -26,6 +30,10 @@ class App : Application() {
     }
 
     private fun initTimber() {
+        val builder = DrinkRequest
+            .newBuilder()
+            .setId(1)
+
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
