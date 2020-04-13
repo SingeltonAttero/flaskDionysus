@@ -1,4 +1,8 @@
 object Versions {
+    // grpc
+    const val grpc_protobuf_plugin = "0.8.12"
+    const val grpc = "1.28.1"
+    const val javax_annotation = "1.3.1"
 
     //Plugins
     const val android_gradle_plugin = "3.6.0"

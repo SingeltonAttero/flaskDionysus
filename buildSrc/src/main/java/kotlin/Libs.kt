@@ -1,12 +1,17 @@
 object Libs {
+    const val javax_annotation = "javax.annotation:javax.annotation-api:${Versions.javax_annotation}"
+    const val grpc_okhttp = "io.grpc:grpc-okhttp:${Versions.grpc}"
+    const val grpc_stub = "io.grpc:grpc-stub:${Versions.grpc}"
+    const val grpc_protobuf_lite = "io.grpc:grpc-protobuf-lite:${Versions.grpc}"
+
     // Plugins
     const val android_gradle_plugin =
         "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
     const val kotlin_gradle_plugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_gradle_plugin}"
-
     const val plugins_android_junit5 =
         "de.mannodermaus.gradle.plugins:android-junit5:${Versions.plugins_android_junit5}"
+    const val grpc_protobuf_plugin = "com.google.protobuf:protobuf-gradle-plugin:${Versions.grpc_protobuf_plugin}"
 
     // AndroidX
     const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"

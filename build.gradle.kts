@@ -12,7 +12,7 @@ buildscript {
         classpath(Libs.android_gradle_plugin)
         classpath(Libs.kotlin_gradle_plugin)
         classpath(Libs.plugins_android_junit5)
-        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.12")
+        classpath(Libs.grpc_protobuf_plugin)
     }
 }
 allprojects {

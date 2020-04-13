@@ -1,3 +1,4 @@
+import com.google.protobuf.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("com.google.protobuf")
 }
 
 android {
@@ -51,15 +53,47 @@ android {
         exclude("META-INF/LICENSE*")
     }
 
+    lintOptions {
+        disable("GoogleAppIndexingWarning", "HardcodedText", "InvalidPackage")
+        textReport = true
+        textOutput("stdout")
+    }
 
     kotlinOptions {
         val options = this as? KotlinJvmOptions
         options?.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.11.0"
+    }
+
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.28.1"
+        }
+    }
+
+    generateProtoTasks {
+        all().forEach {
+            it.builtins {
+                id("java") {
+                    option("lite")
+                }
+            }
+            it.plugins {
+                id("grpc") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(project(":codegen"))
     //AndroidX
     implementation(Libs.androidx_app_compat)
     implementation(Libs.androidx_constraintlayout)
@@ -68,7 +102,11 @@ dependencies {
     implementation(Libs.androidx_recyclerview)
     implementation(Libs.androidx_cardview)
     implementation(Libs.androidx_fragment)
-
+    // GRPC
+    implementation(Libs.grpc_okhttp)
+    implementation(Libs.grpc_protobuf_lite)
+    implementation(Libs.grpc_stub)
+    implementation(Libs.javax_annotation)
     // DI
     implementation(Libs.toothpick_ktp)
     implementation(Libs.toothpick_smoothie_lifecycle)
@@ -107,6 +145,7 @@ dependencies {
     testImplementation(Libs.junit_ext)
     testImplementation(Libs.mockito_core)
     testImplementation(Libs.mockito_kotlin)
+    testProtobuf(files("src/main/proto"))
 
     // Leakcanary
     debugImplementation(Libs.leakcanary)
