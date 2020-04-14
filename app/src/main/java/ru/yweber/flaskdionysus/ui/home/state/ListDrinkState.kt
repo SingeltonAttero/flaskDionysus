@@ -1,5 +1,7 @@
 package ru.yweber.flaskdionysus.ui.home.state
 
+import androidx.paging.PagedList
+import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkItem
 
 /**
@@ -7,5 +9,5 @@ import ru.yweber.flaskdionysus.core.adapter.state.DrinkItem
  * @author YWeber */
 
 data class ListDrinkState(
-    val listDrink: List<DrinkItem>
+    val listDrink: PagedList<DrinkCardItem>
 )

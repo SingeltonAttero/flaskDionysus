@@ -21,11 +21,10 @@ class DrinkRepository @Inject constructor(
     private val errorStatus: ErrorStatusSender
 ) {
     fun pageDrink(page: Int) = flow<DrinksEntity> {
-        val startPage = DrinksRequest.newBuilder()
+        val drinkRequest = DrinksRequest.newBuilder()
             .setPage(page)
             .build()
-
-        val onePageDrinks = client.getDrinkList(startPage).drinksList
+        val pageDrinks = client.getDrinkList(drinkRequest).drinksList
             .map {
                 Timber.e(it.mark.toString())
                 DrinkEntity(
@@ -35,7 +34,8 @@ class DrinkRepository @Inject constructor(
                     it.isIba, it.properties, it.ingredients
                 )
             }
-        emit(DrinksEntity.Result(onePageDrinks))
+        Timber.e("Size drinks ${pageDrinks.size}")
+        emit(DrinksEntity.Result(pageDrinks))
     }.catch {
         emit(DrinksEntity.Error(errorStatus.sender(it)))
     }.flowOn(Dispatchers.IO)

@@ -7,6 +7,7 @@ package ru.yweber.flaskdionysus.core.adapter.state
 sealed class DrinkItem
 
 data class DrinkCardItem(
+    val id: Int,
     val iconPath: String,
     val nameDrink: String,
     val cookingLevel: String,

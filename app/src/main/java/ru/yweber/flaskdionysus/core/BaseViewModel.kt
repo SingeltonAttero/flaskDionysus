@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
+import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import timber.log.Timber
 
 /**
@@ -43,4 +44,5 @@ abstract class BaseViewModel<T>(private val navigatorHolder: NavigatorHolder? = 
     fun removeNavigator() {
         navigatorHolder?.removeNavigator()
     }
+
 }
