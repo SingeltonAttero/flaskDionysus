@@ -19,6 +19,7 @@ import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.system.toast
 import ru.yweber.flaskdionysus.ui.home.state.ListDrinkState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject

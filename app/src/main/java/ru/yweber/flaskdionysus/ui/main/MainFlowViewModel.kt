@@ -25,7 +25,7 @@ class MainFlowViewModel @Inject constructor(
         get() = MainState()
 
     fun navigateToAboutProject() {
-        router.navigateTo(Screens.DrinkDayDetailedScreen)
+        router.navigateTo(Screens.AboutProjectScreen)
     }
 
     fun navigateToDrinks() {

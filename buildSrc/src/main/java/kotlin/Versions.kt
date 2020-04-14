@@ -21,6 +21,7 @@ object Versions {
     const val flexbox_layout = "1.1.1"
     const val refresh_pull_layout = "1.0.0"
     const val transition_transition = "1.2.0"
+    const val android_paging_ktx = "2.1.2"
 
     //Kotlin
     const val kotlin_coroutines = "1.3.3"
@@ -57,7 +58,7 @@ object Versions {
     const val cicerone = "5.1.0"
 
     //AdapterDelegates
-    const val adapter_delegates = "4.2.0"
+    const val adapter_delegates4 = "4.3.0"
 
     //PermissionsDispatcher
     const val permissionsdispatcher = "4.5.0"

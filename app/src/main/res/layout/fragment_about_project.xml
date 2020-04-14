@@ -4,11 +4,5 @@
     android:layout_height="match_parent"
     android:theme="@style/AppTheme">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="TODO About project"
-        android:textSize="30sp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

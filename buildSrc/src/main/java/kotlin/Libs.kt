@@ -17,6 +17,7 @@ object Libs {
     const val androidx_app_compat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
     const val androidx_recyclerview =
         "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview}"
+    const val androidx_paging_ktx = "androidx.paging:paging-runtime-ktx:${Versions.android_paging_ktx}"
     const val androidx_cardview = "androidx.cardview:cardview:${Versions.androidx_cardview}"
     const val androidx_material =
         "com.google.android.material:material:${Versions.androidx_material}"
@@ -92,9 +93,12 @@ object Libs {
 
     // AdapterDelegates
     const val adapter_delegates =
-        "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates}"
+        "com.hannesdorfmann:adapterdelegates4:${Versions.adapter_delegates4}"
     const val adapter_delegates_dsl =
-        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates}"
+        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:${Versions.adapter_delegates4}"
+
+    const val adapter_delegat_pagination =
+        "com.hannesdorfmann:adapterdelegates4-pagination:${Versions.adapter_delegates4}"
 
     // PermissionsDispatcher
     const val permissionsdispatcher =

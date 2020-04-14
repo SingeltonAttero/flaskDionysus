@@ -37,10 +37,12 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "ENDPOINT", Config.SERVER_ENDPOINT)
+            buildConfigField("int","PORT",Config.SERVER_PORT)
         }
         getByName("debug") {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "ENDPOINT", Config.SERVER_ENDPOINT)
+            buildConfigField("int","PORT",Config.SERVER_PORT)
         }
     }
 
@@ -102,6 +104,7 @@ dependencies {
     implementation(Libs.androidx_recyclerview)
     implementation(Libs.androidx_cardview)
     implementation(Libs.androidx_fragment)
+    implementation(Libs.androidx_paging_ktx)
     // GRPC
     implementation(Libs.grpc_okhttp)
     implementation(Libs.grpc_protobuf_lite)
@@ -127,6 +130,7 @@ dependencies {
     // Adapter Delegates
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
+    implementation(Libs.adapter_delegat_pagination)
 
     //Networking
     implementation(Libs.okhttp_logging_interceptor)

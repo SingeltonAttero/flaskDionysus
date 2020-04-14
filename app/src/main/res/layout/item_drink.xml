@@ -53,6 +53,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             app:lriv_count_indicator="5"
             app:lriv_count_progress="3"
+            app:lriv_resize="false"
+            app:lriv_size_item="12dp"
             app:lriv_empty_drawable="@drawable/ic_favorite_invisible"
             app:lriv_filling_drawable="@drawable/ic_favorite_visible" />
 
@@ -134,7 +136,6 @@
             android:src="@drawable/ic_puff"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvStatusBadge"
             app:layout_constraintTop_toBottomOf="@id/ivStatusHot" />
 
         <androidx.constraintlayout.widget.Guideline
