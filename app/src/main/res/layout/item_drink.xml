@@ -33,11 +33,13 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/NameDrink"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toTopOf="@+id/loveRatingIndicator"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Пина коллада" />
@@ -53,10 +55,10 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             app:lriv_count_indicator="5"
             app:lriv_count_progress="3"
-            app:lriv_resize="false"
-            app:lriv_size_item="12dp"
             app:lriv_empty_drawable="@drawable/ic_favorite_invisible"
-            app:lriv_filling_drawable="@drawable/ic_favorite_visible" />
+            app:lriv_filling_drawable="@drawable/ic_favorite_visible"
+            app:lriv_resize="false"
+            app:lriv_size_item="12dp" />
 
         <TextView
             android:id="@+id/tvCookingLevel"
@@ -64,28 +66,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_8"
-            android:layout_marginBottom="3dp"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@id/loveRatingIndicator"
             app:layout_constraintEnd_toStartOf="@+id/tvStatusBadge"
-            app:layout_constraintStart_toEndOf="@id/loveRatingIndicator"
-            app:layout_constraintTop_toTopOf="@id/loveRatingIndicator"
+            app:layout_constraintStart_toEndOf="@id/ivPreviewImage"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewImage"
             tools:text="Легкий, средней сложности" />
 
         <TextView
             android:id="@+id/tvIngredients"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_8"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="2"
             android:textColor="@color/colorBlackTitleText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/ivPreviewImage"
             app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/ivPreviewImage"
-            app:layout_constraintTop_toTopOf="@id/ivPreviewImage"
+            app:layout_constraintTop_toBottomOf="@+id/tvCookingLevel"
             tools:text="Ром, ананасовый сок, компонентананасовый сок, компонентананасовый сок, компонентананасовый сок, компонент Б, компонент К,Ром, Ром, Ром, Ром, " />
 
         <TextView

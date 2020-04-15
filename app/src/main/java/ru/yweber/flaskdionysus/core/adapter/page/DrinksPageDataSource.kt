@@ -9,6 +9,7 @@ import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
 import ru.yweber.flaskdionysus.model.entity.DrinksEntity
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
+import timber.log.Timber
 
 /**
  * Created on 15.04.2020
@@ -21,10 +22,12 @@ class DrinksPageDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, DrinkCardItem>) {
         scope.launch {
-            useCase.pageDrinks(0).collect {
+            val currentPage = 0
+            val nextPage = currentPage + 1
+            useCase.pageDrinks(currentPage).collect {
                 if (it is DrinksEntity.Result) {
                     val createDrinkItem = createDrinkItem(it.list)
-                    callback.onResult(createDrinkItem, 0, 1)
+                    callback.onResult(createDrinkItem, null, nextPage)
                 }
             }
         }
@@ -32,25 +35,20 @@ class DrinksPageDataSource(
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, DrinkCardItem>) {
         scope.launch {
-            useCase.pageDrinks(params.key).collect {
+            val currentPage = params.key
+            val nextPage = currentPage + 1
+            useCase.pageDrinks(currentPage).collect {
                 if (it is DrinksEntity.Result) {
-                    callback.onResult(createDrinkItem(it.list), params.key + 1)
+                    callback.onResult(createDrinkItem(it.list), nextPage)
                 }
             }
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, DrinkCardItem>) {
-        scope.launch {
-            useCase.pageDrinks(params.key).collect {
-                if (it is DrinksEntity.Result) {
-                    callback.onResult(createDrinkItem(it.list), params.key - 1)
-                }
-            }
-        }
-    }
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, DrinkCardItem>) {}
 
     private fun createDrinkItem(drinks: List<DrinkEntity>): List<DrinkCardItem> {
+        Timber.e(" TEst testtest${drinks.map { it.id }}")
         return drinks.map {
             DrinkCardItem(
                 it.id,

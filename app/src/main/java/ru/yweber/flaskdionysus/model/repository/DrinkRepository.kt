@@ -1,10 +1,14 @@
 package ru.yweber.flaskdionysus.model.repository
 
+import io.grpc.ManagedChannel
+import io.grpc.stub.StreamObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import ru.weber.proto.DrinksGrpc
 import ru.weber.proto.DrinksRequest
+import ru.weber.proto.DrinksResponse
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
 import ru.yweber.flaskdionysus.model.entity.DrinksEntity
@@ -34,7 +38,6 @@ class DrinkRepository @Inject constructor(
                     it.isIba, it.properties, it.ingredients
                 )
             }
-        Timber.e("Size drinks ${pageDrinks.size}")
         emit(DrinksEntity.Result(pageDrinks))
     }.catch {
         emit(DrinksEntity.Error(errorStatus.sender(it)))

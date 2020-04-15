@@ -27,15 +27,16 @@ class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
-) :
-    BaseViewModel<ListDrinkState>(navigatorHolder) {
+) : BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     private val pageList: PagedList<DrinkCardItem>
         get() = PagedList
             .Builder(DrinksPageDataSource(useCase, viewModelScope), config())
             .setFetchExecutor {
-                CoroutineScope(Dispatchers.IO).launch {
-                    it.run()
+                launch {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        it.run()
+                    }
                 }
             }.setNotifyExecutor {
                 launch {
