@@ -3,7 +3,11 @@ package ru.yweber.flaskdionysus.core.adapter.page
 import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
@@ -17,19 +21,25 @@ import timber.log.Timber
 
 class DrinksPageDataSource(
     private val useCase: ListDrinkUseCase,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
+    private val eventLoading: (load: Boolean) -> Unit
 ) : PageKeyedDataSource<Int, DrinkCardItem>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, DrinkCardItem>) {
         scope.launch {
             val currentPage = 0
             val nextPage = currentPage + 1
-            useCase.pageDrinks(currentPage).collect {
-                if (it is DrinksEntity.Result) {
-                    val createDrinkItem = createDrinkItem(it.list)
-                    callback.onResult(createDrinkItem, null, nextPage)
+            useCase.pageDrinks(currentPage)
+                .onStart { eventLoading.invoke(true) }
+                .onEach { eventLoading.invoke(false) }
+                .catch { eventLoading.invoke(false) }
+                .collect {
+                    if (it is DrinksEntity.Result) {
+                        val createDrinkItem = createDrinkItem(it.list)
+                        callback.onResult(createDrinkItem, null, nextPage)
+                    }
                 }
-            }
+
         }
     }
 

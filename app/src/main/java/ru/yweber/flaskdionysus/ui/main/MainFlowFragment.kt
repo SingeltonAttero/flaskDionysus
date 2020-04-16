@@ -25,7 +25,7 @@ import toothpick.ktp.delegate.inject
 
 class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
 
-    override val viewModel: MainFlowViewModel by inject()
+    override val viewModel: MainFlowViewModel by inject<MainFlowViewModel>()
 
     override val navigator: Navigator
         get() = object : SupportAppNavigator(requireActivity(), childFragmentManager, R.id.containerMainFlow) {

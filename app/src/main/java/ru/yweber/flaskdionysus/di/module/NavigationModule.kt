@@ -2,6 +2,7 @@ package ru.yweber.flaskdionysus.di.module
 
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import toothpick.Scope
 import toothpick.ktp.binding.module
@@ -12,8 +13,8 @@ import toothpick.ktp.binding.module
 
 fun navigationModule() = module {
     val handlerCicerone = HandleCiceroneNavigate()
-    val globalCicerone = handlerCicerone.createCicerone(HandleCiceroneNavigate.APP_NAVIGATION)
-    bind(Router::class.java).toInstance(globalCicerone.router)
+    val globalCicerone = handlerCicerone.createRootCicerone()
+    bind(GlobalRouter::class.java).toInstance(globalCicerone.router)
     bind(NavigatorHolder::class.java).toInstance(globalCicerone.navigatorHolder)
     bind(HandleCiceroneNavigate::class.java).toInstance(handlerCicerone)
 }
@@ -21,7 +22,7 @@ fun navigationModule() = module {
 inline fun <reified R : Annotation, reified H : Annotation> Scope.installNestedNavigation(constantNavigation: String) {
     installModules(module {
         val handler = getInstance(HandleCiceroneNavigate::class.java)
-        val nestedCicerone = handler.createCicerone(constantNavigation)
+        val nestedCicerone = handler.createNestedCicerone(constantNavigation)
         bind(Router::class.java).withName(R::class.java).toInstance(nestedCicerone.router)
         bind(NavigatorHolder::class.java).withName(H::class.java)
             .toInstance(nestedCicerone.navigatorHolder)

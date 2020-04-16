@@ -1,11 +1,11 @@
 package ru.yweber.flaskdionysus.ui.app
 
+import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
+import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.app.state.AppState
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 class AppViewModel @Inject constructor(
-    private val router: Router,
+    private val router: GlobalRouter,
     navigatorHolder: NavigatorHolder
 ) :
     BaseViewModel<AppState>(navigatorHolder) {
@@ -22,9 +22,14 @@ class AppViewModel @Inject constructor(
     override val defaultState: AppState
         get() = AppState()
 
+
     fun appColdStart() {
         router.newRootScreen(Screens.MainFlowScreen)
         action.value = currentState.copy(isStartMainScreen = true)
+    }
+
+    fun showLoading() {
+        router.navigateTo(Screens.LoadingDialogHolder)
     }
 
 

@@ -10,6 +10,7 @@ import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
+import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
@@ -25,13 +26,14 @@ private const val PAGE_MAX_ITEM = 50
 @InjectConstructor
 class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
+    private val globalRouter: GlobalRouter,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
 ) : BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     private val pageList: PagedList<DrinkCardItem>
         get() = PagedList
-            .Builder(DrinksPageDataSource(useCase, viewModelScope), config())
+            .Builder(DrinksPageDataSource(useCase, viewModelScope, ::handleLoad), config())
             .setFetchExecutor {
                 launch {
                     CoroutineScope(Dispatchers.IO).launch {
@@ -64,4 +66,11 @@ class HomeListDrinkViewModel(
         drinkRouter.newRootScreen(Screens.DrinkTheDayFlowScreen)
     }
 
+    private fun handleLoad(load: Boolean) {
+        if (load) {
+            globalRouter.show(Screens.LoadingDialogHolder)
+        } else {
+            globalRouter.dismiss(Screens.LoadingDialogHolder)
+        }
+    }
 }
