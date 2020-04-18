@@ -3,6 +3,7 @@ package ru.yweber.flaskdionysus.ui.main
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_main_flow.*
@@ -12,11 +13,15 @@ import ru.terrakok.cicerone.commands.Command
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFlowFragment
 import ru.yweber.flaskdionysus.core.BaseFragment
+import ru.yweber.flaskdionysus.core.notifier.VisibleToolbarNotifier
 import ru.yweber.flaskdionysus.di.MainFlowHolder
 import ru.yweber.flaskdionysus.di.MainFlowRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
+import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.main.state.MainState
 import toothpick.Scope
+import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**
@@ -45,16 +50,24 @@ class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
     }
 
     override fun installModule(scope: Scope) {
+        scope.installModules(module {
+            bind(VisibleToolbarNotifier::class.java).singleton()
+        })
         scope.installNestedNavigation<MainFlowRouter, MainFlowHolder>(HandleCiceroneNavigate.MAIN_NAVIGATION)
         scope.installViewModel<MainFlowViewModel>()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subscribe(viewModel.state, ::renderState)
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
         if (childFragmentManager.fragments.isEmpty()) {
             viewModel.navigateToDrinks()
         }
+    }
+
+    private fun renderState(state: MainState) {
+        appBarMain.isVisible = state.visibleToolbar
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

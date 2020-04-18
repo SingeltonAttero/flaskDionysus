@@ -11,4 +11,5 @@
     <color name="colorLogoIBA">#F44336</color>
     <color name="titleDrinkDay">#99000000</color>
     <color name="colorTabSelectItem">#80FFFFFF</color>
+    <color name="colorAnimateListDrinkTransparent">#00FFFFFF</color>
 </resources>

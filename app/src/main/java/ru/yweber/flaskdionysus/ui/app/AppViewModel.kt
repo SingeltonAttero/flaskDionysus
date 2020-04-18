@@ -1,6 +1,5 @@
 package ru.yweber.flaskdionysus.ui.app
 
-import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
@@ -22,14 +21,8 @@ class AppViewModel @Inject constructor(
     override val defaultState: AppState
         get() = AppState()
 
-
     fun appColdStart() {
         router.newRootScreen(Screens.MainFlowScreen)
-        action.value = currentState.copy(isStartMainScreen = true)
-    }
-
-    fun showLoading() {
-        router.navigateTo(Screens.LoadingDialogHolder)
     }
 
 

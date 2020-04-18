@@ -2,11 +2,9 @@ package ru.yweber.flaskdionysus.ui.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Command
@@ -95,9 +93,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun renderState(appState: AppState) {
-        if (appState.isStartMainScreen) {
-            containerRootActivity.setBackgroundColor(ContextCompat.getColor(this, R.color.colorWhite))
-        }
+
     }
 
     override fun onResumeFragments() {

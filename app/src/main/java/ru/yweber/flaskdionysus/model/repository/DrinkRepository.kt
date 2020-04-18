@@ -25,16 +25,7 @@ class DrinkRepository @Inject constructor(
             .setPage(page)
             .build()
         val pageDrinks = try {
-            client.getDrinkList(drinkRequest).drinksList
-                .map {
-                    Timber.e(it.mark.toString())
-                    DrinkEntity(
-                        it.id, it.name,
-                        it.icon, it.mark.toInt(),
-                        it.isFlacky, it.isFire,
-                        it.isIba, it.properties, it.ingredients
-                    )
-                }
+            convertGrpcToEntity(drinkRequest)
         } catch (ex: Throwable) {
             Timber.e(ex)
             throw ex
@@ -43,4 +34,16 @@ class DrinkRepository @Inject constructor(
     }.catch {
         emit(DrinksEntity.Error(errorStatus.sender(it)))
     }.flowOn(Dispatchers.IO)
+
+    private suspend fun convertGrpcToEntity(drinkRequest: DrinksRequest): List<DrinkEntity> {
+        return client.getDrinkList(drinkRequest).drinksList
+            .map {
+                DrinkEntity(
+                    it.id, it.name,
+                    it.icon, it.mark.toInt(),
+                    it.isFlacky, it.isFire,
+                    it.isIba, it.properties, it.ingredients
+                )
+            }
+    }
 }

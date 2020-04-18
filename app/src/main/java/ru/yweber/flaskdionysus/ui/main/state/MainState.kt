@@ -4,4 +4,4 @@ package ru.yweber.flaskdionysus.ui.main.state
  * Created on 31.03.2020
  * @author YWeber */
 
-class MainState
+data class MainState(val visibleToolbar: Boolean)

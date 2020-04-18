@@ -1,7 +1,15 @@
 package ru.yweber.flaskdionysus.ui.home
 
+import android.os.Build
 import android.os.Bundle
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_home_list_drink.*
@@ -32,6 +40,7 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
     }
 
     override val viewModel by inject<HomeListDrinkViewModel>()
+
     override val navigator: Navigator
         get() = object : SupportAppNavigator(requireActivity(), childFragmentManager, R.id.containerDrinkOnDay) {
             override fun setupFragmentTransaction(
@@ -60,7 +69,28 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
     }
 
     private fun renderState(state: ListDrinkState) {
-        adapter.submitList(state.listDrink)
+        if (state.isLoad) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                TransitionManager.endTransitions(rootContainer)
+            }
+            val slideTop = Slide(Gravity.TOP).apply {
+                duration = 600
+                interpolator = AccelerateDecelerateInterpolator()
+            }
+            val slideBottom = Slide(Gravity.BOTTOM).apply {
+                duration = 600
+                interpolator = AccelerateDecelerateInterpolator()
+            }
+            TransitionManager.beginDelayedTransition(appBarHomeList, slideTop)
+            appBarHomeList.isInvisible = false
+            TransitionManager.beginDelayedTransition(rootContainer, slideBottom)
+            rootContainer.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+            rvDrinks.isVisible = true
+            fabFilter.isVisible = true
+        } else {
+            adapter.submitList(state.listDrink)
+        }
+
     }
 
 

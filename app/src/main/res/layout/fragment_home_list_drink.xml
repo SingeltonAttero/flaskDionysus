@@ -11,6 +11,7 @@
         android:id="@+id/appBarHomeList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_behavior=".core.view.scroll.FixedScrollAppBarLayoutBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -35,19 +36,23 @@
         android:id="@+id/rvDrinks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:clipToPadding="false"
-        android:paddingBottom="72dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_drink" />
+        tools:listitem="@layout/item_drink"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFilter"
         style="@style/MaterialFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_16"
         android:src="@drawable/ic_filter_list"
+        android:visibility="gone"
         app:fabSize="normal"
         app:layout_anchor="@id/rvDrinks"
         app:layout_anchorGravity="bottom|end" />

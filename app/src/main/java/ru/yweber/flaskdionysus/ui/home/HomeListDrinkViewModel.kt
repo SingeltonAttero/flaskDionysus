@@ -4,13 +4,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
-import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
+import ru.yweber.flaskdionysus.core.notifier.VisibleToolbarNotifier
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
@@ -26,14 +27,14 @@ private const val PAGE_MAX_ITEM = 50
 @InjectConstructor
 class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
-    private val globalRouter: GlobalRouter,
+    private val notifier: VisibleToolbarNotifier,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
 ) : BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     private val pageList: PagedList<DrinkCardItem>
         get() = PagedList
-            .Builder(DrinksPageDataSource(useCase, viewModelScope, ::handleLoad), config())
+            .Builder(DrinksPageDataSource(useCase, viewModelScope, ::loaded), config())
             .setFetchExecutor {
                 launch {
                     CoroutineScope(Dispatchers.IO).launch {
@@ -48,12 +49,21 @@ class HomeListDrinkViewModel(
             .build()
 
     override val defaultState: ListDrinkState
-        get() = ListDrinkState(pageList)
+        get() = ListDrinkState(pageList, false)
 
     init {
-        action.value = currentState
+        action.value = currentState.copy(isLoad = false)
     }
 
+    private fun loaded(load: Boolean) {
+        if (load) {
+            launch {
+                delay(300) // create recycler item
+                notifier.visibleToolbar(true)
+                action.value = currentState.copy(isLoad = true)
+            }
+        }
+    }
 
     private fun config(): PagedList.Config {
         return PagedList.Config.Builder()
@@ -66,11 +76,7 @@ class HomeListDrinkViewModel(
         drinkRouter.newRootScreen(Screens.DrinkTheDayFlowScreen)
     }
 
-    private fun handleLoad(load: Boolean) {
-        if (load) {
-            globalRouter.show(Screens.LoadingDialogHolder)
-        } else {
-            globalRouter.dismiss(Screens.LoadingDialogHolder)
-        }
-    }
+
 }
+
+
