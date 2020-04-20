@@ -51,10 +51,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    packagingOptions {
-        exclude("META-INF/LICENSE*")
-    }
-
     lintOptions {
         disable("GoogleAppIndexingWarning", "HardcodedText", "InvalidPackage")
         textReport = true

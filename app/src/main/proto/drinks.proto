@@ -3,6 +3,9 @@ syntax = "proto3";
 package proto;
 
 option go_package = ".;proto";
+option java_package = "ru.weber.proto";
+option java_outer_classname = "DrinksProto";
+option java_multiple_files = true;
 
 service Drinks {
   rpc GetDrinks(DrinksRequest) returns (DrinksResponse) {}

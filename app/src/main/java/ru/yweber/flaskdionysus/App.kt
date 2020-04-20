@@ -4,7 +4,6 @@ import android.app.Application
 import coil.Coil
 import coil.ImageLoader
 import coil.decode.SvgDecoder
-import leakcanary.LeakCanary
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +26,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        LeakCanary.showLeakDisplayActivityLauncherIcon(true)
         initTimber()
         rootScope = KTP.openScope(AppScope::class.java)
             .installModules(appModule(this), navigationModule())
