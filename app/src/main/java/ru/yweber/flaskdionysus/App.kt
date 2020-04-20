@@ -27,6 +27,14 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        LeakCanary.showLeakDisplayActivityLauncherIcon(true)
+        initTimber()
+        rootScope = KTP.openScope(AppScope::class.java)
+            .installModules(appModule(this), navigationModule())
+        initDefaultCoil()
+    }
+
+    private fun initDefaultCoil() {
         Coil.setDefaultImageLoader {
             ImageLoader(this) {
                 componentRegistry {
@@ -47,10 +55,6 @@ class App : Application() {
                 }.build()
             }
         }
-        LeakCanary.showLeakDisplayActivityLauncherIcon(true)
-        initTimber()
-        rootScope = KTP.openScope(AppScope::class.java)
-            .installModules(appModule(this), navigationModule())
     }
 
     private fun initTimber() {
