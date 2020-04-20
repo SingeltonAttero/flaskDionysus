@@ -102,9 +102,8 @@
     </style>
 
     <style name="ComponentDrink">
-        <item name="android:letterSpacing">0.05</item>
         <item name="android:textColor">@color/colorBlackTitleText</item>
-        <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:textSize">@dimen/font_14</item>
     </style>
 
 

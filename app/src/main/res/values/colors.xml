@@ -12,4 +12,5 @@
     <color name="titleDrinkDay">#99000000</color>
     <color name="colorTabSelectItem">#80FFFFFF</color>
     <color name="colorAnimateListDrinkTransparent">#00FFFFFF</color>
+    <color name="separator_gray">#1F000000</color>
 </resources>

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    tools:theme="@style/AppTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +21,8 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_8"
             android:layout_weight="1"
-            android:paddingTop="@dimen/margin_8"
-            android:paddingBottom="@dimen/margin_8"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             tools:text="Сок апельсиновый" />
 
         <TextView
@@ -42,6 +43,6 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_8"
-        android:background="@color/colorAccent" />
+        android:background="@color/separator_gray" />
 
 </FrameLayout>

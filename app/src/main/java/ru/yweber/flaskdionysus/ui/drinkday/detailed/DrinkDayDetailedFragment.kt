@@ -14,6 +14,7 @@ import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.core.adapter.DrinkDayDelegateAdapter
 import ru.yweber.flaskdionysus.core.adapter.state.DetailedComponentItemState
+import ru.yweber.flaskdionysus.system.finishLoadedCoil
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.system.toast
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
@@ -50,9 +51,9 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
         viewPagerDetailedDrinkDay.adapter = pageAdapter
         layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
             when (position) {
-                0 -> tab.text = getString(R.string.aboutDrink).toUpperCase(Locale.getDefault())
-                1 -> tab.text = getString(R.string.formula).toUpperCase(Locale.getDefault())
-                2 -> tab.text = getString(R.string.tools).toUpperCase(Locale.getDefault())
+                0 -> tab.text = getString(R.string.formula).toUpperCase(Locale.getDefault())
+                1 -> tab.text = getString(R.string.list_tools).toUpperCase(Locale.getDefault())
+                2 -> tab.text = "инструменты"
             }
         }
         layoutMediator?.attach()
@@ -77,16 +78,18 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
     private fun renderState(state: DrinkDayDetailedState) {
         pageAdapter.items = state.pageItem
         tvNameDrink.text = state.drinkName
-        tabLayoutDetailedDrinkDay.isVisible = state.endShared
-        viewPagerDetailedDrinkDay.isVisible = state.endShared
         ivPreviewDrinkDay.load(state.previewPath) {
-            listener { data, source ->
+            finishLoadedCoil {
                 (view?.parent as ViewGroup?)?.doOnPreDraw {
                     startPostponedEnterTransition()
                 }
             }
+
         }
+        tabLayoutDetailedDrinkDay.isVisible = state.endShared
+        viewPagerDetailedDrinkDay.isVisible = state.endShared
     }
+
 
     override fun onDestroyView() {
         layoutMediator?.detach()

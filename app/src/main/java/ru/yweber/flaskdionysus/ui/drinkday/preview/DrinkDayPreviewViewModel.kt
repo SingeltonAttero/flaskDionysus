@@ -1,6 +1,8 @@
 package ru.yweber.flaskdionysus.ui.drinkday.preview
 
+import kotlinx.coroutines.flow.collect
 import ru.yweber.flaskdionysus.core.BaseViewModel
+import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
 import ru.yweber.flaskdionysus.ui.drinkday.preview.state.DrinkDayPreviewState
 import toothpick.InjectConstructor
 
@@ -9,7 +11,7 @@ import toothpick.InjectConstructor
  * @author YWeber */
 
 @InjectConstructor
-class DrinkDayPreviewViewModel : BaseViewModel<DrinkDayPreviewState>() {
+class DrinkDayPreviewViewModel(private val useCase: DrinkDayUseCase) : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
         get() = DrinkDayPreviewState(
             "Коктейль дня",
@@ -22,13 +24,29 @@ class DrinkDayPreviewViewModel : BaseViewModel<DrinkDayPreviewState>() {
         )
 
     init {
-        action.value = currentState.copy(
-            imagePath = "https://kak-nazyvaetsya.ru/wp-content/uploads/2019/05/b52.jpg",
-            drinkName = "Текила Санрайз",
-            rating = 4,
-            checks = "Попробовали: 132 человека",
-            levelCooking = "Сложность: средне",
-            alcoholStrength = "Крепость: легкий"
-        )
+        launch {
+            useCase.getDrinkDay()
+                .collect {
+                    action.value = currentState.copy(
+                        imagePath = createPreviewPath(it.previewIconPath),
+                        drinkName = it.nameDrink,
+                        rating = it.preview.rating,
+                        checks = it.preview.tried,
+                        levelCooking = it.preview.complication,
+                        alcoholStrength = it.preview.fortress
+                    )
+                }
+
+        }
+    }
+
+    private fun createPreviewPath(previewPath: String): String {
+        return if (previewPath.isEmpty()) {
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/500px-Manhattan_Cocktail2.jpg"
+        } else previewPath
+    }
+
+    fun endSharedAnimate() {
+        action.value = currentState.copy(endShareAnimate = true)
     }
 }

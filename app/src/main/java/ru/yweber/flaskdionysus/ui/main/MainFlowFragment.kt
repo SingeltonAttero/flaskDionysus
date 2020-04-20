@@ -3,7 +3,6 @@ package ru.yweber.flaskdionysus.ui.main
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_main_flow.*
@@ -67,7 +66,7 @@ class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
     }
 
     private fun renderState(state: MainState) {
-        appBarMain.isVisible = state.visibleToolbar
+        /*appBarMain.isVisible = state.visibleToolbar*/
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

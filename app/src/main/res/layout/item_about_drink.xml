@@ -17,7 +17,6 @@
         android:focusable="true"
         android:gravity="start|top"
         android:textAlignment="viewStart"
-        android:textSize="@dimen/font_16"
         tools:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
 
 </androidx.core.widget.NestedScrollView>

@@ -1,10 +1,12 @@
 package ru.yweber.flaskdionysus.ui.drinkday
 
+import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.di.DrinkDayNestedHolder
 import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
+import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.drinkday.state.DrinkTheDayState
 import toothpick.InjectConstructor
@@ -15,6 +17,7 @@ import toothpick.InjectConstructor
 
 @InjectConstructor
 class DrinkTheDayFlowViewModel(
+    private val useCase: DrinkDayUseCase,
     @DrinkDayNestedRouter private val nestedRouter: Router,
     @DrinkDayNestedHolder private val nestedNavigationHolder: NavigatorHolder
 ) : BaseViewModel<DrinkTheDayState>(nestedNavigationHolder) {
@@ -23,6 +26,14 @@ class DrinkTheDayFlowViewModel(
         get() = DrinkTheDayState(true, 0F)
 
     private var isPreview = false
+
+    init {
+        launch {
+            useCase.startDrinkDay()
+                .collect()
+        }
+
+    }
 
     fun startPreview() {
         nestedRouter.newRootScreen(Screens.DrinkDayPreviewScreen)

@@ -7,5 +7,5 @@
     <string name="drink_of_the_day">Коктейль дня</string>
     <string name="aboutDrink">О коктейле</string>
     <string name="formula">рецепт</string>
-    <string name="tools">инструменты</string>
+    <string name="list_tools">состав</string>
 </resources>

@@ -11,5 +11,6 @@ data class DrinkDayPreviewState(
     val rating: Int,
     val checks: String,
     val levelCooking: String,
-    val alcoholStrength: String
+    val alcoholStrength: String,
+    val endShareAnimate: Boolean = false
 )

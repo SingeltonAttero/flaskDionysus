@@ -1,9 +1,7 @@
 package ru.yweber.flaskdionysus.model.client
 
 import io.grpc.ManagedChannel
-import ru.weber.proto.DrinksGrpc
-import ru.weber.proto.DrinksRequest
-import ru.weber.proto.DrinksResponse
+import ru.weber.proto.*
 import javax.inject.Inject
 
 /**
@@ -15,4 +13,11 @@ class GrpcApi @Inject constructor(private val messageChannel: ManagedChannel) : 
         val drinksStub = DrinksGrpc.newBlockingStub(messageChannel)
         return drinksStub.getDrinks(request)
     }
+
+    override suspend fun getDrinkDay(): DrinkOfDayResponse {
+        val drinkDayStub = DrinksGrpc.newBlockingStub(messageChannel)
+        val empty = Empty.newBuilder().build()
+        return drinkDayStub.getDrinkOfDay(empty)
+    }
+
 }

@@ -10,14 +10,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarHomeList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="335dp"
         android:visibility="invisible"
         app:layout_behavior=".core.view.scroll.FixedScrollAppBarLayoutBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctlHomeList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
             app:contentScrim="@color/colorScrimDrinkDay"
@@ -27,7 +27,7 @@
             <FrameLayout
                 android:id="@+id/containerDrinkOnDay"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
                 app:layout_collapseMode="parallax" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,14 +1,19 @@
 package ru.yweber.flaskdionysus.ui.drinkday.preview
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
-import androidx.transition.TransitionInflater
+import androidx.core.view.isVisible
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_drink_day_preview.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
+import ru.yweber.flaskdionysus.system.finishLoadedCoil
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.drinkday.preview.state.DrinkDayPreviewState
 import toothpick.Scope
@@ -34,13 +39,20 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(requireContext())
-            .inflateTransition(R.transition.shared_animate)
+        setEnterSharedElementCallback(object : SharedElementCallback() {
+            override fun onSharedElementEnd(
+                sharedElementNames: MutableList<String>?,
+                sharedElements: MutableList<View>?,
+                sharedElementSnapshots: MutableList<View>?
+            ) {
+                viewModel.endSharedAnimate()
+            }
+        })
     }
 
     private fun renderState(state: DrinkDayPreviewState) {
         ivPreviewDrinkDay.load(state.imagePath) {
-            listener { data, source ->
+            finishLoadedCoil {
                 (view?.parent as ViewGroup?)?.doOnPreDraw {
                     startPostponedEnterTransition()
                 }
@@ -52,6 +64,7 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
         tvTriedDrink.text = state.checks
         tvCookingLevel.text = state.levelCooking
         tvAlcoholStrength.text = state.alcoholStrength
+
 
     }
 }

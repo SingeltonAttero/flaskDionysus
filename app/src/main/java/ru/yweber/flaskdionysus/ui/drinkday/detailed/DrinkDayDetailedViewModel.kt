@@ -1,7 +1,12 @@
 package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
+import kotlinx.coroutines.flow.collect
 import ru.yweber.flaskdionysus.core.BaseViewModel
-import ru.yweber.flaskdionysus.core.adapter.state.*
+import ru.yweber.flaskdionysus.core.adapter.state.AboutDrinkDayItem
+import ru.yweber.flaskdionysus.core.adapter.state.FormulaComponentItem
+import ru.yweber.flaskdionysus.core.adapter.state.ListComponentDetailedItem
+import ru.yweber.flaskdionysus.core.adapter.state.ToolComponentItem
+import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.InjectConstructor
 
@@ -10,41 +15,48 @@ import toothpick.InjectConstructor
  * @author YWeber */
 
 @InjectConstructor
-class DrinkDayDetailedViewModel : BaseViewModel<DrinkDayDetailedState>() {
+class DrinkDayDetailedViewModel(private val useCase: DrinkDayUseCase) : BaseViewModel<DrinkDayDetailedState>() {
     override val defaultState: DrinkDayDetailedState
         get() = DrinkDayDetailedState("", "", listOf(), false)
 
     init {
-        val listFormula = listOf(
-            FormulaComponentItem("Текила", "40 мл"),
-            FormulaComponentItem("Сок апельсиновый", "100 мл"),
-            FormulaComponentItem("Гренадин", "20 мл"),
-            FormulaComponentItem("Текила бум", "32 мл"),
-            FormulaComponentItem("Сок апельсиновый добрый", "100 мл"),
-            FormulaComponentItem("Гренадин синий", "20 мл"),
-            DescriptionComponentItem("Налейте текилу и апельсиновй сок в бокал, перемешайте, затем добавьте гренадин")
-        )
-        val componentFormula = ListComponentDetailedItem(listFormula)
-        val tools = listOf<DetailedComponentItemState>(
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Бокал “Мартини”"),
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Бокал “Мартини”  2"),
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Соломинка"),
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Мозг"),
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Зуб вампира"),
-            ToolComponentItem("https://img1.wbstatic.net/big/new/8740000/8741441-1.jpg", "Печать короля")
-        )
-        val componentTools = ListComponentDetailedItem(tools)
 
-        action.value = currentState.copy(
-            drinkName = "Текила Санрайз",
-            previewPath = "https://kak-nazyvaetsya.ru/wp-content/uploads/2019/05/b52.jpg",
-            pageItem = listOf(
-                AboutDrinkDayItem("Фраппе с арахисовой пастой. Измельчите в пюре 1/4 ст. арахисовой пасты с 1 ст. молока. Налейте в стакан немного шоколадного сиропа, сверху добавьте молоко с пастой. Медленно влейте газированную воду и размешайте. Источник: https://grandkulinar.ru/7418-50-holodnyh-napitkov.html Гранд Кулинар"),
-                componentFormula,
-                componentTools
-            )
-        )
+        launch {
+            useCase.getDrinkDay()
+                .collect { entity ->
+                    val listFormula = entity.detailed.ingredients.map {
+                        FormulaComponentItem(it.id, it.name, it.volume)
+                    }
+                    val listTool = entity.detailed.instruments.map {
+                        ToolComponentItem(it.id, it.iconPath, it.name)
+                    }
+
+                    action.value = currentState.copy(
+                        drinkName = entity.nameDrink,
+                        previewPath = createPreviewPath(entity.previewIconPath),
+                        pageItem = listOf(
+                            createDescription(entity.detailed.recipe),
+                            ListComponentDetailedItem(listFormula),
+                            ListComponentDetailedItem(listTool)
+                        )
+                    )
+                }
+        }
     }
+
+    private fun createPreviewPath(previewPath: String): String {
+        return if (previewPath.isEmpty()) {
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/500px-Manhattan_Cocktail2.jpg"
+        } else previewPath
+    }
+
+    private fun createDescription(description: String): AboutDrinkDayItem {
+        val defaultRecipe = if (description.isEmpty()) {
+            "Напиток, получаемый смешиванием нескольких компонентов."
+        } else description
+        return AboutDrinkDayItem(defaultRecipe)
+    }
+
 
     fun endSharedAnimate() {
         action.value = currentState.copy(endShared = true)

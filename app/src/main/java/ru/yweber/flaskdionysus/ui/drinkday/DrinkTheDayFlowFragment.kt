@@ -21,11 +21,14 @@ import ru.yweber.flaskdionysus.di.DrinkDayNestedHolder
 import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
+import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
+import ru.yweber.flaskdionysus.model.repository.DrinkDayRepository
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
 import ru.yweber.flaskdionysus.ui.drinkday.state.DrinkTheDayState
 import timber.log.Timber
 import toothpick.Scope
+import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**
@@ -44,10 +47,9 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
                 nextFragment: Fragment?,
                 fragmentTransaction: FragmentTransaction
             ) {
-                val containerViewGroup = currentFragment?.view?.findViewById<ConstraintLayout>(R.id.container)
 
-                if (containerViewGroup != null &&
-                    (currentFragment is DrinkDayPreviewFragment)
+                val containerViewGroup = currentFragment?.view?.findViewById<ConstraintLayout>(R.id.container)
+                if (containerViewGroup != null && (currentFragment is DrinkDayPreviewFragment)
                 ) {
                     fragmentTransaction.apply {
                         addSharedElement(
@@ -62,11 +64,11 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
                             containerViewGroup.tvNameDrink,
                             containerViewGroup.tvNameDrink.transitionName
                         )
-                        setReorderingAllowed(true)
                     }
                 }
-
+                fragmentTransaction.setReorderingAllowed(true)
             }
+
         }
 
     private var isGlobalChange = true
@@ -80,7 +82,10 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
     }
 
     override fun installModule(scope: Scope) {
-        fragmentManager
+        scope.installModules(module {
+            bind(DrinkDayUseCase::class.java).singleton()
+            bind(DrinkDayRepository::class.java).singleton()
+        })
         scope.installNestedNavigation<DrinkDayNestedRouter, DrinkDayNestedHolder>(HandleCiceroneNavigate.DRINK_DAY_NESTED_FLOW)
         scope.installViewModel<DrinkTheDayFlowViewModel>()
     }
