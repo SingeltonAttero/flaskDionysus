@@ -1,13 +1,21 @@
 package ru.yweber.flaskdionysus
 
 import android.app.Application
+import coil.Coil
+import coil.ImageLoader
+import coil.decode.SvgDecoder
 import leakcanary.LeakCanary
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.module.appModule
 import ru.yweber.flaskdionysus.di.module.navigationModule
+import ru.yweber.flaskdionysus.model.client.CoilResponseHeaderInterceptor
 import timber.log.Timber
 import toothpick.Scope
 import toothpick.ktp.KTP
+import java.io.File
 
 /**
  * Created on 29.03.2020
@@ -19,6 +27,26 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Coil.setDefaultImageLoader {
+            ImageLoader(this) {
+                componentRegistry {
+                    add(SvgDecoder(this@App))
+                        .build()
+                }.okHttpClient {
+                    val cacheDirectory = File(filesDir, "image_cache").apply {
+                        mkdirs()
+                    }
+                    val cache = Cache(cacheDirectory, Long.MAX_VALUE)
+                    val cacheControlInterceptor =
+                        CoilResponseHeaderInterceptor("Cache-Control", "max-age=31536000,public")
+                    OkHttpClient.Builder()
+                        .cache(cache)
+                        .addNetworkInterceptor(cacheControlInterceptor)
+                        .addInterceptor(HttpLoggingInterceptor())
+                        .build()
+                }.build()
+            }
+        }
         LeakCanary.showLeakDisplayActivityLauncherIcon(true)
         initTimber()
         rootScope = KTP.openScope(AppScope::class.java)

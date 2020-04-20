@@ -126,6 +126,8 @@ dependencies {
 
     // Coil
     implementation(Libs.coil)
+    implementation(Libs.coil_base)
+    implementation(Libs.coil_svg)
 
     // Adapter Delegates
     implementation(Libs.adapter_delegates)

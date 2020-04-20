@@ -3,15 +3,14 @@ package ru.yweber.flaskdionysus.ui.drinkday
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.android.synthetic.main.fragment_drink_day_preview.view.*
 import kotlinx.android.synthetic.main.fragment_drink_the_day.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -23,6 +22,7 @@ import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.di.module.installNestedNavigation
 import ru.yweber.flaskdionysus.di.utils.HandleCiceroneNavigate
 import ru.yweber.flaskdionysus.system.subscribe
+import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
 import ru.yweber.flaskdionysus.ui.drinkday.state.DrinkTheDayState
 import timber.log.Timber
 import toothpick.Scope
@@ -44,7 +44,28 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
                 nextFragment: Fragment?,
                 fragmentTransaction: FragmentTransaction
             ) {
-                fragmentTransaction.setReorderingAllowed(true)
+                val containerViewGroup = currentFragment?.view?.findViewById<ConstraintLayout>(R.id.container)
+
+                if (containerViewGroup != null &&
+                    (currentFragment is DrinkDayPreviewFragment)
+                ) {
+                    fragmentTransaction.apply {
+                        addSharedElement(
+                            containerViewGroup.ivPreviewDrinkDay,
+                            containerViewGroup.ivPreviewDrinkDay.transitionName
+                        )
+                        addSharedElement(
+                            containerViewGroup.tvTitle,
+                            containerViewGroup.tvTitle.transitionName
+                        )
+                        addSharedElement(
+                            containerViewGroup.tvNameDrink,
+                            containerViewGroup.tvNameDrink.transitionName
+                        )
+                        setReorderingAllowed(true)
+                    }
+                }
+
             }
         }
 
@@ -59,6 +80,7 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
     }
 
     override fun installModule(scope: Scope) {
+        fragmentManager
         scope.installNestedNavigation<DrinkDayNestedRouter, DrinkDayNestedHolder>(HandleCiceroneNavigate.DRINK_DAY_NESTED_FLOW)
         scope.installViewModel<DrinkTheDayFlowViewModel>()
     }

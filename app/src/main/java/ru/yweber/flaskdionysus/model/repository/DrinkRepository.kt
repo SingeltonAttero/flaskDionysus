@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.weber.proto.DrinksRequest
+import ru.yweber.flaskdionysus.BuildConfig
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
 import ru.yweber.flaskdionysus.model.entity.DrinksEntity
@@ -40,7 +41,7 @@ class DrinkRepository @Inject constructor(
             .map {
                 DrinkEntity(
                     it.id, it.name,
-                    it.icon, it.mark.toInt(),
+                    "http://${BuildConfig.ENDPOINT}:9001${it.icon}", it.mark.toInt(),
                     it.isFlacky, it.isFire,
                     it.isIba, it.properties, it.ingredients
                 )

@@ -25,7 +25,7 @@ class DrinkTheDayFlowViewModel(
     private var isPreview = false
 
     fun startPreview() {
-        nestedRouter.navigateTo(Screens.DrinkDayPreviewScreen)
+        nestedRouter.newRootScreen(Screens.DrinkDayPreviewScreen)
     }
 
     fun fabAnimationHeight(height: Float) {
@@ -34,7 +34,7 @@ class DrinkTheDayFlowViewModel(
 
     fun swipePreviewToDetailed() {
         if (isPreview) {
-            nestedRouter.backTo(Screens.DrinkDayPreviewScreen)
+            nestedRouter.backTo(null)
         } else {
             nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
         }

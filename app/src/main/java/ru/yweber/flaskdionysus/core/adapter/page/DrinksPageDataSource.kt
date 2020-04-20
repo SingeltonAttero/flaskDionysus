@@ -58,7 +58,7 @@ class DrinksPageDataSource(
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, DrinkCardItem>) {}
 
     private fun createDrinkItem(drinks: List<DrinkEntity>): List<DrinkCardItem> {
-        Timber.e(" TEst testtest${drinks.map { it.id }}")
+        Timber.e(" TEst testtest${drinks.map { it.icon }}")
         return drinks.map {
             DrinkCardItem(
                 it.id,

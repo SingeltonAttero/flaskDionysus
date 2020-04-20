@@ -12,12 +12,12 @@ object Versions {
     //AndroidX
     const val androidx_appcompat = "1.1.0"
     const val androidx_constraint_layout = "2.0.0-beta4"
-    const val androidx_material = "1.1.0-alpha09"
+    const val androidx_material = "1.1.0"
     const val androidx_cardview = "1.0.0"
-    const val androidx_recyclerview = "1.1.0-beta03"
-    const val ktx = "1.2.0-alpha03"
+    const val androidx_recyclerview = "1.1.0"
+    const val ktx = "1.2.0"
     const val multidex = "2.0.1"
-    const val fragment = "1.1.0-alpha09"
+    const val fragment = "1.2.4"
     const val flexbox_layout = "1.1.1"
     const val refresh_pull_layout = "1.0.0"
     const val transition_transition = "1.2.0"
@@ -33,7 +33,7 @@ object Versions {
     const val toothpick = "3.1.0"
 
     //Lifecycle
-    const val lifecycle = "2.2.0-alpha01"
+    const val lifecycle = "2.2.0"
 
     //conductor
     const val conductor_controller = "3.0.0-rc1"

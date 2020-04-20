@@ -12,6 +12,7 @@ import toothpick.InjectConstructor
 class DrinkDayPreviewViewModel : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
         get() = DrinkDayPreviewState(
+            "Коктейль дня",
             "",
             "",
             0,

@@ -12,7 +12,7 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class DrinkDayDetailedViewModel : BaseViewModel<DrinkDayDetailedState>() {
     override val defaultState: DrinkDayDetailedState
-        get() = DrinkDayDetailedState("", listOf())
+        get() = DrinkDayDetailedState("", "", listOf(), false)
 
     init {
         val listFormula = listOf(
@@ -37,11 +37,16 @@ class DrinkDayDetailedViewModel : BaseViewModel<DrinkDayDetailedState>() {
 
         action.value = currentState.copy(
             drinkName = "Текила Санрайз",
+            previewPath = "https://kak-nazyvaetsya.ru/wp-content/uploads/2019/05/b52.jpg",
             pageItem = listOf(
                 AboutDrinkDayItem("Фраппе с арахисовой пастой. Измельчите в пюре 1/4 ст. арахисовой пасты с 1 ст. молока. Налейте в стакан немного шоколадного сиропа, сверху добавьте молоко с пастой. Медленно влейте газированную воду и размешайте. Источник: https://grandkulinar.ru/7418-50-holodnyh-napitkov.html Гранд Кулинар"),
                 componentFormula,
                 componentTools
             )
         )
+    }
+
+    fun endSharedAnimate() {
+        action.value = currentState.copy(endShared = true)
     }
 }

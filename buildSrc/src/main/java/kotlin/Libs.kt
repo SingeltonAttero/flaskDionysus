@@ -87,6 +87,8 @@ object Libs {
 
     //Coil
     const val coil = "io.coil-kt:coil:${Versions.coil}"
+    const val coil_base = "io.coil-kt:coil-base:${Versions.coil}"
+    const val coil_svg = "io.coil-kt:coil-svg:${Versions.coil}"
 
     // Cicerone
     const val cicerone = "ru.terrakok.cicerone:cicerone:${Versions.cicerone}"

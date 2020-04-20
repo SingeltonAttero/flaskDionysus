@@ -8,5 +8,7 @@ import ru.yweber.flaskdionysus.core.adapter.state.DrinkDayItemState
 
 data class DrinkDayDetailedState(
     val drinkName: String,
-    val pageItem: List<DrinkDayItemState>
+    val previewPath: String,
+    val pageItem: List<DrinkDayItemState>,
+    val endShared: Boolean
 )

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import coil.api.load
-import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import com.hannesdorfmann.adapterdelegates4.paging.PagedListDelegationAdapter
 import kotlinx.android.synthetic.main.item_drink.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
+import timber.log.Timber
 
 /**
  * Created on 01.04.2020
@@ -26,7 +26,11 @@ class DrinksPageDelegateAdapter {
                 tvCookingLevel.text = item.cookingLevel
                 tvIngredients.text = item.ingredients
                 tvTitle.text = item.nameDrink
-                ivPreviewImage.load(item.iconPath)
+                ivPreviewImage.load(item.iconPath) {
+                    listener(onError = { date, exc ->
+                        Timber.e(exc)
+                    })
+                }
                 loveRatingIndicator.progress(item.rating)
                 tvStatusBadge.isVisible = item.iba
                 ivStatusHot.isVisible = item.fire

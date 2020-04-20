@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin_5"
     android:elevation="6dp"
-    android:theme="@style/AppTheme">
+    tools:theme="@style/AppTheme">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/containerPreview"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,6 +20,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
+            android:transitionName="image_preview"
             app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,7 @@
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_8"
             android:text="@string/drink_of_the_day"
+            android:transitionName="title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPreviewDrinkDay" />
 
@@ -49,6 +51,7 @@
             style="@style/NameDrink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:transitionName="name_drink"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:text="Текила Санрайз" />
