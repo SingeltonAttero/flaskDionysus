@@ -2,9 +2,12 @@ package ru.yweber.flaskdionysus.ui.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_error_holder.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Command
@@ -79,6 +82,9 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
         if (savedInstanceState == null) {
             viewModel.appColdStart()
         }
+        btnRetry.setOnClickListener {
+            viewModel.retryError()
+        }
     }
 
     private fun initAppScope() {
@@ -93,7 +99,8 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun renderState(appState: AppState) {
-
+        holderError.isVisible = appState.isError
+        containerRootActivity.isVisible = !appState.isError
     }
 
     override fun onResumeFragments() {

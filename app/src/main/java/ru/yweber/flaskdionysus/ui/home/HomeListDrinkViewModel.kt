@@ -5,13 +5,14 @@ import androidx.paging.PagedList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
-import ru.yweber.flaskdionysus.core.notifier.VisibleToolbarNotifier
+import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
@@ -27,14 +28,14 @@ private const val PAGE_MAX_ITEM = 50
 @InjectConstructor
 class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
-    private val notifier: VisibleToolbarNotifier,
+    private val retryNotifier: RetryErrorNotifier,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
 ) : BaseViewModel<ListDrinkState>(navigatorHolder) {
 
     private val pageList: PagedList<DrinkCardItem>
         get() = PagedList
-            .Builder(DrinksPageDataSource(useCase, viewModelScope, ::loaded), config())
+            .Builder(DrinksPageDataSource(useCase, viewModelScope, retryNotifier, ::loaded), config())
             .setFetchExecutor {
                 launch {
                     CoroutineScope(Dispatchers.IO).launch {
@@ -53,13 +54,18 @@ class HomeListDrinkViewModel(
 
     init {
         action.value = currentState.copy(isLoad = false)
+        launch {
+            retryNotifier.eventRetryRequest
+                .collect {
+                    action.value = currentState.copy(listDrink = pageList, isLoad = false)
+                }
+        }
     }
 
     private fun loaded(load: Boolean) {
         if (load) {
             launch {
                 delay(300) // create recycler item
-                notifier.visibleToolbar(true)
                 action.value = currentState.copy(isLoad = true)
             }
         }

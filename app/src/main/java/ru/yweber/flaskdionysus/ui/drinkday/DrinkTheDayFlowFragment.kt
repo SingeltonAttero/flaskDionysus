@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_drink_day_preview.view.*
@@ -34,7 +35,7 @@ import toothpick.ktp.delegate.inject
 /**
  * Created on 07.04.2020
  * @author YWeber */
-private const val DURATION_ANIMATION = 350L
+private const val DURATION_ANIMATION = 800L
 
 class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day) {
 

@@ -8,4 +8,6 @@
     <string name="aboutDrink">О коктейле</string>
     <string name="formula">рецепт</string>
     <string name="list_tools">состав</string>
+    <string name="error_message">Что то пошло не так… \n Проверте интернет и нажмите кнопку повторить</string>
+    <string name="retry">Повторить</string>
 </resources>

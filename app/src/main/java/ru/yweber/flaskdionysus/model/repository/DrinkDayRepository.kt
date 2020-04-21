@@ -1,11 +1,12 @@
 package ru.yweber.flaskdionysus.model.repository
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
 import ru.yweber.flaskdionysus.model.entity.*
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -33,9 +34,8 @@ class DrinkDayRepository @Inject constructor(private val api: GrpcConnectClient)
         )
         val drinkDayEntity = DrinkDayEntity(drinkDay.id, preview, detailed, drinkDay.name, drinkDay.preview)
         event.offer(drinkDayEntity)
-        Timber.e(drinkDayEntity.toString())
         emit(Unit)
-    }
+    }.flowOn(Dispatchers.IO)
 
-    fun getDrinkDay() = event.asFlow()
+    fun getDrinkDay() = event.asFlow().flowOn(Dispatchers.IO)
 }

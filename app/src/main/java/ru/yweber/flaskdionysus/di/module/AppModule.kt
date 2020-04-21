@@ -3,6 +3,7 @@ package ru.yweber.flaskdionysus.di.module
 import android.content.Context
 import io.grpc.ManagedChannel
 import ru.yweber.flaskdionysus.BuildConfig
+import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.provider.ChannelsProvider
 import ru.yweber.flaskdionysus.model.client.GrpcApi
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
@@ -19,4 +20,5 @@ fun appModule(context: Context) = module {
     bind(ManagedChannel::class.java).toProviderInstance(ChannelsProvider(BuildConfig.ENDPOINT, BuildConfig.PORT))
     bind(GrpcConnectClient::class.java).to(GrpcApi::class.java).singleton()
     bind(ErrorStatusSender::class.java).to(AndroidErrorStatusSender::class.java).singleton()
+    bind(RetryErrorNotifier::class.java).toInstance(RetryErrorNotifier())
 }

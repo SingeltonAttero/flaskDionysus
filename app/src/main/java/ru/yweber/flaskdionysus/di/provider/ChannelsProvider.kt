@@ -1,7 +1,7 @@
 package ru.yweber.flaskdionysus.di.provider
 
-import io.grpc.ManagedChannel
-import io.grpc.ManagedChannelBuilder
+import io.grpc.*
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Provider
 
@@ -17,7 +17,7 @@ class ChannelsProvider(
         return ManagedChannelBuilder.forAddress(endpoint, port)
             .usePlaintext()
             .idleTimeout(30, TimeUnit.SECONDS)
-            .keepAliveTimeout(30, TimeUnit.SECONDS)
+            .keepAliveTimeout(10, TimeUnit.SECONDS)
             .build()
     }
 }

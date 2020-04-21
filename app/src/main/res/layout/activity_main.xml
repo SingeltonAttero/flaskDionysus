@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/containerRootActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.app.AppActivity" />
+    tools:context=".ui.app.AppActivity">
+
+    <FrameLayout
+        android:id="@+id/containerRootActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <include
+        android:id="@+id/holderError"
+        layout="@layout/include_error_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</FrameLayout>

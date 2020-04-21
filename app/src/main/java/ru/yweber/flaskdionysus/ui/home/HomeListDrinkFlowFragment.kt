@@ -74,11 +74,13 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
                 TransitionManager.endTransitions(rootContainer)
             }
             val slideTop = Slide(Gravity.TOP).apply {
-                duration = 600
+                duration = 700
+                startDelay = 100
                 interpolator = AccelerateDecelerateInterpolator()
             }
             val slideBottom = Slide(Gravity.BOTTOM).apply {
-                duration = 600
+                duration = 700
+                startDelay = 100
                 interpolator = AccelerateDecelerateInterpolator()
             }
             TransitionManager.beginDelayedTransition(appBarHomeList, slideTop)

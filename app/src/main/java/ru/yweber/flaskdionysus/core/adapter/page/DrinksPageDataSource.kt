@@ -3,13 +3,13 @@ package ru.yweber.flaskdionysus.core.adapter.page
 import androidx.paging.PageKeyedDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
+import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
 import ru.yweber.flaskdionysus.model.entity.DrinksEntity
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
@@ -22,6 +22,7 @@ import timber.log.Timber
 class DrinksPageDataSource(
     private val useCase: ListDrinkUseCase,
     private val scope: CoroutineScope,
+    private val retryErrorNotifier: RetryErrorNotifier,
     private val eventLoading: (load: Boolean) -> Unit
 ) : PageKeyedDataSource<Int, DrinkCardItem>() {
 
@@ -34,9 +35,13 @@ class DrinksPageDataSource(
                 .onEach { eventLoading.invoke(false) }
                 .catch { eventLoading.invoke(false) }
                 .collect {
-                    if (it is DrinksEntity.Result) {
-                        val createDrinkItem = createDrinkItem(it.list)
-                        callback.onResult(createDrinkItem, null, nextPage)
+                    when (it) {
+                        is DrinksEntity.Result -> {
+                            retryErrorNotifier.errorVisible(false)
+                            val createDrinkItem = createDrinkItem(it.list)
+                            callback.onResult(createDrinkItem, null, nextPage)
+                        }
+                        is DrinksEntity.Error -> retryErrorNotifier.errorVisible(true)
                     }
                 }
 
