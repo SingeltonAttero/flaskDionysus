@@ -1,5 +1,6 @@
 package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,9 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
         super.onViewCreated(view, savedInstanceState)
         subscribe(viewModel.state, ::renderState)
         viewPagerDetailedDrinkDay.adapter = pageAdapter
+        fabSwipeDrinkDay.setOnClickListener {
+            viewModel.navigateToPreview()
+        }
         layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
             when (position) {
                 0 -> tab.text = getString(R.string.formula).toUpperCase(Locale.getDefault())
@@ -84,7 +88,6 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
                     startPostponedEnterTransition()
                 }
             }
-
         }
         tabLayoutDetailedDrinkDay.isVisible = state.endShared
         viewPagerDetailedDrinkDay.isVisible = state.endShared

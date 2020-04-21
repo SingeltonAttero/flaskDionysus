@@ -23,8 +23,10 @@
             android:transitionName="image_preview"
             app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:src="@drawable/img_splash_screen" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -98,6 +100,19 @@
             app:layout_constraintTop_toBottomOf="@id/tvCookingLevel"
             tools:text="Крепость: легкий" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSwipeDrinkDay"
+            style="@style/MaterialFabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:src="@drawable/ic_arrow_up_preview"
+            android:transitionName="swipe drink day"
+            app:fabSize="mini"
+            app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

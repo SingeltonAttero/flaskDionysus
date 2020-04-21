@@ -12,6 +12,7 @@ import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
+import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
 import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
@@ -29,6 +30,7 @@ private const val PAGE_MAX_ITEM = 50
 class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
     private val retryNotifier: RetryErrorNotifier,
+    private val globalRouter: GlobalRouter,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
 ) : BaseViewModel<ListDrinkState>(navigatorHolder) {
@@ -80,6 +82,15 @@ class HomeListDrinkViewModel(
 
     fun navigateDrinkDay() {
         drinkRouter.newRootScreen(Screens.DrinkTheDayFlowScreen)
+    }
+
+    fun expendMenu() {
+        action.value = currentState.copy(animationFab = true, menuExpend = !currentState.menuExpend)
+    }
+
+    fun navigateSetting() {
+        action.value = currentState.copy(animationFab = false, menuExpend = !currentState.menuExpend)
+        globalRouter.navigateTo(Screens.AboutProjectScreen)
     }
 
 

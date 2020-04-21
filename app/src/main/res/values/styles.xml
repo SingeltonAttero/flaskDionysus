@@ -59,7 +59,12 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="MaterialFab"
+    <style name="MaterialFabSmall"
+        parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorWhite</item>
+        <item name="backgroundTint">#29B6F6</item>
+    </style>
+    <style name="MaterialFabMain"
         parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@color/colorWhite</item>
         <item name="backgroundTint">#C2185B</item>

@@ -35,6 +35,9 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         subscribe(viewModel.state, ::renderState)
+        fabSwipeDrinkDay.setOnClickListener {
+            viewModel.navigateToDetailed()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

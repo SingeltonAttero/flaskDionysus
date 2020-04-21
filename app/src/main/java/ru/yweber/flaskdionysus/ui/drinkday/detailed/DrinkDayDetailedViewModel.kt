@@ -1,12 +1,15 @@
 package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
 import kotlinx.coroutines.flow.collect
+import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.AboutDrinkDayItem
 import ru.yweber.flaskdionysus.core.adapter.state.FormulaComponentItem
 import ru.yweber.flaskdionysus.core.adapter.state.ListComponentDetailedItem
 import ru.yweber.flaskdionysus.core.adapter.state.ToolComponentItem
+import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
+import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.InjectConstructor
 
@@ -15,7 +18,10 @@ import toothpick.InjectConstructor
  * @author YWeber */
 
 @InjectConstructor
-class DrinkDayDetailedViewModel(private val useCase: DrinkDayUseCase) : BaseViewModel<DrinkDayDetailedState>() {
+class DrinkDayDetailedViewModel(
+    private val useCase: DrinkDayUseCase,
+    @DrinkDayNestedRouter private val nestedRouter: Router
+) : BaseViewModel<DrinkDayDetailedState>() {
     override val defaultState: DrinkDayDetailedState
         get() = DrinkDayDetailedState("", "", listOf(), false)
 
@@ -60,5 +66,9 @@ class DrinkDayDetailedViewModel(private val useCase: DrinkDayUseCase) : BaseView
 
     fun endSharedAnimate() {
         action.value = currentState.copy(endShared = true)
+    }
+
+    fun navigateToPreview() {
+        nestedRouter.backTo(Screens.DrinkDayPreviewScreen)
     }
 }

@@ -55,17 +55,5 @@ class DrinkTheDayFlowViewModel(
         nestedRouter.newRootScreen(Screens.DrinkDayPreviewScreen)
     }
 
-    fun fabAnimationHeight(height: Float) {
-        action.value = currentState.copy(height = height)
-    }
 
-    fun swipePreviewToDetailed() {
-        if (isPreview) {
-            nestedRouter.backTo(null)
-        } else {
-            nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
-        }
-        isPreview = !isPreview
-        action.value = currentState.copy(isPreview = !isPreview)
-    }
 }

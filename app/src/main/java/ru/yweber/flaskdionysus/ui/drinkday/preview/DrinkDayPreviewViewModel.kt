@@ -1,8 +1,11 @@
 package ru.yweber.flaskdionysus.ui.drinkday.preview
 
 import kotlinx.coroutines.flow.collect
+import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
+import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
+import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.drinkday.preview.state.DrinkDayPreviewState
 import toothpick.InjectConstructor
 
@@ -11,7 +14,10 @@ import toothpick.InjectConstructor
  * @author YWeber */
 
 @InjectConstructor
-class DrinkDayPreviewViewModel(private val useCase: DrinkDayUseCase) : BaseViewModel<DrinkDayPreviewState>() {
+class DrinkDayPreviewViewModel(
+    private val useCase: DrinkDayUseCase,
+    @DrinkDayNestedRouter private val nestedRouter: Router
+) : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
         get() = DrinkDayPreviewState(
             "Коктейль дня",
@@ -48,5 +54,9 @@ class DrinkDayPreviewViewModel(private val useCase: DrinkDayUseCase) : BaseViewM
 
     fun endSharedAnimate() {
         action.value = currentState.copy(endShareAnimate = true)
+    }
+
+    fun navigateToDetailed() {
+        nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
     }
 }
