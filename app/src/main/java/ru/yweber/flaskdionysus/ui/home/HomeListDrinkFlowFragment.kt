@@ -79,7 +79,7 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
             viewModel.expendMenu()
         }
         smallFabSetting.setOnClickListener { viewModel.navigateSetting() }
-        smallFabFilter.setOnClickListener { viewModel.navigateSetting() }
+        smallFabFilter.setOnClickListener { viewModel.navigateFilter() }
         smallFabSearch.setOnClickListener { viewModel.navigateSetting() }
     }
 

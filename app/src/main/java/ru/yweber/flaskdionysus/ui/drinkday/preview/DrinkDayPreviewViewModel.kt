@@ -2,9 +2,11 @@ package ru.yweber.flaskdionysus.ui.drinkday.preview
 
 import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.Router
+import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
+import ru.yweber.flaskdionysus.system.ResourceManager
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.drinkday.preview.state.DrinkDayPreviewState
 import toothpick.InjectConstructor
@@ -16,11 +18,12 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class DrinkDayPreviewViewModel(
     private val useCase: DrinkDayUseCase,
+    private val resourceManager: ResourceManager,
     @DrinkDayNestedRouter private val nestedRouter: Router
 ) : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
         get() = DrinkDayPreviewState(
-            "Коктейль дня",
+            resourceManager.getString(R.string.drink_of_the_day),
             "",
             "",
             0,
@@ -48,7 +51,7 @@ class DrinkDayPreviewViewModel(
 
     private fun createPreviewPath(previewPath: String): String {
         return if (previewPath.isEmpty()) {
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/500px-Manhattan_Cocktail2.jpg"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/500px-Manhattan_Cocktail2.jpg" // TODO DELETE PROD
         } else previewPath
     }
 

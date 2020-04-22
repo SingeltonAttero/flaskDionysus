@@ -7,7 +7,8 @@
     <string name="drink_of_the_day">Коктейль дня</string>
     <string name="aboutDrink">О коктейле</string>
     <string name="formula">рецепт</string>
-    <string name="list_tools">состав</string>
+    <string name="composition">состав</string>
+    <string name="tools">инструменты</string>
     <string name="error_message">Что то пошло не так… \n Проверте интернет и нажмите кнопку повторить</string>
     <string name="retry">Повторить</string>
 </resources>

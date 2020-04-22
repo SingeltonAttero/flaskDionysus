@@ -67,7 +67,7 @@ class HomeListDrinkViewModel(
     private fun loaded(load: Boolean) {
         if (load) {
             launch {
-                delay(300) // create recycler item
+                delay(300) // create recycler item or animate lag create
                 action.value = currentState.copy(isLoad = true)
             }
         }
@@ -89,8 +89,11 @@ class HomeListDrinkViewModel(
     }
 
     fun navigateSetting() {
-        action.value = currentState.copy(animationFab = false, menuExpend = !currentState.menuExpend)
         globalRouter.navigateTo(Screens.AboutProjectScreen)
+    }
+
+    fun navigateFilter() {
+        globalRouter.navigateTo(Screens.FilterScreen)
     }
 
 

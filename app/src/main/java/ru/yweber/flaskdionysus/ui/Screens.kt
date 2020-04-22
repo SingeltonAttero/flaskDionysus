@@ -7,6 +7,7 @@ import ru.yweber.flaskdionysus.ui.app.LoadingDialog
 import ru.yweber.flaskdionysus.ui.drinkday.DrinkTheDayFlowFragment
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.DrinkDayDetailedFragment
 import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
+import ru.yweber.flaskdionysus.ui.filter.FilterFragment
 import ru.yweber.flaskdionysus.ui.home.HomeListDrinkFlowFragment
 import ru.yweber.flaskdionysus.ui.main.MainFlowFragment
 
@@ -51,6 +52,12 @@ object Screens {
     object LoadingDialogHolder : SupportAppScreen() {
         override fun getFragment(): Fragment? {
             return LoadingDialog()
+        }
+    }
+
+    object FilterScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment? {
+            return FilterFragment()
         }
     }
 

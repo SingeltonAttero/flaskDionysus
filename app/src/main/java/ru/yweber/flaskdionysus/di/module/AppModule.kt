@@ -7,6 +7,7 @@ import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.provider.ChannelsProvider
 import ru.yweber.flaskdionysus.model.client.GrpcApi
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
+import ru.yweber.flaskdionysus.system.ResourceManager
 import ru.yweber.flaskdionysus.system.error.AndroidErrorStatusSender
 import ru.yweber.flaskdionysus.system.error.ErrorStatusSender
 import toothpick.ktp.binding.module
@@ -21,4 +22,5 @@ fun appModule(context: Context) = module {
     bind(GrpcConnectClient::class.java).to(GrpcApi::class.java).singleton()
     bind(ErrorStatusSender::class.java).to(AndroidErrorStatusSender::class.java).singleton()
     bind(RetryErrorNotifier::class.java).toInstance(RetryErrorNotifier())
+    bind(ResourceManager::class.java).singleton()
 }

@@ -1,7 +1,9 @@
 package ru.yweber.flaskdionysus.ui.main
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -59,38 +61,15 @@ class MainFlowFragment : BaseFlowFragment(R.layout.fragment_main_flow) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribe(viewModel.state, ::renderState)
-        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
         if (childFragmentManager.fragments.isEmpty()) {
             viewModel.navigateToDrinks()
         }
     }
 
     private fun renderState(state: MainState) {
-        /*appBarMain.isVisible = state.visibleToolbar*/
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.aboutItem -> {
-                viewModel.navigateToAboutProject()
-                true
-            }
-            R.id.searchItem -> {
-                // TODO Search drinks
-                true
-            }
-            else -> false
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onDestroyView() {
-        (activity as? AppCompatActivity)?.setSupportActionBar(null)
-        super.onDestroyView()
-    }
 
     override fun backPressed(): Boolean {
         return childFragmentManager.fragments.lastOrNull {

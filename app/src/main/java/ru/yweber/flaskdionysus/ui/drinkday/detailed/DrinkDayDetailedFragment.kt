@@ -1,9 +1,9 @@
 package ru.yweber.flaskdionysus.ui.drinkday.detailed
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -21,7 +21,6 @@ import ru.yweber.flaskdionysus.system.toast
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
-import java.util.*
 
 /**
  * Created on 07.04.2020
@@ -45,24 +44,6 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
 
     private var layoutMediator: TabLayoutMediator? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        postponeEnterTransition()
-        super.onViewCreated(view, savedInstanceState)
-        subscribe(viewModel.state, ::renderState)
-        viewPagerDetailedDrinkDay.adapter = pageAdapter
-        fabSwipeDrinkDay.setOnClickListener {
-            viewModel.navigateToPreview()
-        }
-        layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
-            when (position) {
-                0 -> tab.text = getString(R.string.formula).toUpperCase(Locale.getDefault())
-                1 -> tab.text = getString(R.string.list_tools).toUpperCase(Locale.getDefault())
-                2 -> tab.text = "инструменты"
-            }
-        }
-        layoutMediator?.attach()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(requireContext())
@@ -76,6 +57,24 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
                 viewModel.endSharedAnimate()
             }
         })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        postponeEnterTransition()
+        super.onViewCreated(view, savedInstanceState)
+        subscribe(viewModel.state, ::renderState)
+        viewPagerDetailedDrinkDay.adapter = pageAdapter
+        fabSwipeDrinkDay.setOnClickListener {
+            viewModel.navigateToPreview()
+        }
+        layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
+            when (position) {
+                0 -> tab.text = upperCaseTitleTab(R.string.formula)
+                1 -> tab.text = upperCaseTitleTab(R.string.composition)
+                2 -> tab.text = upperCaseTitleTab(R.string.tools)
+            }
+        }
+        layoutMediator?.attach()
     }
 
 
@@ -93,6 +92,7 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
         viewPagerDetailedDrinkDay.isVisible = state.endShared
     }
 
+    private fun upperCaseTitleTab(@StringRes stringId: Int) = getString(stringId).toUpperCase()
 
     override fun onDestroyView() {
         layoutMediator?.detach()

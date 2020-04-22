@@ -16,7 +16,7 @@
         <item name="android:windowFullscreen">true</item>
 
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorWhiteNavigate</item>
     </style>
 
     <style name="SplashTheme"
@@ -31,9 +31,8 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
-
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorWhiteNavigate</item>
     </style>
 
 
@@ -64,6 +63,7 @@
         <item name="tint">@color/colorWhite</item>
         <item name="backgroundTint">#29B6F6</item>
     </style>
+
     <style name="MaterialFabMain"
         parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@color/colorWhite</item>
