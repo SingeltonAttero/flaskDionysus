@@ -25,10 +25,8 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     }
 
     private lateinit var currentScope: Serializable
-        private set
 
     private lateinit var scope: Scope
-        private set
 
     protected open fun installModule(scope: Scope) {}
 

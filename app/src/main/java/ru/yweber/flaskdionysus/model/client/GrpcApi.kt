@@ -17,8 +17,14 @@ class GrpcApi @Inject constructor(private val messageChannel: ManagedChannel) : 
 
     override suspend fun getDrinkDay(): DrinkOfDayResponse {
         val drinkDayStub = DrinksGrpc.newBlockingStub(messageChannel)
-        val empty = Empty.newBuilder().build()
-        return drinkDayStub.withDeadlineAfter(10, TimeUnit.SECONDS).getDrinkOfDay(empty)
+        return drinkDayStub.withDeadlineAfter(10, TimeUnit.SECONDS)
+            .getDrinkOfDay(Empty.getDefaultInstance())
+    }
+
+    override suspend fun getFilters(): DictionariesResponse {
+        val filterStub = DictionariesGrpc.newBlockingStub(messageChannel)
+        return filterStub.withDeadlineAfter(10, TimeUnit.SECONDS)
+            .getDictionaries(DictionariesRequest.getDefaultInstance())
     }
 
 }

@@ -3,11 +3,11 @@ package ru.yweber.flaskdionysus.ui
 import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.yweber.flaskdionysus.ui.about.AboutProjectFragment
-import ru.yweber.flaskdionysus.ui.app.LoadingDialog
 import ru.yweber.flaskdionysus.ui.drinkday.DrinkTheDayFlowFragment
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.DrinkDayDetailedFragment
 import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
 import ru.yweber.flaskdionysus.ui.filter.FilterFragment
+import ru.yweber.flaskdionysus.ui.filter.chooser.ChooserDialog
 import ru.yweber.flaskdionysus.ui.home.HomeListDrinkFlowFragment
 import ru.yweber.flaskdionysus.ui.main.MainFlowFragment
 
@@ -49,9 +49,9 @@ object Screens {
         }
     }
 
-    object LoadingDialogHolder : SupportAppScreen() {
+    object ChooserDialogHolder : SupportAppScreen() {
         override fun getFragment(): Fragment? {
-            return LoadingDialog()
+            return ChooserDialog()
         }
     }
 

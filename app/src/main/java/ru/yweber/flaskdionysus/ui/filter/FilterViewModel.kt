@@ -55,7 +55,7 @@ class FilterViewModel(private val globalRouter: GlobalRouter) : BaseViewModel<Fi
     }
 
     fun openFilterDialog(type: String) {
-
+        globalRouter.show(Screens.ChooserDialogHolder)
     }
 
     fun backTo() {
