@@ -13,7 +13,6 @@ import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.model.entity.DrinkEntity
 import ru.yweber.flaskdionysus.model.entity.DrinksEntity
 import ru.yweber.flaskdionysus.model.interactor.ListDrinkUseCase
-import timber.log.Timber
 
 /**
  * Created on 15.04.2020
@@ -53,8 +52,13 @@ class DrinksPageDataSource(
             val currentPage = params.key
             val nextPage = currentPage + 1
             useCase.pageDrinks(currentPage).collect {
-                if (it is DrinksEntity.Result) {
-                    callback.onResult(createDrinkItem(it.list), nextPage)
+                when (it) {
+                    is DrinksEntity.Result -> {
+                        callback.onResult(createDrinkItem(it.list), nextPage)
+                    }
+                    is DrinksEntity.Error -> {
+                        // TODO handle page load error
+                    }
                 }
             }
         }
@@ -63,7 +67,6 @@ class DrinksPageDataSource(
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, DrinkCardItem>) {}
 
     private fun createDrinkItem(drinks: List<DrinkEntity>): List<DrinkCardItem> {
-        Timber.e(" TEst testtest${drinks.map { it.icon }}")
         return drinks.map {
             DrinkCardItem(
                 it.id,
