@@ -25,8 +25,8 @@ class ChooserViewModel(
 ) : BaseViewModel<ChooserState>() {
     override val defaultState: ChooserState
         get() = ChooserState(
-            listOf(), type == ItemTypeFilter.NOT_CONTAINS ||
-                    type == ItemTypeFilter.NOT_CONTAINS
+            items = listOf(),
+            showSearch = type == ItemTypeFilter.NOT_CONTAINS || type == ItemTypeFilter.CONTAINS
         )
 
     init {
@@ -51,7 +51,7 @@ class ChooserViewModel(
             launch {
                 useCase.searchComponent(searchName)
                     .take(1)
-                    .onCompletion { isSelectedOldItems(false) }
+                    .onCompletion { isSelectedOldItems() }
                     .collect { filters ->
                         Timber.e(filters.toString())
                         val ingredient = convertToState(filters)
@@ -74,7 +74,6 @@ class ChooserViewModel(
             .take(1)
             .onEach { list ->
                 val ingredient = convertToState(list)
-
                 action.value = currentState.copy(
                     items = ingredient,
                     isInitWindows = isInit,
@@ -82,13 +81,13 @@ class ChooserViewModel(
                 )
             }
             .onCompletion {
-                isSelectedOldItems(false)
+                isSelectedOldItems()
             }
             .launchIn(viewModelScope)
 
     }
 
-    private fun isSelectedOldItems(isInit: Boolean) {
+    private fun isSelectedOldItems() {
         useCase.getSelectComponent()
             .onEach { selectMap ->
                 val selected = selectMap[type] ?: listOf()
@@ -97,7 +96,7 @@ class ChooserViewModel(
                         it.copy(select = true)
                     } else it
                 }
-                action.value = currentState.copy(items = selectedItem.sortedBy { !it.select }, isInitWindows = isInit)
+                action.value = currentState.copy(items = selectedItem, isInitWindows = false)
             }
             .launchIn(viewModelScope)
     }
