@@ -18,7 +18,7 @@ import javax.inject.Inject
 class FilterRepository @Inject constructor(private val api: GrpcConnectClient) {
 
     private val actionCache = ConflatedBroadcastChannel<List<FilterEntity>>(listOf())
-    private val actionSelectComponent = ConflatedBroadcastChannel<Map<ItemTypeFilter, List<Int>>>()
+    private val actionSelectComponent = ConflatedBroadcastChannel<Map<ItemTypeFilter, List<Int>>>(mutableMapOf())
     private val selectMapCache = mutableMapOf<ItemTypeFilter, List<Int>>()
 
     val selectComponentEvent
@@ -38,7 +38,7 @@ class FilterRepository @Inject constructor(private val api: GrpcConnectClient) {
     fun startLoadFilters() = flow {
         val filters = api.getFilters()
         val ingredientsList = filters.ingredientsList
-            .map { it.toFilterEntity(FilterEntity.Type.INGREDIENT) }
+            .map { it.toFilterEntity(FilterEntity.Type.INGREDIENT) }.sortedBy { it.name }
         val otherList = filters.otherList
             .map { it.toFilterEntity(FilterEntity.Type.OTHER) }
         val volumesList = filters.volumesList

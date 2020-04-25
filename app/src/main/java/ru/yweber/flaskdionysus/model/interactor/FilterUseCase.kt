@@ -2,6 +2,7 @@ package ru.yweber.flaskdionysus.model.interactor
 
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
+import ru.yweber.flaskdionysus.model.entity.FilterEntity
 import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import ru.yweber.flaskdionysus.model.repository.FilterRepository
 import javax.inject.Inject
@@ -12,7 +13,6 @@ import javax.inject.Inject
 
 class FilterUseCase @Inject constructor(private val repository: FilterRepository) {
     fun getFilter() = repository.cacheFilterEvent
-
     fun startLoadFilter() = repository.startLoadFilters()
 
     fun searchComponent(name: String) = repository.cacheFilterEvent

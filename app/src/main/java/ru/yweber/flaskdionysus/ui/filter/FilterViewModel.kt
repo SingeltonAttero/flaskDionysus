@@ -8,6 +8,7 @@ import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.Chips
 import ru.yweber.flaskdionysus.core.adapter.state.FilterItemState
 import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
+import ru.yweber.flaskdionysus.core.notifier.FilterApplyNotifier
 import ru.yweber.flaskdionysus.model.entity.FilterEntity
 import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import ru.yweber.flaskdionysus.model.interactor.FilterUseCase
@@ -23,6 +24,7 @@ import toothpick.InjectConstructor
 @InjectConstructor
 class FilterViewModel(
     private val resourceManager: ResourceManager,
+    private val filterApplyNotifier: FilterApplyNotifier,
     private val filterUseCase: FilterUseCase,
     private val globalRouter: GlobalRouter
 ) : BaseViewModel<FilterState>() {
@@ -146,6 +148,11 @@ class FilterViewModel(
     }
 
     fun backTo() {
+        globalRouter.backTo(Screens.HomeListDrinkScreen)
+    }
+
+    fun applyFilter() {
+        filterApplyNotifier.applyFilter()
         globalRouter.backTo(Screens.HomeListDrinkScreen)
     }
 

@@ -32,6 +32,7 @@ class FilterFragment : BaseFragment(R.layout.fragment_filter) {
         super.onViewCreated(view, savedInstanceState)
         rvFilter.adapter = adapter
         rvFilter.addItemDecoration(PaddingItemDecorator())
+        fabFilterApply.setOnClickListener { viewModel.applyFilter() }
         subscribe(viewModel.state, ::renderState)
     }
 

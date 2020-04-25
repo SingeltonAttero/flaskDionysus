@@ -3,6 +3,7 @@ package ru.yweber.flaskdionysus.di.module
 import android.content.Context
 import io.grpc.ManagedChannel
 import ru.yweber.flaskdionysus.BuildConfig
+import ru.yweber.flaskdionysus.core.notifier.FilterApplyNotifier
 import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.provider.ChannelsProvider
 import ru.yweber.flaskdionysus.model.client.GrpcApi
@@ -25,4 +26,5 @@ fun appModule(context: Context) = module {
     bind(RetryErrorNotifier::class.java).toInstance(RetryErrorNotifier())
     bind(ResourceManager::class.java).singleton()
     bind(FilterRepository::class.java).singleton()
+    bind(FilterApplyNotifier::class.java).singleton()
 }

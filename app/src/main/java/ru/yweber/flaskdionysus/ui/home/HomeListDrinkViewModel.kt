@@ -13,6 +13,7 @@ import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.page.DrinksPageDataSource
 import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
+import ru.yweber.flaskdionysus.core.notifier.FilterApplyNotifier
 import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.DrinkDayHolder
 import ru.yweber.flaskdionysus.di.DrinkDayRouter
@@ -30,6 +31,7 @@ private const val PAGE_MAX_ITEM = 50
 class HomeListDrinkViewModel(
     private val useCase: ListDrinkUseCase,
     private val retryNotifier: RetryErrorNotifier,
+    private val filterApplyNotifier: FilterApplyNotifier,
     private val globalRouter: GlobalRouter,
     @DrinkDayRouter private val drinkRouter: Router,
     @DrinkDayHolder private val navigatorHolder: NavigatorHolder
@@ -60,6 +62,16 @@ class HomeListDrinkViewModel(
             retryNotifier.eventRetryRequest
                 .collect {
                     action.value = currentState.copy(listDrink = pageList, isLoad = false)
+                }
+        }
+
+        launch {
+            filterApplyNotifier.applyFilterEvent
+                .collect {
+                    if (it) {
+                        action.value?.listDrink?.detach()
+                        action.value = currentState.copy(listDrink = pageList, isLoad = false)
+                    }
                 }
         }
     }
@@ -93,6 +105,7 @@ class HomeListDrinkViewModel(
     }
 
     fun navigateFilter() {
+        action.value = currentState.copy(animationFab = false, menuExpend = !currentState.menuExpend)
         globalRouter.navigateTo(Screens.FilterScreen)
     }
 

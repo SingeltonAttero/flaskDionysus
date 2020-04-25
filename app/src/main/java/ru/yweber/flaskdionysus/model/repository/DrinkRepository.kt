@@ -21,9 +21,23 @@ class DrinkRepository @Inject constructor(
     private val client: GrpcConnectClient,
     private val errorStatus: ErrorStatusSender
 ) {
-    fun pageDrink(page: Int) = flow<DrinksEntity> {
+    fun pageDrink(
+        page: Int,
+        includes: List<Int>,
+        except: List<Int>,
+        fortress: List<Int>,
+        volumes: List<Int>,
+        another: List<Boolean>
+    ) = flow<DrinksEntity> {
         val drinkRequest = DrinksRequest.newBuilder()
             .setPage(page)
+            .addAllIncludes(includes)
+            .addAllExcept(except)
+            .addAllFortress(fortress)
+            .addAllVolume(volumes)
+            .setIsFlacky(another.getOrNull(0) ?: false)
+            .setIsFire(another.getOrNull(1) ?: false)
+            .setIsIba(another.getOrNull(2) ?: false)
             .build()
         val pageDrinks = try {
             convertGrpcToEntity(drinkRequest)
@@ -41,7 +55,7 @@ class DrinkRepository @Inject constructor(
             .map {
                 DrinkEntity(
                     it.id, it.name,
-                    "http://${BuildConfig.ENDPOINT}:9001${it.icon}", it.mark.toInt(),
+                    "http://${BuildConfig.ENDPOINT}:9001${it.icon}", it.mark,
                     it.isFlacky, it.isFire,
                     it.isIba, it.properties, it.ingredients
                 )

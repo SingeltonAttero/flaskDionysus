@@ -55,12 +55,8 @@ class ChooserDialog : BaseDialog(R.layout.dialog_loading) {
         adapter.items = state.items
         tvSearchHint.isVisible = state.searchEmpty
         tvSearchHint.text = getString(R.string.empty_search_component, state.search)
-        if (state.search.isNotEmpty() && !state.searchEmpty) {
-            rvFilterIngredient.smoothScrollToPosition(0)
-        }
         if (state.isInitWindows) {
             textFieldSearch.isVisible = state.showSearch
-            rvFilterIngredient.smoothScrollToPosition(0)
             if (state.items.isEmpty()) {
                 toast(getString(R.string.filter_empty))
                 dismiss()

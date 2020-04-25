@@ -10,7 +10,6 @@ import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import ru.yweber.flaskdionysus.model.interactor.FilterUseCase
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.filter.chooser.state.ChooserState
-import timber.log.Timber
 import toothpick.InjectConstructor
 
 /**
@@ -29,13 +28,18 @@ class ChooserViewModel(
             showSearch = type == ItemTypeFilter.NOT_CONTAINS || type == ItemTypeFilter.CONTAINS
         )
 
+    private val cacheCurrentSelect = mutableListOf<Int>()
+
     init {
         allComponent()
     }
 
-
     fun selectComponent(id: Int) {
-        Timber.e(id.toString())
+        if (cacheCurrentSelect.contains(id)) {
+            cacheCurrentSelect.remove(id)
+        } else {
+            cacheCurrentSelect.add(id)
+        }
         action.value = currentState.copy(items = currentState.items.map {
             if (id == it.id) {
                 it.copy(select = !it.select)
@@ -89,10 +93,17 @@ class ChooserViewModel(
         useCase.getSelectComponent()
             .onEach { selectMap ->
                 val selected = selectMap[type] ?: listOf()
+                selected.forEach {
+                    if (!cacheCurrentSelect.contains(it)) {
+                        cacheCurrentSelect.add(it)
+                    }
+                }
                 val selectedItem = currentState.items.map {
-                    if (selected.contains(it.id)) {
+                    if (cacheCurrentSelect.contains(it.id)) {
                         it.copy(select = true)
-                    } else it
+                    } else {
+                        it
+                    }
                 }
                 action.value = currentState.copy(items = selectedItem, isInitWindows = false)
             }
@@ -123,6 +134,10 @@ class ChooserViewModel(
             }
         }.map {
             FilterChooserItemState(it.id, it.name)
+        }.map {
+            if (cacheCurrentSelect.contains(it.id)) {
+                it.copy(select = true)
+            } else it
         }
     }
 
@@ -130,7 +145,7 @@ class ChooserViewModel(
         launch {
             useCase.setSelect(
                 type,
-                currentState.items.filter { it.select }.map { it.id }
+                cacheCurrentSelect
             )
             globalRouter.dismiss(Screens.ChooserDialogHolder(type))
 
