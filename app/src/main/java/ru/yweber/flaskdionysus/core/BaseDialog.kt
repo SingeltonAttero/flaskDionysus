@@ -1,6 +1,5 @@
 package ru.yweber.flaskdionysus.core
 
-import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +24,6 @@ import java.io.Serializable
 
 abstract class BaseDialog(@LayoutRes private val layout: Int) : DialogFragment() {
 
-    abstract val rootContainer: ViewGroup
-
-    internal open val isResizeWindows: Boolean = true
-
     private lateinit var currentScope: Serializable
 
     private lateinit var scope: Scope
@@ -51,32 +46,6 @@ abstract class BaseDialog(@LayoutRes private val layout: Int) : DialogFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(layout, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (isResizeWindows) {
-            setDialogSize()
-        }
-
-    }
-
-    internal open fun setDialogSize(
-        spacesLeftPercent: Float = 0.03F,
-        spacesRightPercent: Float = 0.03F,
-        spacesTopPercent: Float = 0.04F,
-        spacesBottomPercent: Float = 0.04F
-    ) {
-        val defaultDisplay = requireActivity().windowManager.defaultDisplay
-        val point = Point()
-        defaultDisplay.getSize(point)
-        val navigationBarOffset = 0.04F
-        rootContainer.setPadding(
-            (point.y * spacesLeftPercent).toInt(),
-            (point.x * spacesTopPercent).toInt(),
-            (point.y * spacesRightPercent).toInt(),
-            (point.x * spacesBottomPercent + navigationBarOffset).toInt()
-        )
     }
 
     /**

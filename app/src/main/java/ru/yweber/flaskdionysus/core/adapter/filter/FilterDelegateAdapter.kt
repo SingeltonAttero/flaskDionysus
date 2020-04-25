@@ -11,13 +11,17 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import kotlinx.android.synthetic.main.item_filter.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.adapter.state.FilterItemState
+import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 
 /**
  * Created on 22.04.2020
  * @author YWeber */
 
 class FilterDelegateAdapter {
-    fun createAdapter(closeChip: (name: String, position: Int) -> Unit, openPartFilter: (nameFilter: String) -> Unit) =
+    fun createAdapter(
+        closeChip: (name: String, position: Int) -> Unit,
+        openPartFilter: (nameFilter: ItemTypeFilter) -> Unit
+    ) =
         AsyncListDifferDelegationAdapter(
             FilterDiff,
             filterAdapter(closeChip, openPartFilter)
@@ -25,7 +29,7 @@ class FilterDelegateAdapter {
 
     private fun filterAdapter(
         closeChip: (name: String, position: Int) -> Unit,
-        openPartFilter: (nameFilter: String) -> Unit
+        openPartFilter: (nameFilter: ItemTypeFilter) -> Unit
     ) =
         adapterDelegateLayoutContainer<FilterItemState, FilterItemState>(R.layout.item_filter) {
             val inflater = LayoutInflater.from(context)
@@ -34,7 +38,7 @@ class FilterDelegateAdapter {
                     closeChip.invoke(it.text.toString(), adapterPosition)
                 }
             }
-            tvAddChips.setOnClickListener { openPartFilter.invoke(item.title) }
+            tvAddChips.setOnClickListener { openPartFilter.invoke(item.type) }
             bind {
                 TransitionManager.beginDelayedTransition(chipGroupFilter)
                 chipGroupFilter.removeAllViews()

@@ -61,8 +61,10 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
                 fragment: DialogFragment,
                 screen: SupportAppScreen
             ) {
-                fragment.show(fragmentManager, screen.screenKey)
-                localStackCopy?.add(screen.screenKey)
+                if (localStackCopy?.contains(screen.screenKey) == false) {
+                    fragment.show(fragmentManager, screen.screenKey)
+                    localStackCopy?.add(screen.screenKey)
+                }
             }
 
             override fun setupFragmentTransaction(

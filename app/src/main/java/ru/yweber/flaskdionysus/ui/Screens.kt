@@ -2,6 +2,7 @@ package ru.yweber.flaskdionysus.ui
 
 import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import ru.yweber.flaskdionysus.ui.about.AboutProjectFragment
 import ru.yweber.flaskdionysus.ui.drinkday.DrinkTheDayFlowFragment
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.DrinkDayDetailedFragment
@@ -49,14 +50,14 @@ object Screens {
         }
     }
 
-    object ChooserDialogHolder : SupportAppScreen() {
-        override fun getFragment(): Fragment? {
-            return ChooserDialog()
+    data class ChooserDialogHolder(private val type: ItemTypeFilter) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return ChooserDialog.newInstance(type)
         }
     }
 
     object FilterScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment? {
+        override fun getFragment(): Fragment {
             return FilterFragment()
         }
     }

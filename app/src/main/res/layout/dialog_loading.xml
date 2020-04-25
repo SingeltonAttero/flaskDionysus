@@ -1,25 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/containerLoading"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/rootContainerFilter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme"
+        android:visibility="invisible"
+        tools:visibility="visible">
 
-        <androidx.core.widget.NestedScrollView
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_4"
+            android:layout_marginEnd="@dimen/margin_4"
+            android:background="@color/colorWhite">
 
-            <TextView
-                android:id="@+id/tvTest"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textFieldSearch"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.core.widget.NestedScrollView>
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:hint="@string/hitn_filter_search" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tvSearchHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:text="@string/empty_search_component"
+            android:textColor="@color/colorBlackTitleText"
+            android:textSize="21sp"
+            android:visibility="gone" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFilterIngredient"
+            android:layout_width="328dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_about_drink" />
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/done" />
+
+    </LinearLayout>
 </FrameLayout>

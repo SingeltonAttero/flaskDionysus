@@ -1,11 +1,14 @@
 package ru.yweber.flaskdionysus.model.repository
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.weber.proto.Dictionary
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
 import ru.yweber.flaskdionysus.model.entity.FilterEntity
+import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import javax.inject.Inject
 
 /**
@@ -13,6 +16,23 @@ import javax.inject.Inject
  * @author YWeber */
 
 class FilterRepository @Inject constructor(private val api: GrpcConnectClient) {
+
+    private val actionCache = ConflatedBroadcastChannel<List<FilterEntity>>(listOf())
+    private val actionSelectComponent = ConflatedBroadcastChannel<Map<ItemTypeFilter, List<Int>>>()
+    private val selectMapCache = mutableMapOf<ItemTypeFilter, List<Int>>()
+
+    val selectComponentEvent
+        get() = actionSelectComponent.asFlow()
+            .flowOn(Dispatchers.IO)
+
+    val cacheFilterEvent
+        get() = actionCache.asFlow()
+            .flowOn(Dispatchers.IO)
+
+    suspend fun setSelectComponent(type: ItemTypeFilter, ids: List<Int>) {
+        selectMapCache[type] = ids
+        actionSelectComponent.send(selectMapCache)
+    }
 
 
     fun startLoadFilters() = flow {
@@ -27,7 +47,16 @@ class FilterRepository @Inject constructor(private val api: GrpcConnectClient) {
             .map { it.toFilterEntity(FilterEntity.Type.FORTRESS_LEVELS) }
         val complicationLevelsList = filters.complicationLevelsList
             .map { it.toFilterEntity(FilterEntity.Type.COMPLICATION_LEVELS) }
-        emit(listOf(ingredientsList, otherList, volumesList, fortressLevelsList, complicationLevelsList).flatten())
+        actionCache.send(
+            listOf(
+                ingredientsList,
+                otherList,
+                volumesList,
+                fortressLevelsList,
+                complicationLevelsList
+            ).flatten()
+        )
+        emit(Unit)
     }.flowOn(Dispatchers.IO)
 
     private fun Dictionary.toFilterEntity(type: FilterEntity.Type): FilterEntity {

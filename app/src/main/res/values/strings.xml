@@ -11,4 +11,17 @@
     <string name="tools">инструменты</string>
     <string name="error_message">Что то пошло не так… \n Проверте интернет и нажмите кнопку повторить</string>
     <string name="retry">Повторить</string>
+    <string name="done">готово</string>
+    <string name="hitn_filter_search">Введите ингредиент</string>
+    <string name="filter_empty">Фильтры не доступны</string>
+    <string name="empty_search_component">Продукта не найден</string>
+    <string name="contains">Содержит</string>
+    <string name="add_ingredient">Еще ингредиент</string>
+    <string name="not_contains">Не содержит</string>
+    <string name="fortress">Крепость</string>
+    <string name="add_fortess">Еще крепость</string>
+    <string name="volumes_drink">Объем коктейля</string>
+    <string name="add">еще</string>
+    <string name="complication_drink">Сложность приготовления</string>
+    <string name="another">Другое</string>
 </resources>
