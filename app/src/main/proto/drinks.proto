@@ -38,9 +38,9 @@ message DrinkMarkResponse {
 
 message DrinksRequest {
   int32 page = 1;
-  int32 fortress = 2;
-  int32 complication = 3;
-  int32 volume = 4;
+  repeated int32 fortress = 2;
+  repeated int32 complication = 3;
+  repeated int32 volume = 4;
   bool is_flacky = 5;
   bool is_fire = 6;
   bool is_iba = 7;
@@ -55,7 +55,7 @@ message DrinkItem {
   bool is_flacky = 2;
   bool is_fire = 3;
   bool is_iba = 4;
-  float mark = 5;
+  int32 mark = 5;
   string name = 6;
   string properties = 7;
   string ingredients = 8;
@@ -79,7 +79,7 @@ message DrinkOfDayResponse {
   bool is_flacky = 2;
   bool is_fire = 3;
   bool is_iba = 4;
-  float mark = 5;
+  int32 mark = 5;
   string name = 6;
   string complication = 8;
   string fortress = 9;
@@ -100,7 +100,7 @@ message DrinkResponse {
   bool is_flacky = 2;
   bool is_fire = 3;
   bool is_iba = 4;
-  float mark = 5;
+  int32 mark = 5;
   string name = 6;
   string name_en = 7;
   string complication = 8;

@@ -53,9 +53,7 @@ class ChooserViewModel(
                     .take(1)
                     .onCompletion { isSelectedOldItems() }
                     .collect { filters ->
-                        Timber.e(filters.toString())
-                        val ingredient = convertToState(filters)
-
+                        val ingredient = convertToItemsState(filters)
                         action.value = currentState.copy(
                             items = ingredient,
                             isInitWindows = false,
@@ -73,7 +71,7 @@ class ChooserViewModel(
         useCase.getFilter()
             .take(1)
             .onEach { list ->
-                val ingredient = convertToState(list)
+                val ingredient = convertToItemsState(list)
                 action.value = currentState.copy(
                     items = ingredient,
                     isInitWindows = isInit,
@@ -101,7 +99,7 @@ class ChooserViewModel(
             .launchIn(viewModelScope)
     }
 
-    private fun convertToState(filters: List<FilterEntity>): List<FilterChooserItemState> {
+    private fun convertToItemsState(filters: List<FilterEntity>): List<FilterChooserItemState> {
         return filters.filter {
             when (type) {
                 ItemTypeFilter.CONTAINS -> {
