@@ -14,7 +14,7 @@
     <string name="done">готово</string>
     <string name="hitn_filter_search">Введите ингредиент</string>
     <string name="filter_empty">Фильтры не доступны</string>
-    <string name="empty_search_component">Продукта не найден</string>
+    <string name="empty_search_component">Продукт не найден</string>
     <string name="contains">Содержит</string>
     <string name="add_ingredient">Еще ингредиент</string>
     <string name="not_contains">Не содержит</string>

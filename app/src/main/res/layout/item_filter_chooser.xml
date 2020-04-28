@@ -14,7 +14,6 @@
         android:paddingTop="@dimen/margin_16"
         android:paddingEnd="40dp"
         android:paddingBottom="@dimen/margin_16"
-        android:textColor="@color/colorBlackTitleText"
         android:textSize="18sp"
         tools:text="Ром светлый" />
 
@@ -22,10 +21,10 @@
         android:id="@+id/checkboxSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:focusable="false"
+        android:layout_gravity="end|center"
         android:checked="false"
-        android:layout_gravity="end|center" />
+        android:clickable="false"
+        android:focusable="false" />
 
     <View
         android:layout_width="match_parent"

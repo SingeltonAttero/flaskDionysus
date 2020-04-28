@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:theme="@style/AppTheme">
+    android:background="@color/colorWhite">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,10 +31,10 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/babFilter"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
         app:elevation="6dp"
-        app:fabAlignmentMode="end"
+        app:fabAlignmentMode="center"
         app:fabCradleMargin="8dp"
         app:fabCradleRoundedCornerRadius="3dp"
         app:fabCradleVerticalOffset="4dp" />

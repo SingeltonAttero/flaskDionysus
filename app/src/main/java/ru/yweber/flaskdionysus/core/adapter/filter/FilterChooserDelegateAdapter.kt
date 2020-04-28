@@ -1,5 +1,6 @@
 package ru.yweber.flaskdionysus.core.adapter.filter
 
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
@@ -27,6 +28,13 @@ class FilterChooserDelegateAdapter {
             bind {
                 tvName.text = item.name
                 checkboxSelect.isChecked = item.select
+                checkboxSelect.buttonTintList = getColorStateList(R.color.colorPrimary)
+                if (item.select) {
+                    tvName.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
+                } else {
+                    checkboxSelect.buttonTintList = getColorStateList(R.color.colorAccent)
+                    tvName.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+                }
             }
         }
 
