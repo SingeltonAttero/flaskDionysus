@@ -112,7 +112,7 @@ class FilterViewModel(
                 FilterItemState(
                     title = resourceManager.getString(R.string.fortress),
                     chips = listOf(),
-                    nameFilterButton = resourceManager.getString(R.string.add_fortess),
+                    nameFilterButton = resourceManager.getString(R.string.add_fortress),
                     type = ItemTypeFilter.FORTRESS
                 ),
                 FilterItemState(

@@ -12,16 +12,22 @@
     <string name="error_message">Что то пошло не так… \n Проверте интернет и нажмите кнопку повторить</string>
     <string name="retry">Повторить</string>
     <string name="done">готово</string>
-    <string name="hitn_filter_search">Введите ингредиент</string>
+    <string name="hint_filter_search">Введите ингредиент</string>
     <string name="filter_empty">Фильтры не доступны</string>
     <string name="empty_search_component">Продукт не найден</string>
     <string name="contains">Содержит</string>
     <string name="add_ingredient">Еще ингредиент</string>
     <string name="not_contains">Не содержит</string>
     <string name="fortress">Крепость</string>
-    <string name="add_fortess">Еще крепость</string>
+    <string name="add_fortress">Еще крепость</string>
     <string name="volumes_drink">Объем коктейля</string>
     <string name="add">еще</string>
     <string name="complication_drink">Сложность приготовления</string>
     <string name="another">Другое</string>
+    <string name="advice_ingredient">Выберите один или несколько ингредиентов, по которым искать напиток</string>
+    <string name="advice_not_ingredient">Выберите один или несколько ингредиентов, которых нет должно быть в напитке</string>
+    <string name="advice_fortress">Выберите один или несколько вариантов крепости напитка</string>
+    <string name="advice_volumes">Выберите один или несколько вариантов объема коктеля</string>
+    <string name="advice_complication">Выберите один или несколько вариантов сложности приготовления напитка</string>
+    <string name="advice_other">Выберите один или несколько типов коктеля</string>
 </resources>

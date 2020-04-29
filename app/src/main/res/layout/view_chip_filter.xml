@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:chipBackgroundColor="@color/colorChips"
-    app:closeIconTint="@color/color_close_chip"
+    app:closeIconTint="@color/colorCloseChip"
     app:closeIconVisible="true"
     app:rippleColor="@color/colorControl"
     tools:text="Апельсиновый сок" />

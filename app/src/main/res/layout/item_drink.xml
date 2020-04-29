@@ -134,6 +134,7 @@
             android:paddingStart="2dp"
             android:paddingTop="2dp"
             android:paddingEnd="2dp"
+            android:paddingBottom="2dp"
             android:src="@drawable/ic_puff"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"

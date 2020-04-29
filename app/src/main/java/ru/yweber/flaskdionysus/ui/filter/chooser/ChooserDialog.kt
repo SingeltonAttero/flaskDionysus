@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
-import kotlinx.android.synthetic.main.dialog_loading.*
+import kotlinx.android.synthetic.main.dialog_chooser.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseDialog
 import ru.yweber.flaskdionysus.core.adapter.filter.FilterChooserDelegateAdapter
@@ -24,7 +24,7 @@ import toothpick.ktp.delegate.inject
  * Created on 16.04.2020
  * @author YWeber */
 
-class ChooserDialog : BaseDialog(R.layout.dialog_loading) {
+class ChooserDialog : BaseDialog(R.layout.dialog_chooser) {
 
     private val viewModel by inject<ChooserViewModel>()
     private val adapter by lazy {
@@ -54,6 +54,7 @@ class ChooserDialog : BaseDialog(R.layout.dialog_loading) {
     private fun renderState(state: ChooserState) {
         adapter.items = state.items
         tvSearchHint.isVisible = state.searchEmpty
+        tvAdvice.text = state.searchAdvice
         tvSearchHint.text = getString(R.string.empty_search_component, state.search)
         if (state.isInitWindows) {
             textFieldSearch.isVisible = state.showSearch

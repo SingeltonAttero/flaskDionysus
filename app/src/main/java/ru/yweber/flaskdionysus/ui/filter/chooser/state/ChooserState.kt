@@ -11,5 +11,6 @@ data class ChooserState(
     val showSearch: Boolean,
     val isInitWindows: Boolean = true,
     val searchEmpty: Boolean = false,
-    val search: String = ""
+    val search: String = "",
+    val searchAdvice: String = ""
 )

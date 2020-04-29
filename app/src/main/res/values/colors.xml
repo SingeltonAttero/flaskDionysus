@@ -10,11 +10,12 @@
     <color name="colorWhiteNavigate">#EFEEEE</color>
     <color name="colorBlackTitleText">#DE000000</color>
     <color name="colorGrayDescriptionText">#99000000</color>
-    <color name="colorLogoIBA">#F44336</color>
+    <color name="colorLogoIBA">#FFFFFF</color>
     <color name="titleDrinkDay">#99000000</color>
     <color name="colorTabSelectItem">#80FFFFFF</color>
     <color name="colorAnimateListDrinkTransparent">#00FFFFFF</color>
     <color name="separator_gray">#1F000000</color>
     <color name="colorChips">#FFFAED</color>
-    <color name="color_close_chip">#F8CC8D</color>
+    <color name="colorCloseChip">#F8CC8D</color>
+    <color name="colorTextAdvice">#99000000</color>
 </resources>
