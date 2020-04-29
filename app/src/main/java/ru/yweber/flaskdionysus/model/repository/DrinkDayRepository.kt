@@ -38,7 +38,10 @@ class DrinkDayRepository @Inject constructor(private val api: GrpcConnectClient)
             preview,
             detailed,
             drinkDay.name,
-            "http://${BuildConfig.ENDPOINT}:9001${drinkDay.preview}"
+            "http://${BuildConfig.ENDPOINT}:9001${drinkDay.preview}",
+            isHot = drinkDay.isFire,
+            isIba = drinkDay.isIba,
+            isPuff = drinkDay.isFlacky
         )
         event.offer(drinkDayEntity)
         emit(Unit)

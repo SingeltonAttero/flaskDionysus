@@ -27,6 +27,47 @@
             tools:src="@drawable/img_splash_screen" />
 
         <TextView
+            android:id="@+id/tvStatusBadge"
+            style="@style/BadgeIso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/iba_logo"
+            android:transitionName="tvStatusBadge"
+            app:layout_constraintStart_toStartOf="@id/ivPreviewDrinkDay"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+        <ImageView
+            android:id="@+id/ivStatusHot"
+            style="@style/BadgeType"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_4"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_hot_drink"
+            android:transitionName="ivStatusHot"
+            app:layout_constraintStart_toEndOf="@id/tvStatusBadge"
+            app:layout_constraintTop_toTopOf="@id/tvStatusBadge" />
+
+        <ImageView
+            android:id="@+id/ivStatusPuff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_4"
+            android:background="@drawable/bg_puff_status"
+            android:contentDescription="@string/todo"
+            android:paddingStart="2dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/ic_puff"
+            android:transitionName="ivStatusPuff"
+            app:layout_constraintStart_toEndOf="@id/ivStatusHot"
+            app:layout_constraintTop_toTopOf="@id/ivStatusHot" />
+
+
+        <TextView
             android:id="@+id/tvTitle"
             style="@style/TitleDrinkDay"
             android:layout_width="wrap_content"

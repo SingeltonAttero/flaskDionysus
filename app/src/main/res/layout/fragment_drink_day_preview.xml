@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageView
             android:id="@+id/ivPreviewDrinkDay"
             android:layout_width="0dp"
@@ -28,6 +29,51 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             tools:src="@drawable/img_splash_screen" />
+
+        <TextView
+            android:id="@+id/tvStatusBadge"
+            style="@style/BadgeIso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/iba_logo"
+            android:transitionName="tvStatusBadge"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@id/ivPreviewDrinkDay"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+        <ImageView
+            android:id="@+id/ivStatusHot"
+            style="@style/BadgeType"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_hot_drink"
+            android:transitionName="ivStatusHot"
+            app:layout_constraintStart_toEndOf="@id/tvStatusBadge"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+        <ImageView
+            android:id="@+id/ivStatusPuff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:background="@drawable/bg_puff_status"
+            android:contentDescription="@string/todo"
+            android:paddingStart="2dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/ic_puff"
+            android:transitionName="ivStatusPuff"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@id/ivStatusHot"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineHorizontal"

@@ -1,6 +1,5 @@
 package ru.yweber.flaskdionysus.ui.drinkday
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -62,6 +61,18 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
                             containerViewGroup.fabSwipeDrinkDay,
                             containerViewGroup.fabSwipeDrinkDay.transitionName
                         )
+                        addSharedElement(
+                            containerViewGroup.tvStatusBadge,
+                            containerViewGroup.tvStatusBadge.transitionName
+                        )
+                        addSharedElement(
+                            containerViewGroup.ivStatusHot,
+                            containerViewGroup.ivStatusHot.transitionName
+                        )
+                        addSharedElement(
+                            containerViewGroup.ivStatusPuff,
+                            containerViewGroup.ivStatusPuff.transitionName
+                        )
                     }
                 }
                 fragmentTransaction.setReorderingAllowed(true)
@@ -88,11 +99,7 @@ class DrinkTheDayFlowFragment : BaseFlowFragment(R.layout.fragment_drink_the_day
     }
 
     private fun render(state: DrinkTheDayState) {
-        animationFab(state)
     }
 
-    private fun animationFab(state: DrinkTheDayState) {
-
-    }
 
 }

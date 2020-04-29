@@ -12,5 +12,8 @@ data class DrinkDayPreviewState(
     val checks: String,
     val levelCooking: String,
     val alcoholStrength: String,
-    val endShareAnimate: Boolean = false
+    val endShareAnimate: Boolean = false,
+    val isStatusIba: Boolean = false,
+    val isStatusHot: Boolean = false,
+    val isStatusPuff: Boolean = false
 )

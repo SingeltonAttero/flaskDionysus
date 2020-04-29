@@ -9,7 +9,10 @@ data class DrinkDayEntity(
     val preview: PreviewDrinkDayEntity,
     val detailed: DetailedDrinkDayEntity,
     val nameDrink: String,
-    val previewIconPath: String
+    val previewIconPath: String,
+    val isIba: Boolean,
+    val isHot: Boolean,
+    val isPuff: Boolean
 )
 
 data class PreviewDrinkDayEntity(

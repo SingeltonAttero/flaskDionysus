@@ -1,14 +1,11 @@
 package ru.yweber.flaskdionysus.ui.drinkday.preview
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_drink_day_preview.*
 import ru.yweber.flaskdionysus.R
@@ -61,6 +58,9 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
                 }
             }
         }
+        tvStatusBadge.isVisible = state.isStatusIba
+        ivStatusHot.isVisible = state.isStatusHot
+        ivStatusPuff.isVisible = state.isStatusPuff
         tvTitle.text = state.title
         tvNameDrink.text = state.drinkName
         lriDrinkDay.progress(state.rating)

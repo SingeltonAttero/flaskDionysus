@@ -113,5 +113,22 @@
         <item name="android:textSize">@dimen/font_14</item>
     </style>
 
+    <style name="BadgeIso">
+        <item name="android:background">@drawable/bg_circle_status</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">7dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingEnd">7dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/colorLogoIBA</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BadgeType">
+        <item name="android:background">@drawable/bg_circle_status</item>
+        <item name="android:padding">@dimen/margin_8</item>
+    </style>
+
 
 </resources>

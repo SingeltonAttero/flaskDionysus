@@ -42,7 +42,10 @@ class DrinkDayPreviewViewModel(
                         rating = it.preview.rating,
                         checks = it.preview.tried,
                         levelCooking = it.preview.complication,
-                        alcoholStrength = it.preview.fortress
+                        alcoholStrength = it.preview.fortress,
+                        isStatusHot = it.isHot,
+                        isStatusIba = it.isIba,
+                        isStatusPuff = it.isPuff
                     )
                 }
 
