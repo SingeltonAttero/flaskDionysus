@@ -17,11 +17,14 @@ import timber.log.Timber
 
 class DrinksPageDelegateAdapter {
 
-    fun createPageAdapter() =
-        PagedListDelegationAdapter(DiffDrink, createDrink())
+    fun createPageAdapter(click: (id: Int) -> Unit) =
+        PagedListDelegationAdapter(DiffDrink, createDrink(click))
 
-    private fun createDrink() =
+    private fun createDrink(click: (id: Int) -> Unit) =
         adapterDelegateLayoutContainer<DrinkCardItem, DrinkCardItem>(R.layout.item_drink) {
+            itemView.setOnClickListener {
+                click(item.id)
+            }
             bind {
                 tvCookingLevel.text = item.cookingLevel
                 tvIngredients.text = item.ingredients

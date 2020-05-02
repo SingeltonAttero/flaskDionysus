@@ -40,7 +40,7 @@ import toothpick.ktp.delegate.inject
 class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_drink) {
 
     private val adapter by lazy {
-        DrinksPageDelegateAdapter().createPageAdapter()
+        DrinksPageDelegateAdapter().createPageAdapter(viewModel::navigateToDetailed)
     }
 
     private val expendMainAnimatorSet by lazy { AnimatorSet() }

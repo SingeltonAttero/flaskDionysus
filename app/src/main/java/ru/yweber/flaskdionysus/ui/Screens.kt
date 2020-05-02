@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.yweber.flaskdionysus.model.entity.ItemTypeFilter
 import ru.yweber.flaskdionysus.ui.about.AboutProjectFragment
+import ru.yweber.flaskdionysus.ui.detailed.DrinkDetailedFragment
 import ru.yweber.flaskdionysus.ui.drinkday.DrinkTheDayFlowFragment
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.DrinkDayDetailedFragment
 import ru.yweber.flaskdionysus.ui.drinkday.preview.DrinkDayPreviewFragment
@@ -59,6 +60,12 @@ object Screens {
     object FilterScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return FilterFragment()
+        }
+    }
+
+    data class DrinkDetailedScreen(private val drinkId: Int) : SupportAppScreen() {
+        override fun getFragment(): Fragment? {
+            return DrinkDetailedFragment()
         }
     }
 

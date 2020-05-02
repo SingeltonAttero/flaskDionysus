@@ -109,6 +109,9 @@ class HomeListDrinkViewModel(
         globalRouter.navigateTo(Screens.FilterScreen)
     }
 
+    fun navigateToDetailed(id: Int) {
+        globalRouter.navigateTo(Screens.DrinkDetailedScreen(id))
+    }
 
 }
 
