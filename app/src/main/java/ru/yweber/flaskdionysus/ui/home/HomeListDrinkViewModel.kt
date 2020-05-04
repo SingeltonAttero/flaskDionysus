@@ -70,7 +70,9 @@ class HomeListDrinkViewModel(
                 .collect {
                     if (it) {
                         action.value?.listDrink?.detach()
-                        action.value = currentState.copy(listDrink = pageList, isLoad = false)
+                        action.value = currentState.copy(listDrink = pageList, filterDone = true)
+                    } else {
+                        action.value = currentState.copy(filterDone = false)
                     }
                 }
         }
@@ -80,7 +82,7 @@ class HomeListDrinkViewModel(
         if (load) {
             launch {
                 delay(300) // create recycler item or animate lag create
-                action.value = currentState.copy(isLoad = true)
+                action.value = currentState.copy(isLoad = true, filterDone = false)
             }
         }
     }

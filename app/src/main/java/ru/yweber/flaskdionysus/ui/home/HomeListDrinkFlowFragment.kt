@@ -88,7 +88,9 @@ class HomeListDrinkFlowFragment : BaseFlowFragment(R.layout.fragment_home_list_d
             containerAnimation()
         } else {
             adapter.submitList(state.listDrink)
-
+        }
+        if (state.filterDone) {
+            adapter.submitList(state.listDrink)
         }
         if (state.animationFab) {
             menuSwap(state.menuExpend)

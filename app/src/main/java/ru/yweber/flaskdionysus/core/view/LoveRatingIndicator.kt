@@ -2,6 +2,7 @@ package ru.yweber.flaskdionysus.core.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -79,7 +80,12 @@ class LoveRatingIndicator @JvmOverloads constructor(
                 it.layoutParams = wrapParams
             }
         }
-        listView.forEach { addView(it) }
+        listView.forEach {
+            if (it.parent != null) {
+                (it.parent as ViewGroup).removeView(it)
+            }
+            addView(it)
+        }
         orientation = HORIZONTAL
     }
 

@@ -74,6 +74,13 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
                 fragmentTransaction: FragmentTransaction
             ) {
                 fragmentTransaction.setReorderingAllowed(true)
+                fragmentTransaction.setCustomAnimations(
+                    R.anim.slide_start_left,
+                    R.anim.slide_out_right,
+                    R.anim.slide_pop_left,
+                    R.anim.slide_pop_right
+
+                )
             }
         }
 

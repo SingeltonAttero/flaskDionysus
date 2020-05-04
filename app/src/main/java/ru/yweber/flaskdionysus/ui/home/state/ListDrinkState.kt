@@ -10,6 +10,7 @@ import ru.yweber.flaskdionysus.core.adapter.state.DrinkCardItem
 data class ListDrinkState(
     val listDrink: PagedList<DrinkCardItem>,
     val isLoad: Boolean = false,
+    val filterDone: Boolean = false,
     val animationFab: Boolean = false,
     val menuExpend: Boolean = false
 )
