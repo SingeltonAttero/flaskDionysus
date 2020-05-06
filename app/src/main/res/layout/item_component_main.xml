@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:theme="@style/AppTheme">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_4"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_marginEnd="@dimen/margin_4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTriedDrink"
+                style="@style/DescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Попробовали: 132 человека"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCookingLevel"
+                style="@style/DescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сложность: средне"
+                app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
+                app:layout_constraintTop_toBottomOf="@id/tvTriedDrink" />
+
+            <TextView
+                android:id="@+id/tvAlcoholStrength"
+                style="@style/DescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Крепость: легкий"
+                app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
+                app:layout_constraintTop_toBottomOf="@id/tvCookingLevel" />
+
+
+            <TextView
+                android:id="@+id/tvStatusBadge"
+                style="@style/BadgeIso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:text="@string/iba_logo"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/ivStatusHot"
+                app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
+                app:layout_constraintTop_toBottomOf="@id/tvAlcoholStrength" />
+
+            <ImageView
+                android:id="@+id/ivStatusHot"
+                style="@style/BadgeType"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_hot_drink"
+                app:layout_constraintBottom_toTopOf="@+id/ivStatusPuff"
+                app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
+                app:layout_constraintTop_toBottomOf="@+id/tvStatusBadge" />
+
+            <ImageView
+                android:id="@+id/ivStatusPuff"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@drawable/bg_puff_status"
+                android:contentDescription="@string/todo"
+                android:paddingStart="2dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="2dp"
+                android:paddingBottom="2dp"
+                android:src="@drawable/ic_puff"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/tvDescriptionAdvice"
+                app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
+                app:layout_constraintTop_toBottomOf="@id/ivStatusHot" />
+
+            <TextView
+                android:id="@+id/tvDescriptionIba"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:text="@string/description_iba_badge"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStatusBadge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvStatusBadge"
+                app:layout_constraintTop_toTopOf="@id/tvStatusBadge" />
+
+            <TextView
+                android:id="@+id/tvDescriptionHot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:text="@string/description_hot_badge"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toBottomOf="@+id/ivStatusHot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivStatusHot"
+                app:layout_constraintTop_toTopOf="@id/ivStatusHot" />
+
+            <TextView
+                android:id="@+id/tvDescriptionPuff"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:text="@string/description_puff_badge"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintBottom_toBottomOf="@+id/ivStatusPuff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivStatusPuff"
+                app:layout_constraintTop_toTopOf="@id/ivStatusPuff" />
+
+            <TextView
+                android:id="@+id/tvDescriptionAdvice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:text="@string/description_main"
+                app:layout_constraintBottom_toTopOf="@id/tvSimilarDrinks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvSimilarDrinks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/margin_8"
+                android:text="похожие коктейли"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

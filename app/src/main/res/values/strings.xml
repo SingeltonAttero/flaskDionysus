@@ -24,10 +24,18 @@
     <string name="add">еще</string>
     <string name="complication_drink">Сложность приготовления</string>
     <string name="another">Другое</string>
+    <string name="main_drink">Основное</string>
     <string name="advice_ingredient">Выберите один или несколько ингредиентов, по которым искать напиток</string>
     <string name="advice_not_ingredient">Выберите один или несколько ингредиентов, которых нет должно быть в напитке</string>
     <string name="advice_fortress">Выберите один или несколько вариантов крепости напитка</string>
     <string name="advice_volumes">Выберите один или несколько вариантов объема коктеля</string>
     <string name="advice_complication">Выберите один или несколько вариантов сложности приготовления напитка</string>
     <string name="advice_other">Выберите один или несколько типов коктеля</string>
+    <string name="description_iba_badge">Коктель международной ассоциации барменов</string>
+    <string name="description_hot_badge">Горящий</string>
+    <string name="description_puff_badge">Слоеный</string>
+    <string name="description_main">Не забудьте отметить коктейль, который вы уже попробовали , а также оценить его . Это поможет другим пользователям подобрать напиток, и поможет нам предложить коктейли, которые понравятся именно вам. Если вам понравился этот коктейль, вы можете найти похожие на него, поделиться им с друзьями или добавить в избранное .</string>
+    <string name="tried_prefix">Попробовали: %s</string>
+    <string name="cooking_level_prefix">Сложность: %s</string>
+    <string name="alcohol_strength_prefix">Крепость: %s</string>
 </resources>

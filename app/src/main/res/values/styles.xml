@@ -102,10 +102,25 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="TabLayoutDrinkDetailed"
+        parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabRippleColor">@color/colorControl</item>
+        <item name="tabTextAppearance">@style/TabTextItemDetailed</item>
+        <item name="tabTextColor">@color/colorTextAdvice</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="TabTextItem"
         parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TabTextItemDetailed"
+        parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/colorBlackTitleText</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ComponentDrink">

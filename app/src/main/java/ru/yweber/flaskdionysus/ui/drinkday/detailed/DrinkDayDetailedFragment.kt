@@ -3,7 +3,6 @@ package ru.yweber.flaskdionysus.ui.drinkday.detailed
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -17,7 +16,7 @@ import ru.yweber.flaskdionysus.core.adapter.DrinkDayDelegateAdapter
 import ru.yweber.flaskdionysus.core.adapter.state.DetailedComponentItemState
 import ru.yweber.flaskdionysus.system.finishLoadedCoil
 import ru.yweber.flaskdionysus.system.subscribe
-import ru.yweber.flaskdionysus.system.toast
+import ru.yweber.flaskdionysus.system.upperCaseTitleTab
 import ru.yweber.flaskdionysus.ui.drinkday.detailed.state.DrinkDayDetailedState
 import toothpick.Scope
 import toothpick.ktp.delegate.inject
@@ -35,7 +34,7 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
     }
 
     private fun clickComponentItem(item: DetailedComponentItemState) {
-        toast(item.toString())
+
     }
 
     override fun installModule(scope: Scope) {
@@ -91,8 +90,6 @@ class DrinkDayDetailedFragment : BaseFragment(R.layout.fragment_drink_day_detail
         tabLayoutDetailedDrinkDay.isVisible = state.endShared
         viewPagerDetailedDrinkDay.isVisible = state.endShared
     }
-
-    private fun upperCaseTitleTab(@StringRes stringId: Int) = getString(stringId).toUpperCase()
 
     override fun onDestroyView() {
         layoutMediator?.detach()

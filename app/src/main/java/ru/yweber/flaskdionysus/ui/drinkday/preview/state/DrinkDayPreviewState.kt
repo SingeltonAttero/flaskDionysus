@@ -9,7 +9,7 @@ data class DrinkDayPreviewState(
     val imagePath: String,
     val drinkName: String,
     val rating: Int,
-    val checks: String,
+    val tried: String,
     val levelCooking: String,
     val alcoholStrength: String,
     val endShareAnimate: Boolean = false,

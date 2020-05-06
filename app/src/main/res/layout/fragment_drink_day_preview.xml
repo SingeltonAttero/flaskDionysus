@@ -106,10 +106,9 @@
 
         <ru.yweber.flaskdionysus.core.view.LoveRatingIndicator
             android:id="@+id/lriDrinkDay"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="@id/tvNameDrink"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvNameDrink"
             app:lriv_count_indicator="5"

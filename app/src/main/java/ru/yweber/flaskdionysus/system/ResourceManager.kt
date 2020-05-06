@@ -10,4 +10,6 @@ import javax.inject.Inject
 
 class ResourceManager @Inject constructor(private val context: Context) {
     fun getString(@StringRes stringId: Int) = context.getString(stringId)
+    fun getString(@StringRes stringRes: Int, vararg formatArgs: String) =
+        context.getString(stringRes, *formatArgs)
 }

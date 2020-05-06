@@ -64,7 +64,7 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
         tvTitle.text = state.title
         tvNameDrink.text = state.drinkName
         lriDrinkDay.progress(state.rating)
-        tvTriedDrink.text = state.checks
+        tvTriedDrink.text = state.tried
         tvCookingLevel.text = state.levelCooking
         tvAlcoholStrength.text = state.alcoholStrength
 

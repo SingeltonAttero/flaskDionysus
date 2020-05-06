@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_16"
     tools:theme="@style/AppTheme">
-
-    <TextView
-        android:id="@+id/tvAbout"
-        style="@style/ComponentDrink"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardAboutDrink"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:ellipsize="end"
-        android:focusable="true"
-        android:gravity="start|top"
-        android:textAlignment="viewStart"
-        tools:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
+        android:layout_height="match_parent">
 
-</androidx.core.widget.NestedScrollView>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_16"
+            tools:theme="@style/AppTheme">
+
+            <TextView
+                android:id="@+id/tvAbout"
+                style="@style/ComponentDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:focusable="true"
+                android:gravity="start|top"
+                android:textAlignment="viewStart"
+                tools:text="Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the" />
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

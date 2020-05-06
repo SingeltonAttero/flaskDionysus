@@ -3,7 +3,7 @@ package ru.yweber.flaskdionysus.ui.drinkday.detailed
 import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.core.BaseViewModel
-import ru.yweber.flaskdionysus.core.adapter.state.AboutDrinkDayItem
+import ru.yweber.flaskdionysus.core.adapter.state.AboutDrinkComponentItem
 import ru.yweber.flaskdionysus.core.adapter.state.FormulaComponentItem
 import ru.yweber.flaskdionysus.core.adapter.state.ListComponentDetailedItem
 import ru.yweber.flaskdionysus.core.adapter.state.ToolComponentItem
@@ -40,7 +40,7 @@ class DrinkDayDetailedViewModel(
                         drinkName = entity.nameDrink,
                         previewPath = createPreviewPath(entity.previewIconPath),
                         pageItem = listOf(
-                            AboutDrinkDayItem(entity.detailed.recipe),
+                            AboutDrinkComponentItem(entity.detailed.recipe),
                             ListComponentDetailedItem(listFormula),
                             ListComponentDetailedItem(listTool)
                         )

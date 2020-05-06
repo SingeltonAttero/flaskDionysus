@@ -40,9 +40,15 @@ class DrinkDayPreviewViewModel(
                         imagePath = createPreviewPath(it.previewIconPath),
                         drinkName = it.nameDrink,
                         rating = it.preview.rating,
-                        checks = it.preview.tried,
-                        levelCooking = it.preview.complication,
-                        alcoholStrength = it.preview.fortress,
+                        tried = resourceManager.getString(R.string.tried_prefix, it.preview.tried),
+                        levelCooking = resourceManager.getString(
+                            R.string.cooking_level_prefix,
+                            it.preview.complication
+                        ),
+                        alcoholStrength = resourceManager.getString(
+                            R.string.alcohol_strength_prefix,
+                            it.preview.fortress
+                        ),
                         isStatusHot = it.isHot,
                         isStatusIba = it.isIba,
                         isStatusPuff = it.isPuff
@@ -53,9 +59,7 @@ class DrinkDayPreviewViewModel(
     }
 
     private fun createPreviewPath(previewPath: String): String {
-        return if (previewPath.isEmpty()) {
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/500px-Manhattan_Cocktail2.jpg" // TODO DELETE PROD
-        } else previewPath
+        return previewPath
     }
 
     fun endSharedAnimate() {

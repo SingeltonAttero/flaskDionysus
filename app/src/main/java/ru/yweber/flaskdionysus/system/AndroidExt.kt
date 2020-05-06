@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
@@ -35,3 +36,6 @@ fun Any.objectScopeName() = "${javaClass.simpleName}_${hashCode()}"
 fun <T> AsyncListDifferDelegationAdapter<T>.setData(data: List<T>) {
     items = data
 }
+
+fun Fragment.upperCaseTitleTab(@StringRes stringId: Int) = getString(stringId).toUpperCase()
+
