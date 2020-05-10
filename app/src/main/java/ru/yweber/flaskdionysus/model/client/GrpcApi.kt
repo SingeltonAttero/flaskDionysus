@@ -27,4 +27,12 @@ class GrpcApi @Inject constructor(private val messageChannel: ManagedChannel) : 
             .getDictionaries(DictionariesRequest.getDefaultInstance())
     }
 
+    override suspend fun getDetailedDrink(drinkId: Int): DrinkResponse {
+        val detailedStub = DrinksGrpc.newBlockingStub(messageChannel)
+        val detailedRequest = DrinkRequest.newBuilder()
+            .setId(drinkId)
+            .build()
+        return detailedStub.getDrinkById(detailedRequest)
+    }
+
 }

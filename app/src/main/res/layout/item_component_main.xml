@@ -53,12 +53,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16"
-                android:layout_marginEnd="@dimen/margin_8"
                 android:text="@string/iba_logo"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/ivStatusHot"
                 app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
-                app:layout_constraintTop_toBottomOf="@id/tvAlcoholStrength" />
+                app:layout_constraintTop_toBottomOf="@id/tvAlcoholStrength"
+                tools:layout_editor_absoluteY="81dp" />
 
             <ImageView
                 android:id="@+id/ivStatusHot"
@@ -68,9 +67,8 @@
                 android:layout_marginTop="@dimen/margin_16"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_hot_drink"
-                app:layout_constraintBottom_toTopOf="@+id/ivStatusPuff"
                 app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
-                app:layout_constraintTop_toBottomOf="@+id/tvStatusBadge" />
+                app:layout_constraintTop_toBottomOf="@id/tvStatusBadge" />
 
             <ImageView
                 android:id="@+id/ivStatusPuff"
@@ -86,7 +84,6 @@
                 android:paddingBottom="2dp"
                 android:src="@drawable/ic_puff"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/tvDescriptionAdvice"
                 app:layout_constraintStart_toStartOf="@id/tvTriedDrink"
                 app:layout_constraintTop_toBottomOf="@id/ivStatusHot" />
 
@@ -134,12 +131,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_16"
                 android:text="@string/description_main"
                 app:layout_constraintBottom_toTopOf="@id/tvSimilarDrinks"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivStatusPuff" />
 
 
             <TextView

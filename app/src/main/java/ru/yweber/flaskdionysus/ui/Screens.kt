@@ -64,8 +64,8 @@ object Screens {
     }
 
     data class DrinkDetailedScreen(private val drinkId: Int) : SupportAppScreen() {
-        override fun getFragment(): Fragment? {
-            return DrinkDetailedFragment()
+        override fun getFragment(): Fragment {
+            return DrinkDetailedFragment.newInstance(drinkId)
         }
     }
 

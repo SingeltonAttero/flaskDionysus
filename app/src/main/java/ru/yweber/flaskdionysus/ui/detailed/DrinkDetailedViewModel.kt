@@ -1,8 +1,14 @@
 package ru.yweber.flaskdionysus.ui.detailed
 
+import kotlinx.coroutines.flow.collect
+import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseViewModel
 import ru.yweber.flaskdionysus.core.adapter.state.*
 import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
+import ru.yweber.flaskdionysus.di.utils.PrimitiveWrapper
+import ru.yweber.flaskdionysus.model.entity.DrinkDetailedEntity
+import ru.yweber.flaskdionysus.model.interactor.DrinkDetailedUseCase
+import ru.yweber.flaskdionysus.system.ResourceManager
 import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.detailed.state.DrinkDetailedState
 import toothpick.InjectConstructor
@@ -12,47 +18,63 @@ import toothpick.InjectConstructor
  * @author YWeber */
 
 @InjectConstructor
-class DrinkDetailedViewModel(private val globalRouter: GlobalRouter) : BaseViewModel<DrinkDetailedState>() {
+class DrinkDetailedViewModel(
+    private val globalRouter: GlobalRouter,
+    private val drinkId: PrimitiveWrapper<Int>,
+    private val useCase: DrinkDetailedUseCase,
+    private val resourceManager: ResourceManager
+) : BaseViewModel<DrinkDetailedState>() {
 
     override val defaultState: DrinkDetailedState
-        get() = DrinkDetailedState(listOf(), "", "", 5, "")
+        get() = DrinkDetailedState.defaultInstance()
 
     init {
-        action.value = currentState.copy(
-            listPage = listOf(
-                MainComponentDetailedItem(""),
-                AboutDrinkComponentItem(
-                    "Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the \n" +
+        launch {
+            useCase.getDrinkDetailed(drinkId.value)
+                .collect {
+                    action.value = currentState.copy(
+                        title = it.name,
+                        imagePath = it.imagePath,
+                        titleEn = it.nameEn,
+                        rating = it.rating,
+                        listPage = listOf(
+                            createMainComponent(it),
+                            createAboutComponent(it),
+                            createIngredientComponent(it),
+                            createInstrumentComponent(it)
+                        )
+                    )
+                }
+        }
+    }
 
-                            "Apparently we had reached a great height in the atmosphere, for the Apparently we had reached a great height in the atmosphere, for the"
-                ),
-                ListComponentDetailedItem(
-                    listOf(
-                        FormulaComponentItem(1, "Текила", "40 мл"),
-                        FormulaComponentItem(2, "Сок апельсиновый", "40 мл"),
-                        FormulaComponentItem(3, "Гренадин 5", "40 мл"),
-                        FormulaComponentItem(4, "Гренадин 3", "40 мл"),
-                        FormulaComponentItem(3, "Гренадин 3", "40 мл")
-                    )
-                ),
-                ListComponentDetailedItem(
-                    listOf(
-                        ToolComponentItem(1, "", "Бокал “Мартини”"),
-                        ToolComponentItem(2, "", "Соломинка"),
-                        ToolComponentItem(3, "", "Труба"),
-                        ToolComponentItem(4, "", "Стакан"),
-                        ToolComponentItem(65, "", "Лес"),
-                        ToolComponentItem(7, "", "Озеро"),
-                        ToolComponentItem(8, "", "Остров")
-                    )
-                )
-            ),
-            title = "Текила Санрайз",
-            titleEn = "Tequila sunrise",
-            rating = 3,
-            imagePath = "https://media.merixstudio.com/uploads/svg-logo-text-550x526.png"
+    private fun createMainComponent(entity: DrinkDetailedEntity): MainComponentDetailedItem {
+        return MainComponentDetailedItem(
+            resourceManager.getString(R.string.tried_prefix, entity.tried),
+            resourceManager.getString(R.string.alcohol_strength_prefix, entity.fortress),
+            resourceManager.getString(R.string.cooking_level_prefix, entity.complication),
+            entity.isFire,
+            entity.isPuff,
+            entity.isIba
         )
     }
+
+    private fun createAboutComponent(entity: DrinkDetailedEntity): AboutDrinkComponentItem {
+        return AboutDrinkComponentItem(entity.description)
+    }
+
+    private fun createIngredientComponent(entity: DrinkDetailedEntity): ListComponentDetailedItem {
+        return ListComponentDetailedItem(entity.ingredients.map {
+            FormulaComponentItem(it.id, it.name, it.volume)
+        })
+    }
+
+    private fun createInstrumentComponent(entity: DrinkDetailedEntity): ListComponentDetailedItem {
+        return ListComponentDetailedItem(entity.instruments.map {
+            ToolComponentItem(it.id, it.iconPath, it.name)
+        })
+    }
+
 
     fun backTo() {
         globalRouter.backTo(Screens.HomeListDrinkScreen)

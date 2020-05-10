@@ -12,4 +12,12 @@ data class DrinkDetailedState(
     val titleEn: String,
     val rating: Int,
     val imagePath: String
-)
+) {
+    companion object {
+        fun defaultInstance(): DrinkDetailedState = DrinkDetailedState(
+            listPage = listOf(), title = "",
+            titleEn = "", rating = 0,
+            imagePath = ""
+        )
+    }
+}

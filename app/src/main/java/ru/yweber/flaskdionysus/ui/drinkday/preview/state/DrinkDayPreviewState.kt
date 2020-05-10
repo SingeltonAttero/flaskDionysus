@@ -5,6 +5,7 @@ package ru.yweber.flaskdionysus.ui.drinkday.preview.state
  * @author YWeber */
 
 data class DrinkDayPreviewState(
+    val id: Int,
     val title: String,
     val imagePath: String,
     val drinkName: String,

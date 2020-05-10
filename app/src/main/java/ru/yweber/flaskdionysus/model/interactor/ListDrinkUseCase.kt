@@ -24,10 +24,16 @@ class ListDrinkUseCase @Inject constructor(
             val volumes = it[ItemTypeFilter.VOLUMES] ?: listOf()
             val another = it[ItemTypeFilter.OTHER] ?: listOf()
             val reallyAnother = listOf(
-                another.contains(1),
-                another.contains(2),
-                another.contains(3)
+                another.contains(PUFF),
+                another.contains(FIRE),
+                another.contains(IBA)
             )
             repository.pageDrink(page, includes, except, fortress, volumes, reallyAnother)
         }
+
+    companion object {
+        private const val PUFF = 1
+        private const val FIRE = 2
+        private const val IBA = 3
+    }
 }

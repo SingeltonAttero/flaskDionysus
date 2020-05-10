@@ -23,7 +23,8 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -60,6 +61,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/margin_8"
                     app:lriv_count_indicator="5"
                     app:lriv_count_progress="3"
                     app:lriv_empty_drawable="@drawable/ic_favorite_invisible"

@@ -33,7 +33,10 @@ class DrinkDayPreviewFragment : BaseFragment(R.layout.fragment_drink_day_preview
         postponeEnterTransition()
         subscribe(viewModel.state, ::renderState)
         fabSwipeDrinkDay.setOnClickListener {
-            viewModel.navigateToDetailed()
+            viewModel.navigateToDetailedHeader()
+        }
+        cardViewPreview.setOnClickListener {
+            viewModel.navigateToFullDetailed()
         }
     }
 

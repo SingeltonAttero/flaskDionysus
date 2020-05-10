@@ -5,9 +5,9 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yweber.flaskdionysus.BuildConfig
 import ru.yweber.flaskdionysus.model.client.GrpcConnectClient
 import ru.yweber.flaskdionysus.model.entity.*
+import ru.yweber.flaskdionysus.system.absoluteImagePath
 import javax.inject.Inject
 
 /**
@@ -38,7 +38,7 @@ class DrinkDayRepository @Inject constructor(private val api: GrpcConnectClient)
             preview,
             detailed,
             drinkDay.name,
-            "http://${BuildConfig.ENDPOINT}:9001${drinkDay.preview}",
+            absoluteImagePath(drinkDay.preview),
             isHot = drinkDay.isFire,
             isIba = drinkDay.isIba,
             isPuff = drinkDay.isFlacky

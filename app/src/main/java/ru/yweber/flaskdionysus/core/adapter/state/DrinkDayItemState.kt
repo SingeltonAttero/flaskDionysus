@@ -7,4 +7,11 @@ package ru.yweber.flaskdionysus.core.adapter.state
 sealed class DrinkDayItemState
 data class AboutDrinkComponentItem(val description: String) : DrinkDayItemState()
 data class ListComponentDetailedItem(val components: List<DetailedComponentItemState>) : DrinkDayItemState()
-data class MainComponentDetailedItem(val tryDrink: String) : DrinkDayItemState()
+data class MainComponentDetailedItem(
+    val tried: String,
+    val fortress: String,
+    val complication: String,
+    val isFire: Boolean,
+    val isPuff: Boolean,
+    val isIba: Boolean
+) : DrinkDayItemState()

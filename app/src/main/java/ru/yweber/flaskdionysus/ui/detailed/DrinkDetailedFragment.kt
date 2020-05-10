@@ -8,10 +8,12 @@ import kotlinx.android.synthetic.main.fragment_drink_detailed.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.core.adapter.DrinkDayDelegateAdapter
+import ru.yweber.flaskdionysus.di.utils.PrimitiveWrapper
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.system.upperCaseTitleTab
 import ru.yweber.flaskdionysus.ui.detailed.state.DrinkDetailedState
 import toothpick.Scope
+import toothpick.ktp.binding.module
 import toothpick.ktp.delegate.inject
 
 /**
@@ -21,7 +23,6 @@ import toothpick.ktp.delegate.inject
 class DrinkDetailedFragment : BaseFragment(R.layout.fragment_drink_detailed) {
 
     private val viewModel by inject<DrinkDetailedViewModel>()
-
 
     private val pageAdapter by lazy {
         DrinkDayDelegateAdapter(true).createAdapter {
@@ -33,6 +34,10 @@ class DrinkDetailedFragment : BaseFragment(R.layout.fragment_drink_detailed) {
 
 
     override fun installModule(scope: Scope) {
+        scope.installModules(module {
+            val drinkId = arguments?.getInt(EXTRA_DRINK_ID, -1) ?: -1
+            bind(PrimitiveWrapper::class.java).toInstance(PrimitiveWrapper(drinkId))
+        })
         scope.installViewModel<DrinkDetailedViewModel>()
     }
 
@@ -70,6 +75,16 @@ class DrinkDetailedFragment : BaseFragment(R.layout.fragment_drink_detailed) {
         layoutMediator = null
         viewPagerDetailedDrinkDay.adapter = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val EXTRA_DRINK_ID = "EXTRA_DRINK_ID"
+        fun newInstance(drinkId: Int) = with(DrinkDetailedFragment()) {
+            val bundle = Bundle()
+            bundle.putInt(EXTRA_DRINK_ID, drinkId)
+            arguments = bundle
+            this
+        }
     }
 
 }

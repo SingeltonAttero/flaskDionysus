@@ -3,10 +3,12 @@ package ru.yweber.flaskdionysus.core.adapter
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import kotlinx.android.synthetic.main.item_about_drink.*
+import kotlinx.android.synthetic.main.item_component_main.*
 import kotlinx.android.synthetic.main.item_list_component.*
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.adapter.state.*
@@ -49,9 +51,16 @@ class DrinkDayDelegateAdapter(private val isCard: Boolean = false) {
 
     private fun mainAdapter() =
         adapterDelegateLayoutContainer<MainComponentDetailedItem, DrinkDayItemState>(R.layout.item_component_main) {
-
             bind {
-
+                tvTriedDrink.text = item.tried
+                tvCookingLevel.text = item.complication
+                tvAlcoholStrength.text = item.fortress
+                tvStatusBadge.isVisible = item.isIba
+                ivStatusHot.isVisible = item.isFire
+                ivStatusPuff.isVisible = item.isPuff
+                tvDescriptionHot.isVisible = item.isFire
+                tvDescriptionIba.isVisible = item.isIba
+                tvDescriptionPuff.isVisible = item.isPuff
             }
         }
 

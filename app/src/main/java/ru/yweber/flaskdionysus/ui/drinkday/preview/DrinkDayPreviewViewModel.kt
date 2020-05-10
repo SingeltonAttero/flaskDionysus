@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.Router
 import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseViewModel
+import ru.yweber.flaskdionysus.core.navigation.GlobalRouter
 import ru.yweber.flaskdionysus.di.DrinkDayNestedRouter
 import ru.yweber.flaskdionysus.model.interactor.DrinkDayUseCase
 import ru.yweber.flaskdionysus.system.ResourceManager
@@ -19,10 +20,12 @@ import toothpick.InjectConstructor
 class DrinkDayPreviewViewModel(
     private val useCase: DrinkDayUseCase,
     private val resourceManager: ResourceManager,
-    @DrinkDayNestedRouter private val nestedRouter: Router
+    @DrinkDayNestedRouter private val nestedRouter: Router,
+    private val globalRouter: GlobalRouter
 ) : BaseViewModel<DrinkDayPreviewState>() {
     override val defaultState: DrinkDayPreviewState
         get() = DrinkDayPreviewState(
+            -1,
             resourceManager.getString(R.string.drink_of_the_day),
             "",
             "",
@@ -37,6 +40,7 @@ class DrinkDayPreviewViewModel(
             useCase.getDrinkDay()
                 .collect {
                     action.value = currentState.copy(
+                        id = it.id,
                         imagePath = createPreviewPath(it.previewIconPath),
                         drinkName = it.nameDrink,
                         rating = it.preview.rating,
@@ -66,7 +70,11 @@ class DrinkDayPreviewViewModel(
         action.value = currentState.copy(endShareAnimate = true)
     }
 
-    fun navigateToDetailed() {
+    fun navigateToFullDetailed() {
+        globalRouter.navigateTo(Screens.DrinkDetailedScreen(currentState.id))
+    }
+
+    fun navigateToDetailedHeader() {
         nestedRouter.navigateTo(Screens.DrinkDayDetailedScreen)
     }
 }
