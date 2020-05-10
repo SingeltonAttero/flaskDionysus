@@ -6,9 +6,9 @@
     <string name="about_project">О проекте</string>
     <string name="drink_of_the_day">Коктейль дня</string>
     <string name="aboutDrink">О коктейле</string>
-    <string name="formula">рецепт</string>
-    <string name="composition">состав</string>
-    <string name="tools">инструменты</string>
+    <string name="formula">Рецепт</string>
+    <string name="composition">Состав</string>
+    <string name="tools">Инструменты</string>
     <string name="error_message">Что то пошло не так… \n Проверте интернет и нажмите кнопку повторить</string>
     <string name="retry">Повторить</string>
     <string name="done">готово</string>
@@ -34,8 +34,9 @@
     <string name="description_iba_badge">Коктель международной ассоциации барменов</string>
     <string name="description_hot_badge">Горящий</string>
     <string name="description_puff_badge">Слоеный</string>
-    <string name="description_main">Не забудьте отметить коктейль, который вы уже попробовали , а также оценить его . Это поможет другим пользователям подобрать напиток, и поможет нам предложить коктейли, которые понравятся именно вам. Если вам понравился этот коктейль, вы можете найти похожие на него, поделиться им с друзьями или добавить в избранное .</string>
+    <string name="description_main">Если вам понравился этот коктейль, вы можете найти похожие на него, поделиться им с друзьями.</string>
     <string name="tried_prefix">Попробовали: %s</string>
     <string name="cooking_level_prefix">Сложность: %s</string>
     <string name="alcohol_strength_prefix">Крепость: %s</string>
+    <string name="description_share">Фляга Диониса</string>
 </resources>

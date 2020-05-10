@@ -24,7 +24,7 @@ object Versions {
     const val android_paging_ktx = "2.1.2"
 
     //Kotlin
-    const val kotlin_coroutines = "1.3.3"
+    const val kotlin_coroutines = "1.3.6"
 
     //Koin
     const val koin = "2.0.1"

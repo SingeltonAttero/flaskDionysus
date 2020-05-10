@@ -1,13 +1,17 @@
 package ru.yweber.flaskdionysus.ui.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_error_holder.*
+import kotlinx.coroutines.flow.collect
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Command
@@ -15,6 +19,7 @@ import ru.yweber.flaskdionysus.R
 import ru.yweber.flaskdionysus.core.BaseFragment
 import ru.yweber.flaskdionysus.core.navigation.command.DismissDialog
 import ru.yweber.flaskdionysus.core.navigation.command.ShowDialog
+import ru.yweber.flaskdionysus.core.notifier.ShareTextNotifier
 import ru.yweber.flaskdionysus.di.ActivityScope
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.utils.ToothpickViewModelFactory
@@ -30,6 +35,7 @@ import toothpick.smoothie.viewmodel.installViewModelBinding
 class AppActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val viewModel: AppViewModel by inject<AppViewModel>()
+    private val share by inject<ShareTextNotifier>()
     private val navigator
         get() = object : SupportAppNavigator(this, supportFragmentManager, R.id.containerRootActivity) {
             override fun applyCommand(command: Command) {
@@ -94,7 +100,15 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
         btnRetry.setOnClickListener {
             viewModel.retryError()
         }
+        lifecycleScope.launchWhenCreated {
+            share
+                .intentStartShare
+                .collect {
+                    shareDrinks(it)
+                }
+        }
     }
+
 
     private fun initAppScope() {
         Toothpick.openScope(AppScope::class.java)
@@ -110,6 +124,14 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
     private fun renderState(appState: AppState) {
         holderError.isVisible = appState.isError
         containerRootActivity.isVisible = !appState.isError
+    }
+
+    private fun shareDrinks(message: String) {
+        val intent = ShareCompat.IntentBuilder.from(this)
+            .setText(message)
+            .setType("text/plain")
+            .intent
+        startActivity(Intent.createChooser(intent, "Share"))
     }
 
     override fun onResumeFragments() {

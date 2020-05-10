@@ -109,6 +109,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvNameDrink"
             app:lriv_count_indicator="5"
@@ -123,6 +124,7 @@
             style="@style/DescriptionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/lriDrinkDay"
             tools:text="Попробовали: 132 человека" />

@@ -45,6 +45,9 @@ class DrinkDetailedFragment : BaseFragment(R.layout.fragment_drink_detailed) {
         super.onViewCreated(view, savedInstanceState)
         subscribe(viewModel.state, ::renderState)
         viewPagerDetailedDrinkDay.adapter = pageAdapter
+        fabShare.setOnClickListener {
+            viewModel.shareDrink()
+        }
         layoutMediator = TabLayoutMediator(tabLayoutDetailedDrinkDay, viewPagerDetailedDrinkDay) { tab, position ->
             when (position) {
                 0 -> tab.text = upperCaseTitleTab(R.string.main_drink)

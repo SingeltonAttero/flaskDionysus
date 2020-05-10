@@ -3,6 +3,7 @@ package ru.yweber.flaskdionysus.di.module
 import android.content.Context
 import io.grpc.ManagedChannel
 import ru.yweber.flaskdionysus.BuildConfig
+import ru.yweber.flaskdionysus.core.notifier.ShareTextNotifier
 import ru.yweber.flaskdionysus.core.notifier.FilterApplyNotifier
 import ru.yweber.flaskdionysus.core.notifier.RetryErrorNotifier
 import ru.yweber.flaskdionysus.di.provider.ChannelsProvider
@@ -27,4 +28,5 @@ fun appModule(context: Context) = module {
     bind(ResourceManager::class.java).singleton()
     bind(FilterRepository::class.java).singleton()
     bind(FilterApplyNotifier::class.java).singleton()
+    bind(ShareTextNotifier::class.java).singleton()
 }
