@@ -11,4 +11,5 @@ interface GrpcConnectClient {
     suspend fun getDrinkDay(): DrinkOfDayResponse
     suspend fun getFilters(): DictionariesResponse
     suspend fun getDetailedDrink(drinkId: Int): DrinkResponse
+    suspend fun searchComponent(search: String, page: Int): NameResponse
 }

@@ -145,5 +145,4 @@
         <item name="android:padding">@dimen/margin_8</item>
     </style>
 
-
 </resources>

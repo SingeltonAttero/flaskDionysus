@@ -12,6 +12,7 @@ import ru.yweber.flaskdionysus.ui.filter.FilterFragment
 import ru.yweber.flaskdionysus.ui.filter.chooser.ChooserDialog
 import ru.yweber.flaskdionysus.ui.home.HomeListDrinkFlowFragment
 import ru.yweber.flaskdionysus.ui.main.MainFlowFragment
+import ru.yweber.flaskdionysus.ui.search.SearchFragment
 
 object Screens {
 
@@ -66,6 +67,12 @@ object Screens {
     data class DrinkDetailedScreen(private val drinkId: Int) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return DrinkDetailedFragment.newInstance(drinkId)
+        }
+    }
+
+    object SearchScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchFragment()
         }
     }
 

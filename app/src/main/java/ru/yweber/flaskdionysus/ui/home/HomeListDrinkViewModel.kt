@@ -111,7 +111,13 @@ class HomeListDrinkViewModel(
         globalRouter.navigateTo(Screens.FilterScreen)
     }
 
+    fun navigateSearch() {
+        action.value = currentState.copy(animationFab = false, menuExpend = !currentState.menuExpend)
+        globalRouter.navigateTo(Screens.SearchScreen)
+    }
+
     fun navigateToDetailed(id: Int) {
+
         globalRouter.navigateTo(Screens.DrinkDetailedScreen(id))
     }
 

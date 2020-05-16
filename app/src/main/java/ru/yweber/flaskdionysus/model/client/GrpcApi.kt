@@ -35,4 +35,13 @@ class GrpcApi @Inject constructor(private val messageChannel: ManagedChannel) : 
         return detailedStub.getDrinkById(detailedRequest)
     }
 
+    override suspend fun searchComponent(search: String, page: Int): NameResponse {
+        val searchStub = DictionariesGrpc.newBlockingStub(messageChannel)
+        val request = NameRequest.newBuilder()
+            .setName(search)
+            .setPage(page)
+            .build()
+        return searchStub.getByName(request)
+    }
+
 }

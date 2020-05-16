@@ -1,6 +1,9 @@
 package ru.yweber.flaskdionysus.system
 
+import android.content.Context
 import android.content.res.Resources
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -39,3 +42,14 @@ fun <T> AsyncListDifferDelegationAdapter<T>.setData(data: List<T>) {
 
 fun Fragment.upperCaseTitleTab(@StringRes stringId: Int) = getString(stringId).toUpperCase()
 
+fun View.showKeyboard() {
+    this.requestFocus()
+    val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun View.hideKeyboard() {
+    val inputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+}

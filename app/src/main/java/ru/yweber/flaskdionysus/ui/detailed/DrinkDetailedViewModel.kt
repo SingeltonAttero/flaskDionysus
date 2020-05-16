@@ -10,7 +10,6 @@ import ru.yweber.flaskdionysus.di.utils.PrimitiveWrapper
 import ru.yweber.flaskdionysus.model.entity.DrinkDetailedEntity
 import ru.yweber.flaskdionysus.model.interactor.DrinkDetailedUseCase
 import ru.yweber.flaskdionysus.system.ResourceManager
-import ru.yweber.flaskdionysus.ui.Screens
 import ru.yweber.flaskdionysus.ui.detailed.state.DrinkDetailedState
 import toothpick.InjectConstructor
 
@@ -110,6 +109,6 @@ class DrinkDetailedViewModel(
 
 
     fun backTo() {
-        globalRouter.backTo(Screens.HomeListDrinkScreen)
+        globalRouter.exit()
     }
 }

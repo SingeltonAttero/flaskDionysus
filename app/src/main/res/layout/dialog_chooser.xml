@@ -22,14 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_4"
             android:layout_marginEnd="@dimen/margin_4"
-            android:background="@color/colorWhite">
+            android:background="@color/colorWhite"
+            android:hint="@string/hint_filter_search">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textFieldSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorWhite"
-                android:hint="@string/hint_filter_search" />
+                android:background="@color/colorWhite" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

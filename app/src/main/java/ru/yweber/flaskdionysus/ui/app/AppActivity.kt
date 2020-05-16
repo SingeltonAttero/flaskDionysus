@@ -23,6 +23,7 @@ import ru.yweber.flaskdionysus.core.notifier.ShareTextNotifier
 import ru.yweber.flaskdionysus.di.ActivityScope
 import ru.yweber.flaskdionysus.di.AppScope
 import ru.yweber.flaskdionysus.di.utils.ToothpickViewModelFactory
+import ru.yweber.flaskdionysus.system.hideKeyboard
 import ru.yweber.flaskdionysus.system.subscribe
 import ru.yweber.flaskdionysus.ui.app.state.AppState
 import toothpick.Toothpick
@@ -124,6 +125,9 @@ class AppActivity : AppCompatActivity(R.layout.activity_main) {
     private fun renderState(appState: AppState) {
         holderError.isVisible = appState.isError
         containerRootActivity.isVisible = !appState.isError
+        if (appState.isError) {
+            holderError.hideKeyboard()
+        }
     }
 
     private fun shareDrinks(message: String) {
