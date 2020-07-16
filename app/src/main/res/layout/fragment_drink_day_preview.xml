@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewPreview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_5"
+    android:elevation="6dp"
+    tools:theme="@style/AppTheme">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/ivPreviewDrinkDay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:transitionName="image_preview"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:src="@drawable/img_splash_screen" />
+
+        <TextView
+            android:id="@+id/tvStatusBadge"
+            style="@style/BadgeIso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/iba_logo"
+            android:transitionName="tvStatusBadge"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@id/ivPreviewDrinkDay"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+        <ImageView
+            android:id="@+id/ivStatusHot"
+            style="@style/BadgeType"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_hot_drink"
+            android:transitionName="ivStatusHot"
+            app:layout_constraintStart_toEndOf="@id/tvStatusBadge"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+        <ImageView
+            android:id="@+id/ivStatusPuff"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:background="@drawable/bg_puff_status"
+            android:contentDescription="@string/todo"
+            android:paddingStart="2dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/ic_puff"
+            android:transitionName="ivStatusPuff"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@id/ivStatusHot"
+            app:layout_constraintTop_toTopOf="@id/ivPreviewDrinkDay" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.63" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TitleDrinkDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/drink_of_the_day"
+            android:transitionName="title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPreviewDrinkDay" />
+
+        <TextView
+            android:id="@+id/tvNameDrink"
+            style="@style/NameDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:transitionName="name_drink"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="Текила Санрайз" />
+
+        <ru.yweber.flaskdionysus.core.view.LoveRatingIndicator
+            android:id="@+id/lriDrinkDay"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvNameDrink"
+            app:lriv_count_indicator="5"
+            app:lriv_count_progress="3"
+            app:lriv_empty_drawable="@drawable/ic_favorite_invisible"
+            app:lriv_filling_drawable="@drawable/ic_favorite_visible"
+            app:lriv_resize="false"
+            app:lriv_size_item="12dp" />
+
+        <TextView
+            android:id="@+id/tvTriedDrink"
+            style="@style/DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/lriDrinkDay"
+            tools:text="Попробовали: 132 человека" />
+
+        <TextView
+            android:id="@+id/tvCookingLevel"
+            style="@style/DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTriedDrink"
+            tools:text="Сложность: средне" />
+
+        <TextView
+            android:id="@+id/tvAlcoholStrength"
+            style="@style/DescriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvCookingLevel"
+            tools:text="Крепость: легкий" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSwipeDrinkDay"
+            style="@style/MaterialFabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:src="@drawable/ic_arrow_up_preview"
+            android:transitionName="swipe drink day"
+            app:fabSize="mini"
+            app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

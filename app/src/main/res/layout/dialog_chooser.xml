@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/rootContainerFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme"
+        android:visibility="invisible"
+        tools:ignore="UselessParent"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_4"
+            android:layout_marginEnd="@dimen/margin_4"
+            android:background="@color/colorWhite"
+            android:hint="@string/hint_filter_search">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textFieldSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvAdvice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:text="Выберите один или несколько вариантов крепости напитка"
+            android:textColor="@color/colorTextAdvice"
+            android:textSize="12sp"
+            tools:text="Выберите один или несколько вариантов крепости напитка" />
+
+        <TextView
+            android:id="@+id/tvSearchHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:text="@string/empty_search_component"
+            android:textColor="@color/colorBlackTitleText"
+            android:textSize="21sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFilterIngredient"
+            android:layout_width="328dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_about_drink" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:background="@drawable/bg_button_done"
+            android:paddingStart="@dimen/margin_16"
+            android:paddingEnd="@dimen/margin_16"
+            android:text="@string/done"
+            android:textColor="@color/colorWhite"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:cornerRadius="17dp" />
+
+    </LinearLayout>
+</FrameLayout>

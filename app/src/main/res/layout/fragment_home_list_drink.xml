@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:theme="@style/AppTheme">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarHomeList"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="invisible"
+        app:layout_behavior=".core.view.scroll.FixedScrollAppBarLayoutBehavior">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctlHomeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentScrim="@color/colorScrimDrinkDay"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:scrimAnimationDuration="400">
+
+            <FrameLayout
+                android:id="@+id/containerDrinkOnDay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDrinks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_drink"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/smallFabSetting"
+        style="@style/MaterialFabSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_settings"
+        android:visibility="gone"
+        app:fabSize="mini"
+        app:layout_anchor="@id/rvDrinks"
+        app:layout_anchorGravity="bottom|end"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/smallFabSearch"
+        style="@style/MaterialFabSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_search"
+        android:visibility="gone"
+        app:fabSize="mini"
+        app:layout_anchor="@id/rvDrinks"
+        app:layout_anchorGravity="bottom|end"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/smallFabFilter"
+        style="@style/MaterialFabSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_filter_list"
+        android:visibility="gone"
+        app:fabSize="mini"
+        app:layout_anchor="@id/rvDrinks"
+        app:layout_anchorGravity="bottom|end"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        style="@style/MaterialFabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_8"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/ic_menu"
+        android:visibility="gone"
+        app:fabSize="normal"
+        app:layout_anchor="@id/rvDrinks"
+        app:layout_anchorGravity="bottom|end"
+        tools:visibility="visible" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

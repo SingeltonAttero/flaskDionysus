@@ -2,11 +2,147 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme"
-        parent="Theme.AppCompat.Light.DarkActionBar">
+        parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorControl</item>
+
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:navigationBarColor">@color/colorWhiteNavigate</item>
+    </style>
+
+    <style name="SplashTheme"
+        parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorControl</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowBackground">@drawable/layer_splesh_screen</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:navigationBarColor">@color/colorWhiteNavigate</item>
+    </style>
+
+
+    <style name="Toolbar"
+        parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="actionOverflowButtonStyle">@style/ActionItem</item>
+        <item name="titleTextColor">@color/colorBlackTitleText</item>
+    </style>
+
+    <style name="ActionItem"
+        parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_action_item</item>
+    </style>
+
+    <style name="DownloadDialog"
+        parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="MaterialFabSmall"
+        parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="MaterialFabMain"
+        parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MenuStyle"
+        parent="Widget.AppCompat.Light.PopupMenu" />
+
+    <style name="DescriptionText">
+        <item name="android:textColor">@color/colorGrayDescriptionText</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NameDrink">
+        <item name="android:textColor">@color/colorBlackTitleText</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleDrinkDay">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/titleDrinkDay</item>
+        <item name="android:textSize">@dimen/font_10</item>
+    </style>
+
+    <style name="TabLayoutDrinkDay"
+        parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/colorWhite</item>
+        <item name="tabRippleColor">@color/colorPrimary</item>
+        <item name="tabTextAppearance">@style/TabTextItem</item>
+        <item name="tabTextColor">@color/colorTabSelectItem</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="TabLayoutDrinkDetailed"
+        parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabRippleColor">@color/colorControl</item>
+        <item name="tabTextAppearance">@style/TabTextItemDetailed</item>
+        <item name="tabTextColor">@color/colorTextAdvice</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TabTextItem"
+        parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TabTextItemDetailed"
+        parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/colorBlackTitleText</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ComponentDrink">
+        <item name="android:textColor">@color/colorBlackTitleText</item>
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+    <style name="BadgeIso">
+        <item name="android:background">@drawable/bg_circle_status</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">7dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingEnd">7dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/colorLogoIBA</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BadgeType">
+        <item name="android:background">@drawable/bg_circle_status</item>
+        <item name="android:padding">@dimen/margin_8</item>
     </style>
 
 </resources>

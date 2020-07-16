@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoveRatingIndicator">
+        <attr name="lriv_filling_drawable"
+            format="reference" />
+        <attr name="lriv_empty_drawable"
+            format="reference" />
+        <attr name="lriv_count_indicator"
+            format="integer">5
+        </attr>
+        <attr name="lriv_count_progress"
+            format="integer">0
+        </attr>
+        <attr name="lriv_resize"
+            format="boolean">true
+        </attr>
+        <attr name="lriv_size_item"
+            format="dimension">
+            16dp
+        </attr>
+    </declare-styleable>
+</resources>

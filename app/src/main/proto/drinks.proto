@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+option java_package = "ru.weber.proto";
+option java_outer_classname = "DrinksProto";
+option java_multiple_files = true;
+
+service Drinks {
+  rpc GetDrinks(DrinksRequest) returns (DrinksResponse) {}
+  rpc GetDrinkOfDay(Empty) returns (DrinkOfDayResponse) {}
+  rpc GetDrinkById(DrinkRequest) returns (DrinkResponse) {}
+  rpc SetDrinkTried(DrinkTryRequest) returns (Empty) {}
+  rpc SetDrinkMark(DrinkMarkRequest) returns (DrinkMarkResponse) {}
+}
+
+message DrinkRequest {
+  int32 id = 1;
+}
+
+message DrinkTryRequest {
+  int32 id = 1;
+  string user_id = 2;
+}
+
+message DrinkMarkRequest {
+  int32 id = 1;
+  int32 mark = 2;
+}
+
+message Empty {}
+
+message DrinkMarkResponse {
+  int32 mark = 1;
+  string mark_description = 2;
+}
+
+message DrinksRequest {
+  int32 page = 1;
+  repeated int32 fortress = 2;
+  repeated int32 complication = 3;
+  repeated int32 volume = 4;
+  bool is_flacky = 5;
+  bool is_fire = 6;
+  bool is_iba = 7;
+  repeated int32 includes = 8;
+  repeated int32 except = 9;
+  repeated int32 instruments = 10;
+  repeated int32 similar = 11;
+}
+
+message DrinkItem {
+  int32 id = 1;
+  bool is_flacky = 2;
+  bool is_fire = 3;
+  bool is_iba = 4;
+  int32 mark = 5;
+  string name = 6;
+  string properties = 7;
+  string ingredients = 8;
+  string icon = 9;
+}
+
+message Instrument {
+  int32 id = 1;
+  string name = 2;
+  string image = 3;
+}
+
+message Ingredient {
+  int32 id = 1;
+  string name = 2;
+  string volume = 3;
+}
+
+message DrinkOfDayResponse {
+  int32 id = 1;
+  bool is_flacky = 2;
+  bool is_fire = 3;
+  bool is_iba = 4;
+  int32 mark = 5;
+  string name = 6;
+  string complication = 8;
+  string fortress = 9;
+  string recipe = 10;
+  string description = 11;
+  string tried_by = 12;
+  string preview = 13;
+  repeated Ingredient ingredients = 14;
+  repeated Instrument instruments = 15;
+}
+
+message DrinksResponse {
+  repeated DrinkItem drinks = 1;
+}
+
+message DrinkResponse {
+  int32 id = 1;
+  bool is_flacky = 2;
+  bool is_fire = 3;
+  bool is_iba = 4;
+  int32 mark = 5;
+  string name = 6;
+  string name_en = 7;
+  string complication = 8;
+  string fortress = 9;
+  string recipe = 10;
+  string description = 11;
+  string tried_by = 12;
+  string mark_description = 13;
+  string icon = 14;
+  repeated Instrument instruments = 15;
+  repeated Ingredient ingredients = 16;
+}

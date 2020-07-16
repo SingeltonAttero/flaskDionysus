@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+option java_package = "ru.weber.proto";
+option java_outer_classname = "InstrumentsProto";
+option java_multiple_files = true;
+
+service Instruments {
+  rpc GetInstrumentById(InstrumentRequest) returns (InstrumentResponse) {}
+}
+
+message InstrumentRequest {
+  int32 id = 1;
+}
+
+message InstrumentResponse {
+  int32 id = 1;
+  string name = 2;
+  string name_en = 3;
+  string info = 4;
+  string description = 5;
+  string icon = 6;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <changeBounds
+        android:duration="600"
+        android:interpolator="@android:interpolator/accelerate_decelerate" />
+    <changeTransform
+        android:duration="600"
+        android:interpolator="@android:interpolator/accelerate_decelerate" />
+    <changeClipBounds
+        android:duration="600"
+        android:interpolator="@android:interpolator/accelerate_decelerate" />
+    <changeImageTransform
+        android:duration="600"
+        android:interpolator="@android:interpolator/accelerate_decelerate" />
+
+</transitionSet>

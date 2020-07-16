@@ -1,3 +1,4 @@
+import com.google.protobuf.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 plugins {
@@ -5,6 +6,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("com.google.protobuf")
 }
 
 android {
@@ -35,10 +37,12 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "ENDPOINT", Config.SERVER_ENDPOINT)
+            buildConfigField("int","PORT",Config.SERVER_PORT)
         }
         getByName("debug") {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             buildConfigField("String", "ENDPOINT", Config.SERVER_ENDPOINT)
+            buildConfigField("int","PORT",Config.SERVER_PORT)
         }
     }
 
@@ -47,16 +51,45 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    packagingOptions {
-        exclude("META-INF/LICENSE*")
+    lintOptions {
+        disable("GoogleAppIndexingWarning", "HardcodedText", "InvalidPackage")
+        textReport = true
+        textOutput("stdout")
     }
-
 
     kotlinOptions {
         val options = this as? KotlinJvmOptions
         options?.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.11.0"
+    }
+
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.28.1"
+        }
+    }
+
+    generateProtoTasks {
+        all().forEach {
+            it.builtins {
+                id("java") {
+                    option("lite")
+                }
+            }
+            it.plugins {
+                id("grpc") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //AndroidX
@@ -67,57 +100,57 @@ dependencies {
     implementation(Libs.androidx_recyclerview)
     implementation(Libs.androidx_cardview)
     implementation(Libs.androidx_fragment)
+    implementation(Libs.androidx_paging_ktx)
+    // GRPC
+    implementation(Libs.grpc_okhttp)
+    implementation(Libs.grpc_protobuf_lite)
+    implementation(Libs.grpc_stub)
+    implementation(Libs.javax_annotation)
+    // DI
+    implementation(Libs.toothpick_ktp)
+    implementation(Libs.toothpick_smoothie_lifecycle)
+    implementation(Libs.toothpick_smoothie_viewmodel)
+    kapt(Libs.toothpick_kapt)
 
-    //Koin
-    implementation(Libs.koin_scope)
-    implementation(Libs.koin_viewmodel)
-
-    // cicerone
+    // Cicerone
     implementation(Libs.cicerone)
 
-    //lifecycle
+    // Lifecycle
     implementation(Libs.lifecycle_extensions)
     implementation(Libs.lifecycle_livedata)
     implementation(Libs.lifecycle_viewmodel)
 
-    //Glide
-    implementation(Libs.glide_runtime)
-    kapt(Libs.glide_compiler)
+    // Coil
+    implementation(Libs.coil)
+    implementation(Libs.coil_base)
+    implementation(Libs.coil_svg)
 
-    //adapterDelegat
+    // Adapter Delegates
     implementation(Libs.adapter_delegates)
     implementation(Libs.adapter_delegates_dsl)
+    implementation(Libs.adapter_delegat_pagination)
 
-    //room
-    implementation(Libs.room_runtime)
-    implementation(Libs.room_ktx)
-    implementation(Libs.room_testing)
-    kapt(Libs.room_compiler)
     //Networking
-    implementation(Libs.tikxml_annotation)
-    implementation(Libs.tikxml_core)
-    kapt(Libs.tikxml_kapt)
     implementation(Libs.okhttp_logging_interceptor)
     implementation(Libs.retrofit)
-    implementation(Libs.tikxml_converter)
 
-    // coroutines
+    // Coroutines
     implementation(Libs.coroutines_android)
     implementation(Libs.coroutines)
-    // logger
-    implementation(Libs.stetho)
 
     //Timber
     implementation(Libs.timber)
 
-    // test
+    // Unit test
     testImplementation(Libs.kotlinx_coroutines_test)
     testImplementation(Libs.junit4)
-    testImplementation(Libs.assertj)
     testImplementation(Libs.junit_ext)
     testImplementation(Libs.mockito_core)
     testImplementation(Libs.mockito_kotlin)
-    testImplementation(Libs.koin_test)
+    testProtobuf(files("src/main/proto"))
+
+    // Leakcanary
+    debugImplementation(Libs.leakcanary)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class).all {
